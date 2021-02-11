@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Mulish', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,4 +10,224 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.primary-color {
+  color: #1D4BB7 !important;
+}
+
+.bold {
+  font-weight: 500;
+}
+
+.primary-color-bg {
+  background-color: #1D4BB7;
+  border: 1px solid #1D4BB7;
+}
+
+.register-button {
+  border-radius: 50px;
+  padding: 5px 20px;
+  font-weight: 500;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  padding: 25px;
+  color: #fff;
+}
+
+.hero {
+  background-color: #1D4BB7 !important;
+  padding-bottom: 50px;
+}
+
+.hero h1 {
+  color: #fff;
+  font-size: 60px !important;
+  font-weight: 800;
+  margin-bottom: 30px;
+}
+
+.hero p {
+  color: #fff;
+}
+
+.hero_img {
+  width: 130% !important;
+  position: absolute;
+  margin-top: 53px !important;
+  margin-left: -100px !important;
+}
+
+.form-br {
+  border-radius: 50px;
+}
+
+.form-control {
+  height: 50px !important;
+}
+
+::placeholder {
+  font-size: 14px;
+  text-indent: 15px;
+}
+
+select {
+  appearance: none;
+  text-indent: 15px;
+}
+
+.search-btn {
+  float: right;
+  position: relative;
+  top: 0;
+  right: 0;
+  color: #fff;
+  margin-top: -59px;
+  margin-right: 10px;
+  padding: 5px 9px;
+  border-radius: 100px;
+  font-weight: bold;
+}
+
+.primary-bg {
+  background-color: #1D4BB7;
+}
+
+.nl {
+  color: #fff !important;
+}
+
+
+/* Amazing Benefits Section*/
+
+.benefits {
+  margin-top: 130px !important;
+  margin-bottom: 100px !important;
+}
+
+.benefits h2 {
+  color: black;
+  font-weight: 700;
+}
+
+.benefits h4 {
+  color: black;
+  font-weight: 700;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.benefits p{
+  color: #7D7987;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.border-around {
+  border: 1px solid #cdcdcd;
+  border-radius: 20px;
+  margin: 30px;
+}
+
+.border-right {
+  border-right: 1px solid #cdcdcd;
+}
+
+.border-top {
+  border-top: 1px solid #cdcdcd;
+}
+
+.padding-inner {
+  padding: 30px;
+}
+
+.border-around .hover:hover {
+  background-color: #fafafa;
+  transition: 1s;
+}
+
+
+/* Pricing Section */
+
+.pricing {
+  background-color: #fafafa;
+  padding: 100px 30px !important;
+  margin-bottom: 100px !important;
+}
+
+.pricing h2 {
+  color: black;
+  font-weight: 700;
+}
+
+.pricing p{
+  color: #7D7987;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.pricing h6 {
+  color: #1D4BB7;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.pricing-plan {
+  border: 1px solid #cdcdcd;
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 50px 30px;
+  width: 280px;
+  height: auto;
+  margin-top: -100px;
+}
+
+.pricing-plan h2 {
+  font-weight: 900;
+  color: #000;
+  font-size: 40px;
+}
+
+.pricing-plan h5 {
+  color: #4D4D4D;
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 0px;
+}
+
+.pricing-plan .small {
+  margin-top: 5px !important;
+}
+
+.pricing-plan .sub {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.perk p {
+  margin-bottom: -5px;
+}
+
+/* Download App Section */
+
+.download-app {
+  padding: 100px !important;
+  margin-bottom: 100px !important;
+}
+
+.download-inner {
+  border-radius: 100px;
+  padding: 70px 50px 0 70px;
+}
+
+.download-inner h1 {
+  font-weight: 900;
+  color: #fff;
+  font-size: 60px;
+}
+
+.download-inner p {
+  margin-top: 30px;
+  color: #fff;
 }

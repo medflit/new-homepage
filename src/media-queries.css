@@ -1,0 +1,78 @@
+
+
+
+@media(max-width: 768px) {
+
+    body {
+        overflow-x: hidden !important;
+    }
+    .hero h1,p {
+      text-align: center;
+    }
+  
+    .hero h1 {
+      font-size: 45px !important;
+    }
+    .download-btn {
+      text-align: center;
+    }
+    .hero .app-btn {
+      width: 130px;
+    }
+
+    /* Amazing Benefits Section */
+
+    .benefits h4, p {
+        text-align: center;
+    }
+
+    .benefits img{
+        text-align: center !important;
+        margin-left: 30% !important;
+    }
+    .border-right {
+        border-right: none !important;
+    }
+
+    .border-around {
+        margin: 20px;
+    }
+
+    .border-top_ {
+    border-top: 1px solid #cdcdcd;
+    }
+
+    /* Pricing Section */
+
+    .pricing p {
+        text-align: left;
+    }
+
+    .pricing-plan {
+        margin-top: 0px;
+    }
+
+    /* Download App Section */
+
+    .download-app {
+        padding: 0px !important;
+    }
+
+    .download-inner {
+        padding: 50px 20px 40px 20px;
+        border-radius: 50px;
+    }
+
+    .download-inner h1 {
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .download-inner p {
+        text-align: center;
+    }
+
+    .download-inner .app-btn {
+        width: 130px;
+    }
+}
