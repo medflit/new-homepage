@@ -21,7 +21,7 @@ function WhyMedflit() {
                     <Col md={3}>
                         <div className="medflit-item">
                             <Row>
-                                <Col md={{ span: 4, offset: 6 }} xs={{ span: 4, offset: 8 }}>
+                                <Col md={{ span: 4, offset: 6 }} xs={{ span: 4, offset: 7 }}>
                                     <img src={ powerful } width="100" alt=""/>
                                 </Col>
                             </Row>
@@ -36,7 +36,7 @@ function WhyMedflit() {
                     <Col md={3}>
                         <div className="medflit-item">
                             <Row>
-                                <Col md={{ span: 4, offset: 6 }} xs={{ span: 4, offset: 8 }}>
+                                <Col md={{ span: 4, offset: 6 }} xs={{ span: 4, offset: 7 }}>
                                     <img src={ pickup } width="100" alt=""/>
                                 </Col>
                             </Row>
@@ -51,7 +51,7 @@ function WhyMedflit() {
                     <Col md={3}>
                         <div className="medflit-item">
                             <Row>
-                                <Col md={{ span: 4, offset: 6 }} xs={{ span: 4, offset: 8 }}>
+                                <Col md={{ span: 4, offset: 6 }} xs={{ span: 4, offset: 7 }}>
                                     <img src={ screening } width="100" alt=""/>
                                 </Col>
                             </Row>
@@ -66,7 +66,7 @@ function WhyMedflit() {
                     <Col md={3}>
                         <div className="medflit-item">
                             <Row>
-                                <Col md={{ span: 4, offset: 6 }} xs={{ span: 4, offset: 8 }}>
+                                <Col md={{ span: 4, offset: 6 }} xs={{ span: 4, offset: 7 }}>
                                     <img src={ emr } width="100" alt=""/>
                                 </Col>
                             </Row>

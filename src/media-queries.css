@@ -91,6 +91,10 @@
     .testimonials {
         padding: 0px !important;
     }
+    .testimonial-inner {
+        border-radius: 70px;
+        padding: 70px 30px 40px 30px;
+    }
 
     .testimonial-inner h3 {
         font-weight: 900;

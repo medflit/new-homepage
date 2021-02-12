@@ -21,7 +21,7 @@ function Testimonials() {
                             <Row>
                                 <Col md={6}>
                                     <Row>
-                                        <Col md={{ span: 4, offset: 2 }} xs={4}>
+                                        <Col md={{ span: 4, offset: 1 }} xs={{ span: 4, offset: 1 }}>
                                             <img src={ customer } width="100" alt=""/>                                    
                                         </Col>
                                         <Col md={6} xs={6} className="m-auto">

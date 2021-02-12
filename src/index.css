@@ -39,7 +39,13 @@ code {
 
 .hero {
   background-color: #1D4BB7 !important;
-  padding-bottom: 45px;
+  padding-bottom: 100px;
+}
+
+.hero .pad {
+  padding-top: 40px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .hero h1 {
@@ -56,7 +62,7 @@ code {
 .hero_img {
   width: 140% !important;
   position: absolute;
-  margin-top: 90px !important;
+  margin-top: 73px !important;
   margin-left: -150px !important;
 }
 
@@ -278,7 +284,7 @@ select {
 }
 
 .testimonial-inner {
-  border-radius: 100px;
+  border-radius: 50px;
   padding: 70px 50px 40px 70px;
 }
 
@@ -298,6 +304,7 @@ select {
 .testimonial-inner .customer-name {
   margin-top: 0px;
   color: #fff;
+  text-align: left;
 }
 
 
