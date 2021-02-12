@@ -11,7 +11,7 @@ function Footer() {
         <section className="footer">
             <Container>
                 <Row>
-                    <Col md="5">
+                    <Col md={5}>
                         <img src={ logo } width="120" />
                         <Row className="mt-5">
                             <img src={ fbIcon } width="" className="ml-2 social-icon" />
@@ -20,9 +20,9 @@ function Footer() {
                         </Row>
                         <p className="copyright">© Medflit 2021. All rights reserved</p>
                     </Col>
-                    <Col md="7">
+                    <Col md={7}>
                         <Row>
-                            <Col md="4">
+                            <Col md={4}>
                                 <h5>Company</h5>
                                 <div className="mt-4">
                                     <p>About</p>
@@ -31,7 +31,7 @@ function Footer() {
                                     <p>FAQs</p>
                                 </div>                                    
                             </Col>
-                            <Col md="4">
+                            <Col md={4}>
                                 <h5>Company</h5>
                                 <div className="mt-4">
                                     <p>About</p>
@@ -40,7 +40,7 @@ function Footer() {
                                     <p>FAQs</p>
                                 </div>                                    
                             </Col>
-                            <Col md="4">
+                            <Col md={4}>
                                 <h5>Company</h5>
                                 <div className="mt-4">
                                     <p>About</p>

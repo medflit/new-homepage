@@ -16,32 +16,32 @@ function Benefits() {
                 </Row>
                 <div>
                     <Row className="border-around">
-                        <Col md="4" sm="6" xs="12" className="border-right hover padding-inner">
+                        <Col md={4} sm={6} xs={12} className="border-right hover padding-inner">
                             <img src={ heroIllustration } width="100" className="" alt="" />
                             <h4>Book a Doctor</h4>
                             <p>Select out of the hundreds of professional doctors we have on our platform</p>
                         </Col>
-                        <Col md="4" sm="6" xs="12" className="border-right hover border-top_ padding-inner">
+                        <Col md={4} sm={6} xs={12} className="border-right hover border-top_ padding-inner">
                             <img src={ heroIllustration } width="100" className="" alt="" />
                             <h4>Book a Doctor</h4>
                             <p>Select out of the hundreds of professional doctors we have on our platform</p>
                         </Col>
-                        <Col md="4" sm="6" xs="12" className="border-top_ hover padding-inner">
+                        <Col md={4} sm={6} xs={12} className="border-top_ hover padding-inner">
                             <img src={ heroIllustration } width="100" className="" alt="" />
                             <h4>Book a Doctor</h4>
                             <p>Select out of the hundreds of professional doctors we have on our platform</p>
                         </Col>
-                        <Col md="4" sm="6" xs="12" className="border-right hover border-top padding-inner">
+                        <Col md={4} sm={6} xs={12} className="border-right hover border-top padding-inner">
                             <img src={ heroIllustration } width="100" className="" alt="" />
                             <h4>Book a Doctor</h4>
                             <p>Select out of the hundreds of professional doctors we have on our platform</p>
                         </Col>
-                        <Col md="4" sm="6" xs="12" className="border-right hover border-top padding-inner">
+                        <Col md={4} sm={6} xs={12} className="border-right hover border-top padding-inner">
                             <img src={ heroIllustration } width="100" className="" alt="" />
                             <h4>Book a Doctor</h4>
                             <p>Select out of the hundreds of professional doctors we have on our platform</p>
                         </Col>
-                        <Col md="4" sm="6" xs="12" className="border-top hover padding-inner">
+                        <Col md={4} sm={6} xs={12} className="border-top hover padding-inner">
                             <img src={ heroIllustration } width="100" className="" alt="" />
                             <h4>Book a Doctor</h4>
                             <p>Select out of the hundreds of professional doctors we have on our platform</p>

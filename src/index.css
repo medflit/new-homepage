@@ -245,9 +245,8 @@ select {
 
 .medflit-item {
   box-sizing: content-box;
-  padding: 30px 15px 30px 30px;
-  /* margin: 30px 15px; */
-  height: auto;
+  padding: 15px 15px 15px 30px;
+  height: 200px;
   border-radius: 50px;
   border: 1px solid #CDCDCD;
   position: relative;

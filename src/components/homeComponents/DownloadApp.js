@@ -12,10 +12,10 @@ function DownloadApp() {
             <Container>
                 <div className="primary-color-bg download-inner">
                     <Row>
-                        <Col md="5" className="d-none d-md-block">
+                        <Col md={5} className="d-none d-md-block">
                             <img src={ handPhone } width="65%" className="" alt="" />
                         </Col>
-                        <Col md="7" xs="12">
+                        <Col md={7} xs={12}>
                             <h1>Why not book a Doctor now?</h1>
                             <p>Save time and effort. Medflit is your best choice.</p>
 

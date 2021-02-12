@@ -13,10 +13,10 @@ function WhyMedflit() {
                     </Col>
                 </Row>
                 <Row>
-                    <Col md="3">
+                    <Col md={3}>
                         <div className="medflit-item">
                             <Row>
-                                <Col md="4">
+                                <Col md={{ span: 4, offset: 6 }}>
                                     <img src={ why } width="100" alt=""/>
                                 </Col>
                             </Row>
@@ -28,47 +28,47 @@ function WhyMedflit() {
                             </Row>
                         </div>
                     </Col>
-                    <Col md="3">
+                    <Col md={3}>
                         <div className="medflit-item">
                             <Row>
-                                <Col md="4">
+                                <Col md={{ span: 4, offset: 6 }}>
                                     <img src={ why } width="100" alt=""/>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
-                                    <h5>Powerful</h5>
-                                    <p className="">Powerful technology that enables Video, Chat, and Audio Calls</p>
+                                    <h5>Prescription Pickup</h5>
+                                    <p className="">Pick up prescriptions at your preferred pharmacy location.</p>
                                 </Col>
                             </Row>
                         </div>
                     </Col>
-                    <Col md="3">
+                    <Col md={3}>
                         <div className="medflit-item">
                             <Row>
-                                <Col md="4">
+                                <Col md={{ span: 4, offset: 6 }}>
                                     <img src={ why } width="100" alt=""/>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
-                                    <h5>Powerful</h5>
-                                    <p className="">Powerful technology that enables Video, Chat, and Audio Calls</p>
+                                    <h5>Health Screening</h5>
+                                    <p className="">Health screening, diagnosis and treatment of non-emergency medical conditions.</p>
                                 </Col>
                             </Row>
                         </div>
                     </Col>
-                    <Col md="3">
+                    <Col md={3}>
                         <div className="medflit-item">
                             <Row>
-                                <Col md="4">
+                                <Col md={{ span: 4, offset: 6 }}>
                                     <img src={ why } width="100" alt=""/>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
-                                    <h5>Powerful</h5>
-                                    <p className="">Powerful technology that enables Video, Chat, and Audio Calls</p>
+                                    <h5>EHR</h5>
+                                    <p className="">Electronic Retrieval of Medical Records</p>
                                 </Col>
                             </Row>
                         </div>

@@ -18,13 +18,16 @@ function Navigation() {
                     <Nav.Link href="/" className="nl">Home</Nav.Link>
                     <Nav.Link href="/conditions" className="nl">Conditions</Nav.Link>
                     <NavDropdown title="Solutions" className="nl" id="collasible-nav-dropdown">
-                        <NavDropdown.Item href="#action/">Action</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                        <NavDropdown.Item href="#">Patient</NavDropdown.Item>
+                        <NavDropdown.Item href="#">Provider</NavDropdown.Item>
+                        <NavDropdown.Item href="#">Pharmacy</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                        <NavDropdown.Item href="#">Partners</NavDropdown.Item>
                     </NavDropdown>
-                    <Nav.Link href="/contact" className="nl">Contact</Nav.Link>
+                    <NavDropdown title="Contact" className="nl" id="collasible-nav-dropdown">
+                        <NavDropdown.Item href="#">WhatsApp</NavDropdown.Item>
+                        <NavDropdown.Item href="#">Email Us</NavDropdown.Item>
+                    </NavDropdown>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

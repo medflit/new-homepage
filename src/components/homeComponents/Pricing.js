@@ -13,14 +13,14 @@ function Pricing() {
                     </Col>
                 </Row>
                 <Row>
-                    <Col md="5">
+                    <Col md={5}>
                         <p>Firstly, get an appointment with a <br className="d-md-block" /> Doctor for as low as N1k.</p>
                         <h6>Show benefits</h6>
 
                         <p>Lastly, purchase a treatment plan after <br className="d-md-block" /> finished talking to your doctor</p>
                         <h6>Show benefits</h6>
                     </Col>
-                    <Col md="7">
+                    <Col md={7}>
                         <div className="pricing-plan">
                             <h5>Book a Doctor</h5>
                             <p className="small"><small>Unlimited access to a Doctor</small></p>

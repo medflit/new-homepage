@@ -14,7 +14,7 @@ function Hero() {
         <section className="hero">
             <Container>
                 <Row>
-                    <Col className="col-md-6 p-5 m-auto">
+                    <Col className="p-5 m-auto">
                         <h1>Nigeria First Integrated Telemedicine</h1>
                         <p>Medflit is a convenient and affordable telemedicine
                             platform that allows you to talk to a board-certified 
