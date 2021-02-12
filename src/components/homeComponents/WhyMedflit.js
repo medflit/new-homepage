@@ -1,5 +1,10 @@
 import React, { Components } from 'react'
-import why from '../../assets/images/why1.png';
+import powerful from '../../assets/images/powerful.png';
+import pickup from '../../assets/images/pickup.png';
+import screening from '../../assets/images/screening.png';
+import emr from '../../assets/images/emr.png';
+import drug from '../../assets/images/drug.png';
+// import payment from '../../assets/images/payment.png';
 
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -16,8 +21,8 @@ function WhyMedflit() {
                     <Col md={3}>
                         <div className="medflit-item">
                             <Row>
-                                <Col md={{ span: 4, offset: 6 }}>
-                                    <img src={ why } width="100" alt=""/>
+                                <Col md={{ span: 4, offset: 6 }} xs={{ span: 4, offset: 8 }}>
+                                    <img src={ powerful } width="100" alt=""/>
                                 </Col>
                             </Row>
                             <Row>
@@ -31,8 +36,8 @@ function WhyMedflit() {
                     <Col md={3}>
                         <div className="medflit-item">
                             <Row>
-                                <Col md={{ span: 4, offset: 6 }}>
-                                    <img src={ why } width="100" alt=""/>
+                                <Col md={{ span: 4, offset: 6 }} xs={{ span: 4, offset: 8 }}>
+                                    <img src={ pickup } width="100" alt=""/>
                                 </Col>
                             </Row>
                             <Row>
@@ -46,8 +51,8 @@ function WhyMedflit() {
                     <Col md={3}>
                         <div className="medflit-item">
                             <Row>
-                                <Col md={{ span: 4, offset: 6 }}>
-                                    <img src={ why } width="100" alt=""/>
+                                <Col md={{ span: 4, offset: 6 }} xs={{ span: 4, offset: 8 }}>
+                                    <img src={ screening } width="100" alt=""/>
                                 </Col>
                             </Row>
                             <Row>
@@ -61,8 +66,8 @@ function WhyMedflit() {
                     <Col md={3}>
                         <div className="medflit-item">
                             <Row>
-                                <Col md={{ span: 4, offset: 6 }}>
-                                    <img src={ why } width="100" alt=""/>
+                                <Col md={{ span: 4, offset: 6 }} xs={{ span: 4, offset: 8 }}>
+                                    <img src={ emr } width="100" alt=""/>
                                 </Col>
                             </Row>
                             <Row>

@@ -9,6 +9,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 function Footer() {
     return (
         <section className="footer">
+            <hr /><br /><br /><br />
             <Container>
                 <Row>
                     <Col md={5}>
@@ -18,7 +19,7 @@ function Footer() {
                             <img src={ twitterIcon } width="" className="social-icon" />
                             <img src={ igIcon } width="" className="social-icon" />
                         </Row>
-                        <p className="copyright">© Medflit 2021. All rights reserved</p>
+                        <p className="copyright d-none d-md-block">© Medflit 2021. All rights reserved</p>
                     </Col>
                     <Col md={7}>
                         <Row>
@@ -50,6 +51,9 @@ function Footer() {
                                 </div>                                    
                             </Col>
                         </Row>
+                    </Col>
+                    <Col className="">
+                        <p className="copyright2">© Medflit 2021. All rights reserved</p>
                     </Col>
                 </Row>
             </Container>

@@ -3,6 +3,9 @@ import logo from '../../assets/images/medflit-logo.png';
 import logoWhite from '../../assets/images/logo-white.png';
 import { Navbar, NavDropdown, NavLink, NavbarBrand, Nav, Button } from 'react-bootstrap';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
+
 import { Route, Link } from 'react-router-dom';
 
 function Navigation() {
@@ -25,8 +28,8 @@ function Navigation() {
                         <NavDropdown.Item href="#">Partners</NavDropdown.Item>
                     </NavDropdown>
                     <NavDropdown title="Contact" className="nl" id="collasible-nav-dropdown">
-                        <NavDropdown.Item href="#">WhatsApp</NavDropdown.Item>
-                        <NavDropdown.Item href="#">Email Us</NavDropdown.Item>
+                        <NavDropdown.Item href="#"><FontAwesomeIcon icon={['fab', 'whatsapp']} /> WhatsApp</NavDropdown.Item>
+                        <NavDropdown.Item href="#"><FontAwesomeIcon icon={ faPaperPlane } /> Email Us</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
             </Navbar.Collapse>
