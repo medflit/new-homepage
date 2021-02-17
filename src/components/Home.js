@@ -6,7 +6,6 @@ import DownloadApp from './homeComponents/DownloadApp';
 import WhyMedflit from './homeComponents/WhyMedflit';
 import Testimonials from './homeComponents/Testimonials';
 
-
 function Home() {
     return(
         <div>

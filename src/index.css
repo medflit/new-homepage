@@ -253,7 +253,7 @@ select {
 .medflit-item {
   box-sizing: content-box;
   padding: 15px 15px 15px 30px;
-  height: 200px;
+  height: auto !important;
   border-radius: 50px;
   border: 1px solid #CDCDCD;
   position: relative;
@@ -339,8 +339,32 @@ select {
   display: none;
 }
 
+.footer-link a {
+  color: black;
+  text-decoration: none;
+}
+
 /* navigation */
 
+.navvy a {
+  color: #fff !important;
+  text-decoration: none;
+}
+
+.da {
+  color: #fff !important;
+}
+
+.da a {
+  color: black !important;
+}
+
+.nl a {
+  color: #fff !important;
+}
+.ni {
+  color: #000 !important;
+}
 .navbar-light .navbar-toggler {
   color: #fff;
   border-color:#fff;
@@ -348,4 +372,42 @@ select {
 
 .navbar-light .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(255, 255, 255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+/* Swiper */
+
+/* .swiper-container {
+  width: 480px;
+} */
+
+/* @media screen and (min-width: 640px) {
+  .swiper-container {
+    width: 640px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .swiper-container {
+    width: 768px;
+  }
+} */
+
+@media screen and (max-width: 400px) {
+  .swiper-container {
+    width: 400px;
+  }
+}
+
+/* Forms */
+
+.bordered {
+  border: 1px solid #cdcdcd;
+  border-radius: 10px;
+  padding: 40px;
+}
+
+@media(max-width: 768px) {
+  .bordered {
+    margin: 40px;
+  }
 }

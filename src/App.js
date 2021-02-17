@@ -4,7 +4,12 @@ import './App.css';
 import Navigation from './components/generalComponents/Navigation';
 import Footer from './components/generalComponents/Footer';
 import Home from './components/Home';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import AdminLogin from './components/AdminLogin';
+import Conditions from './components/Conditions';
+import { BrowserRouter as Router, Route, Link, HashRouter } from 'react-router-dom';
+
+// import 'animate.css'
+
 
 class App extends Component {
   render() {
@@ -12,7 +17,11 @@ class App extends Component {
       <Router>
         <div>
           <Navigation/>
-          <Home/>
+          <div className="content">
+            <Route exact path="/" component={ Home }/>
+            <Route path="/admin-login" component={ AdminLogin }/>
+            <Route path="/conditions" component={ Conditions }/>
+          </div>
           <Footer/>
         </div>
       </Router>

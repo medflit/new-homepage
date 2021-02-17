@@ -9,6 +9,8 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 import { Route, Link } from 'react-router-dom';
 
+// import Animate from 'animate.css-react'
+
 function Hero() {
     return (
         <section className="hero">
@@ -32,7 +34,13 @@ function Hero() {
                     </Col>
                     <Col className="d-none d-md-block">
                         <div>
-                            <img src={ heroIllustration } className="hero_img" alt="" />
+                            {/* <Animate
+                                appear="fadeInDown"
+                                durationAppear={1000}
+                                component="div" >
+                            </Animate> */}
+                            <img src={ heroIllustration } className="hero_img" alt="" />                                                       
+
                         </div>
                     </Col>
                 </Row>

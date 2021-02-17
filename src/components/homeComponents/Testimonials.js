@@ -8,6 +8,11 @@ import customer from '../../assets/images/customer.png';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Route, Link } from 'react-router-dom';
 
+
+import SwiperCore, { Autoplay } from 'swiper';
+
+import 'swiper/swiper.scss';
+
 function Testimonials() {
     return(
         <section className="testimonials">
