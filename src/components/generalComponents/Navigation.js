@@ -16,6 +16,13 @@ function Navigation() {
                     <img src={logoWhite} className="" width="80" alt="logo" />
                 </Link>
             </Navbar.Brand>
+
+            <Nav.Link className="nl ml-5 whatsapp">
+                <Link to={{ pathname: "https://api.whatsapp.com/send?phone=+=2347055209676&text=Hi,%20I%20would%20like%20to%20know%20more%20about%20Medflit." }} target="_blank">
+                    <FontAwesomeIcon icon={['fab', 'whatsapp']} /> WhatsApp Us
+                </Link>
+            </Nav.Link>
+            
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 

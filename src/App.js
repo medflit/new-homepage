@@ -6,6 +6,7 @@ import Footer from './components/generalComponents/Footer';
 import Home from './components/Home';
 import AdminLogin from './components/AdminLogin';
 import Conditions from './components/Conditions';
+import Faq from './components/Faq';
 import { BrowserRouter as Router, Route, Link, HashRouter } from 'react-router-dom';
 
 // import 'animate.css'
@@ -21,6 +22,7 @@ class App extends Component {
             <Route exact path="/" component={ Home }/>
             <Route path="/admin-login" component={ AdminLogin }/>
             <Route path="/conditions" component={ Conditions }/>
+            <Route path="/faq" component={ Faq }/>
           </div>
           <Footer/>
         </div>
