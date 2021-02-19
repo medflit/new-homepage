@@ -7,6 +7,8 @@ import Home from './components/Home';
 import AdminLogin from './components/AdminLogin';
 import Conditions from './components/Conditions';
 import Faq from './components/Faq';
+import About from './components/About';
+import Partners from './components/Partners';
 import { BrowserRouter as Router, Route, Link, HashRouter } from 'react-router-dom';
 
 // import 'animate.css'
@@ -23,6 +25,8 @@ class App extends Component {
             <Route path="/admin-login" component={ AdminLogin }/>
             <Route path="/conditions" component={ Conditions }/>
             <Route path="/faq" component={ Faq }/>
+            <Route path="/about" component={ About }/>
+            <Route path="/partners" component={ Partners }/>
           </div>
           <Footer/>
         </div>

@@ -125,4 +125,7 @@
         display: block;
     }
       
+    .about h4, h5, p {
+        text-align: left;
+      }
 }

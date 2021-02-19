@@ -18,9 +18,9 @@ function Hero() {
                 <Row>
                     <Col className="pad m-auto">
                         <h1>Nigeria First Integrated Telemedicine</h1>
-                        <p>Medflit is a convenient and affordable telemedicine
+                        <p>Medflit is a convenient and affordable telemedicine <br className="d-none d-md-block" />
                             platform that allows you to talk to a board-certified 
-                            doctor by phone or video  healthcare, accessible on mobile and online for everyone</p>
+                            doctors <br className="d-none d-md-block" />by phone or video.</p>
                         <div className="mt-5 br">
                             <div className="mt-3 download-btn">
                                 <Link to="/playstore">

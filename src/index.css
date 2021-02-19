@@ -387,17 +387,23 @@ select {
   .swiper-container {
     width: 640px;
   }
-}
+} */
+@media screen and (min-width: 1024px) {
+  .swiper-container {
+    width: 1024px;
+  }
+} 
 
+/*
 @media screen and (min-width: 768px) {
   .swiper-container {
     width: 768px;
   }
-} */
+}  */
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 300px) {
   .swiper-container {
-    width: 400px;
+    width: 300px;
   }
 }
 
@@ -417,4 +423,15 @@ select {
   .bordered {
     margin: 40px;
   }
+}
+
+/* About Page */
+
+.about {
+
+}
+
+.about h4, h5 {
+  font-weight: 800;
+  margin-bottom: 20px;
 }

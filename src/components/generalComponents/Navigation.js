@@ -19,7 +19,7 @@ function Navigation() {
 
             <Nav.Link className="nl ml-5 whatsapp">
                 <Link to={{ pathname: "https://api.whatsapp.com/send?phone=+=2347055209676&text=Hi,%20I%20would%20like%20to%20know%20more%20about%20Medflit." }} target="_blank">
-                    <FontAwesomeIcon icon={['fab', 'whatsapp']} /> WhatsApp Us
+                    <FontAwesomeIcon icon={['fab', 'whatsapp']} /> WhatsApp
                 </Link>
             </Nav.Link>
             
@@ -28,7 +28,7 @@ function Navigation() {
                 
                 <Nav className="ml-auto">
                     <Nav.Link className="nl"><Link to="/">Home</Link></Nav.Link>
-                    <Nav.Link className="nl"><Link to="/conditions">Conditions</Link></Nav.Link>
+                    <Nav.Link className="nl"><Link to="/about">About</Link></Nav.Link>
                     <NavDropdown title="Solutions" className="nl_" id="collasible-nav-dropdown">
                         <NavDropdown.Item className="ni">
                             <Link to="/patient">Patient</Link>

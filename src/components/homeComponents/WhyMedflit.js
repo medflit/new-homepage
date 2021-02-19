@@ -28,14 +28,24 @@ function WhyMedflit() {
                 <Row className="dd">
                     <Swiper
                         spaceBetween={30}
-                        slidesPerView={3}
+                        slidesPerView={5}
                         loop={true}
                         autoplay={true}
                         breakpoints={{
                             
-                            400: {
-                                width: 400,
-                                slidesPerView: 2,
+                            300: {
+                                width: 300,
+                                slidesPerView: 1,
+                            },
+
+                            // 768: {
+                            //     width: 768,
+                            //     slidesPerView: 3,
+                            // },
+
+                            1024: {
+                                width: 1024,
+                                slidesPerView: 5,
                             },
                           }}
                         >
