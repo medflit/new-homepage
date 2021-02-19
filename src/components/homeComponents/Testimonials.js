@@ -25,9 +25,9 @@ function Testimonials() {
                             <h3>What our customers are saying</h3>
                         </Col>
                         <Col className="mt-5">
-                            <Carousel className="text-center" indicators={false}>
+                            <Carousel className="text-center" controls={false} indicators={false}>
                                 <Carousel.Item>
-                                    <p>""This is the best medical lab. I love everything about this<br className="d-none d-md-block"/> app, you can call, chat and video chat a doctor for a <br className="d-none d-md-block"/>whole month for just 1k!"
+                                    <p>"This is the best medical lab. I love everything about this<br className="d-none d-md-block"/> app, you can call, chat and video chat a doctor for a <br className="d-none d-md-block"/>whole month for just 1k!
                                     "</p>
                                     <h5>Taofeeq Alade</h5>
                                 </Carousel.Item>

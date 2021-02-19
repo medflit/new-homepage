@@ -104,7 +104,11 @@
 
     .testimonial-inner p {
         margin-top: 20px;
-        font-size: 14px;
+        font-size: 14px; 
+    }
+
+    .testimonial-inner h5, p {
+        text-align: center !important;
     }
 
     /* Footer Section */
