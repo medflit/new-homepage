@@ -39,11 +39,6 @@ function Testimonials() {
                                 <Carousel.Item>
                                     <p>"I had infection, consulted medflit doctor online, <br className="d-none d-md-block"/>he prescribed medications that I took and I felt better.
                                     "</p>
-                                    <h5>Jerry Samuel</h5>
-                                </Carousel.Item>
-                                <Carousel.Item>
-                                    <p>"I had infection, consulted medflit doctor online, <br className="d-none d-md-block"/>he prescribed medications that I took and I felt better.
-                                    "</p>
                                     <h5>Titilayo Demilade</h5>
                                 </Carousel.Item>
                                 <Carousel.Item>

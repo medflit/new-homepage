@@ -5,6 +5,7 @@ import { Navbar, NavDropdown, NavbarBrand, Nav, Button } from 'react-bootstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
+import { whatsapp } from '@fortawesome/free-regular-svg-icons'
 
 import { Route, Link, NavLink } from 'react-router-dom';
 
@@ -45,6 +46,11 @@ function Navigation() {
                         </NavDropdown.Item>
                     </NavDropdown>
                     <NavDropdown title="Contact" className="nl_" id="collasible-nav-dropdown">
+                        <NavDropdown.Item>
+                            {/* <Link to={{ pathname: "https://api.whatsapp.com/send?phone=+=2347055209676&text=Hi,%20I%20would%20like%20to%20know%20more%20about%20Medflit." }} target="_blank">
+                                <FontAwesomeIcon icon={['fab', 'whatsapp']} /> WhatsApp
+                            </Link> */}
+                        </NavDropdown.Item>
                         <NavDropdown.Item>
                             <Link to="/contact"><FontAwesomeIcon icon={ faPaperPlane } /> Email Us</Link>
                         </NavDropdown.Item>
