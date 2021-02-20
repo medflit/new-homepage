@@ -65,7 +65,7 @@ function Partners() {
                     </Col>
                 </Row>
                 <hr />
-                <Row className="mt-5 mb-5 text-center">
+                <Row className="mt-5 mb-5 text-center hiw">
                     <Col md={12} className="mt-5 mb-5">
                         <h3><b>How it works</b></h3>
                     </Col>

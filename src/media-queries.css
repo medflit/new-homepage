@@ -138,7 +138,15 @@
         text-align: left;
     }
 
-    /* .wcyd h5, p {
+    .wcyd h5 {
         text-align: center !important;
-    } */
+    }
+
+    .wcyd p {
+        text-align: center !important;
+    }
+
+    .hiw p {
+        text-align: center !important;
+    }
 }

@@ -31,15 +31,15 @@ function Navigation() {
             </NavDropdown> */}
 
             <NavDropdown title="Call us" className="nl whatsapp" id="collasible-nav-dropdown">
-                <NavDropdown.Item className="ni">
-                    <NavLink 
-                        className="nl" id="no"
+                {/* <NavDropdown.Item className="ni"> */}
+                    <Link 
+                        className="nl das" id="no"
                         to={{ pathname: "https://api.whatsapp.com/send?phone=+=2347055209676&text=Hi,%20I%20would%20like%20to%20know%20more%20about%20Medflit." }} 
                         target="_blank"
                     >
                     <FontAwesomeIcon icon={ faWhatsapp } />  +234 705 520 9676
-                    </NavLink>
-                </NavDropdown.Item>
+                    </Link>
+                {/* </NavDropdown.Item> */}
             </NavDropdown>
             
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
