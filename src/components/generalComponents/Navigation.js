@@ -46,11 +46,6 @@ function Navigation() {
                     </NavDropdown>
                     <NavDropdown title="Contact" className="nl_" id="collasible-nav-dropdown">
                         <NavDropdown.Item>
-                            <Link to={{ pathname: "https://api.whatsapp.com/send?phone=+=2347055209676&text=Hi,%20I%20would%20like%20to%20know%20more%20about%20Medflit." }} target="_blank">
-                                <FontAwesomeIcon icon={['fab', 'whatsapp']} /> WhatsApp
-                            </Link>
-                        </NavDropdown.Item>
-                        <NavDropdown.Item>
                             <Link to="/contact"><FontAwesomeIcon icon={ faPaperPlane } /> Email Us</Link>
                         </NavDropdown.Item>
                     </NavDropdown>

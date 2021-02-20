@@ -49,7 +49,7 @@ function Testimonials() {
                                 <Carousel.Item>
                                     <p>"This app had helped me conceive I have PCOS <br className="d-none d-md-block"/>and was told I would never have kids. This app helped me conceive.<br className="d-none d-md-block"/> So thankful. Highly recommended.
                                     "</p>
-                                    <h5>Jessica Anthony</h5>
+                                    <h5>Hadizah Abdulrahman</h5>
                                 </Carousel.Item>
                                 <Carousel.Item>
                                     <p>"Simply the best at what it does. I used Medflit to track my cycle, <br className="d-none d-md-block"/>I got notifications about ovulation, and within 1 <br className="d-none d-md-block"/>month of trying to conceive we got pregnant.
