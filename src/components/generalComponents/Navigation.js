@@ -18,7 +18,7 @@ function Navigation() {
                 </Link>
             </Navbar.Brand>
 
-            <Nav.Link className="nl ml-5 whatsapp">
+            <Nav.Link className="nl whatsapp">
                 <Link to={{ pathname: "https://api.whatsapp.com/send?phone=+=2347055209676&text=Hi,%20I%20would%20like%20to%20know%20more%20about%20Medflit." }} target="_blank">
                 <FontAwesomeIcon icon={ faWhatsapp } /> WhatsApp
                 </Link>
