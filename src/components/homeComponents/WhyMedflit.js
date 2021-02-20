@@ -35,7 +35,7 @@ function WhyMedflit() {
                             
                             300: {
                                 width: 300,
-                                slidesPerView: 1,
+                                slidesPerView: 2,
                             },
 
                             // 768: {
