@@ -362,6 +362,14 @@ select {
 .nl a {
   color: #fff !important;
 }
+
+.nn {
+  color: #fff !important;
+}
+
+#no {
+  color: #1D4BB7 !important;
+}
 .ni {
   color: #000 !important;
 }

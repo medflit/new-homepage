@@ -19,10 +19,28 @@ function Navigation() {
             </Navbar.Brand>
 
             {/* <Nav.Link className="nl whatsapp"> */}
-                <NavLink className="nl whatsapp" to={{ pathname: "https://api.whatsapp.com/send?phone=+=2347055209676&text=Hi,%20I%20would%20like%20to%20know%20more%20about%20Medflit." }} target="_blank">
-                <FontAwesomeIcon icon={ faWhatsapp } /> WhatsApp
-                </NavLink>
+                
             {/* </Nav.Link> */}
+
+            {/* <NavDropdown title="Call us" className="nl_ whatsapp" id="collasible-nav-dropdown">
+                <NavDropdown.Item className="ni">
+                    <NavLink className="nl" to={{ pathname: "https://api.whatsapp.com/send?phone=+=2347055209676&text=Hi,%20I%20would%20like%20to%20know%20more%20about%20Medflit." }} target="_blank">
+                    <FontAwesomeIcon icon={ faWhatsapp } /> WhatsApp
+                    </NavLink>
+                </NavDropdown.Item>
+            </NavDropdown> */}
+
+            <NavDropdown title="Call us" className="nl whatsapp" id="collasible-nav-dropdown">
+                <NavDropdown.Item className="ni">
+                    <NavLink 
+                        className="nl" id="no"
+                        to={{ pathname: "https://api.whatsapp.com/send?phone=+=2347055209676&text=Hi,%20I%20would%20like%20to%20know%20more%20about%20Medflit." }} 
+                        target="_blank"
+                    >
+                    <FontAwesomeIcon icon={ faWhatsapp } />  +234 705 520 9676
+                    </NavLink>
+                </NavDropdown.Item>
+            </NavDropdown>
             
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
@@ -45,16 +63,7 @@ function Navigation() {
                             <Link to="/partners">Partners</Link>
                         </NavDropdown.Item>
                     </NavDropdown>
-                    <NavDropdown title="Contact" className="nl_" id="collasible-nav-dropdown">
-                        <NavDropdown.Item>
-                            {/* <Link to={{ pathname: "https://api.whatsapp.com/send?phone=+=2347055209676&text=Hi,%20I%20would%20like%20to%20know%20more%20about%20Medflit." }} target="_blank">
-                                <FontAwesomeIcon icon={['fab', 'whatsapp']} /> WhatsApp
-                            </Link> */}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item>
-                            <Link to="/contact"><FontAwesomeIcon icon={ faPaperPlane } /> Email Us</Link>
-                        </NavDropdown.Item>
-                    </NavDropdown>
+                    <Nav.Link className="nl"><Link to="/contact">Contact</Link></Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
