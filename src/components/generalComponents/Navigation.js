@@ -5,7 +5,7 @@ import { Navbar, NavDropdown, NavbarBrand, Nav, Button } from 'react-bootstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
-import { whatsapp } from '@fortawesome/free-regular-svg-icons'
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons'
 
 import { Route, Link, NavLink } from 'react-router-dom';
 
@@ -20,7 +20,7 @@ function Navigation() {
 
             <Nav.Link className="nl ml-5 whatsapp">
                 <Link to={{ pathname: "https://api.whatsapp.com/send?phone=+=2347055209676&text=Hi,%20I%20would%20like%20to%20know%20more%20about%20Medflit." }} target="_blank">
-                    <FontAwesomeIcon icon={['fab', 'whatsapp']} /> WhatsApp
+                <FontAwesomeIcon icon={ faWhatsapp } /> WhatsApp
                 </Link>
             </Nav.Link>
             
