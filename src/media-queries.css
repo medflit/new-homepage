@@ -22,7 +22,11 @@
 
     /* Amazing Benefits Section */
 
-    .benefits h4, p {
+    .benefits h4 {
+        text-align: center;
+    }
+
+    .benefits p {
         text-align: center;
     }
 
@@ -105,9 +109,10 @@
     .testimonial-inner p {
         margin-top: 20px;
         font-size: 14px; 
+        text-align: center !important;
     }
 
-    .testimonial-inner h5, p {
+    .testimonial-inner h5 {
         text-align: center !important;
     }
 
@@ -133,7 +138,7 @@
         text-align: left;
     }
 
-    .wcyd h5, p {
+    /* .wcyd h5, p {
         text-align: center !important;
-    }
+    } */
 }

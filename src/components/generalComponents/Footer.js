@@ -52,7 +52,7 @@ function Footer() {
                                     <NavLink to="/about"><p>About Us</p></NavLink>
                                     <NavLink to={{ pathname: "https://api.whatsapp.com/send?phone=+=2347055209676&text=Hi,%20I%20would%20like%20to%20know%20more%20about%20Medflit." }} target="_blank"><p>Contact Us</p></NavLink>
                                     <NavLink to="/partners"><p>Partners</p></NavLink>
-                                    <NavLink to="/admin-login"><p>Admin</p></NavLink>
+                                    <NavLink to="/admin-login"><p>Login</p></NavLink>
                                 </div>                                    
                             </Col>
                             <Col md={3}>

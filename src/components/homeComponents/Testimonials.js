@@ -54,12 +54,12 @@ function Testimonials() {
                                 <Carousel.Item>
                                     <p>"Simply the best at what it does. I used Medflit to track my cycle, <br className="d-none d-md-block"/>I got notifications about ovulation, and within 1 <br className="d-none d-md-block"/>month of trying to conceive we got pregnant.
                                     "</p>
-                                    <h5>Joan Nicholas</h5>
+                                    <h5>Kikelomo Nicholas</h5>
                                 </Carousel.Item>
                                 <Carousel.Item>
                                     <p>"Amazing! This has been a helpful and amazing app. <br className="d-none d-md-block"/>I got pregnant in one try. Thanks alot.
                                     "</p>
-                                    <h5>Pea Johnson</h5>
+                                    <h5>Vivian Ciroma</h5>
                                 </Carousel.Item>
                             </Carousel>
                         </Col> 
