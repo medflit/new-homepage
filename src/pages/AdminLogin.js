@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap';
-
 import {Link} from 'react-router-dom'
 
 import DefaultLayout from '../layouts/default'
@@ -23,9 +22,9 @@ function AdminLogin() {
                         {/* <Form.Group controlId="formBasicCheckbox">
                             <Form.Check type="checkbox" label="Check me out" />
                         </Form.Group> */}
-                        <Link to="/admin/dashboard" className="primary-bg" type="submit">
-                            Submit
-                        </Link>
+                        <Button className="primary-bg" type="submit">
+                            <Link to="/admin/dashboard">Submit</Link>
+                        </Button>
                     </Form>
                 </Col>
             </Row>
