@@ -11,8 +11,11 @@
 /*
 Base 
 */
-html {
-  background: #f9f9fa; }
+/* html {
+  background: #f9f9fa; } */
+.bg-admin {
+  background-color: #f9f9fa;
+}
 
 body {
   width: 100%;

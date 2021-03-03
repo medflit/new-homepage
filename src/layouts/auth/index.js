@@ -15,7 +15,7 @@ import Footer from './Footer'
 
 const AuthLayout = ( {children} ) => {
     return (
-        <div className="layout-row">
+        <div className="layout-row bg-admin">
             <Sidebar/>
             <div id="main" className="layout-column flex">
                 <Navigation/>

@@ -31,6 +31,7 @@ function Dashboard() {
                         </Link>
                     </Col>
                     <Col md={3} xs={6}>
+                        <Link to="/admin/providers">
                         <Card>
                             <Card.Body>
                                 <div className="d-md-flex">
@@ -45,6 +46,7 @@ function Dashboard() {
                                 </Row>
                             </Card.Body>
                         </Card>
+                        </Link>
                     </Col>
                     <Col md={3} xs={6}>
                         <Card>

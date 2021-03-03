@@ -35,11 +35,33 @@ const Sidebar = () => {
                                     <span className="nav-text">Update Profile</span>
                                 </Link>
                             </li>
+                            {/* <li>
+                                <a href="#" class="">
+                                    <span class="nav-icon"><i data-feather='file'></i></span>
+                                    <span class="nav-text">System Settings</span>
+                                    <span class="nav-caret"></span>
+                                </a>
+                                <ul class="nav-sub nav-mega">
+                                    <li>
+                                        <a href="page.profile.html" class="">
+                                            <span class="nav-text">Profile</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li> */}
                             <li>
-                                <Link to="/">
+                                <a href="#" className="">
                                     <span className="nav-icon "><FeatherIcon icon="settings" size="18"/></span>
                                     <span className="nav-text">System Settings</span>
-                                </Link>
+                                    <span className="nav-caret"></span>
+                                </a>
+                                <ul class="nav-sub nav-mega">
+                                    <li>
+                                        <Link to="/" className="">
+                                            <span className="nav-text">Profile</span>
+                                        </Link>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
                                 <Link to="/">
@@ -54,9 +76,9 @@ const Sidebar = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/">
+                                <Link to="/admin/providers">
                                     <span className="nav-icon "><FeatherIcon icon="user" size="18"/></span>
-                                    <span className="nav-text">Doctors Dashboard</span>
+                                    <span className="nav-text">Providers Dashboard</span>
                                 </Link>
                             </li>
                             <li>

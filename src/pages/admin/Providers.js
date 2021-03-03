@@ -6,7 +6,7 @@ import FeatherIcon from 'feather-icons-react'
 
 import AuthLayout from '../../layouts/auth'
 
-function Patients() {
+function Providers() {
     return (
         <AuthLayout>
             <Container>
@@ -42,13 +42,15 @@ function Patients() {
                                                 <i></i>
                                             </label>
                                         </th>
-                                        <th className="text-muted">First Name</th>
-                                        <th className="text-muted d-none d-sm-block" dataToggleClassName="asc">Last Name</th>
-                                        <th className="text-muted"><span className="">Unique ID</span></th>
-                                        <th className="text-muted"><span className="d-none d-sm-block">Sub status</span></th>
-                                        <th className="text-muted"><span className="d-none d-sm-block">Sub Expiry</span></th>
-                                        <th className="text-muted"><span className="d-none d-sm-block">Date</span></th>
-                                        <th className="text-muted"><span className="d-none d-sm-block">Status</span></th>
+                                        <th className="text-muted">Full Name</th>
+                                        <th className="text-muted">Prof. Class</th>
+                                        <th className="text-muted d-none d-sm-block">Medical Org.</th>
+                                        <th className="text-muted d-none d-sm-block">Org. Tel</th>
+                                        <th className="text-muted"><span className="">License ID</span></th>
+                                        <th className="text-muted"><span className="">Resume</span></th>
+                                        <th className="text-muted"><span className="">Uni. Cert.</span></th>
+                                        <th className="text-muted"><span className="">Med. License.</span></th>
+                                        <th className="text-muted"><span className="d-none d-sm-block">Provider status</span></th>
                                         <th style={{width: "50px"}}></th>
                                     </tr>
                                 </thead>
@@ -61,35 +63,32 @@ function Patients() {
                                             </label>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color ">Samson</div>                                            
+                                            <div className="item-title text-color ">Samson S.</div>                                            
                                         </td>
                                         <td className="flex">
-                                            <div className=" d-none d-sm-block item-title text-color ">Samuels</div>
-                                            
+                                            <div className=" d-none d-sm-block item-title text-color ">---</div>
+                                        </td>
+                                        <td className="flex">
+                                            <div className=" d-none d-sm-block item-title text-color ">---</div>
                                         </td>
                                         <td>
                                             <div className="item-except text-muted text-sm h-1x">
                                                 MDFT1234543
                                             </div>
                                         </td>
+                                        <td className="flex">
+                                            <div className=" d-none d-sm-block item-title text-color ">---</div>
+                                        </td>
+                                        
+                                        <td className="flex">
+                                            <div className=" d-none d-sm-block item-title text-color ">---</div>
+                                        </td>
+                                        <td className="flex">
+                                            <div className=" d-none d-sm-block item-title text-color ">---</div>
+                                        </td>
                                         <td>
                                             <span className=" d-none d-sm-block badge badge-secondary badge-sm">
-                                                Not Subscribed
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span className="item-amount d-none d-sm-block text-sm">
-                                                Not Subscribed
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span className="item-amount d-none d-sm-block text-sm">
-                                                Wed, 14th Feb, 2021
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span className=" d-none d-sm-block badge badge-success badge-sm">
-                                                Active
+                                                Unverify
                                             </span>
                                         </td>
                                         <td>
@@ -99,14 +98,15 @@ function Patients() {
                                                 </Dropdown.Toggle>
 
                                                 <Dropdown.Menu>
-                                                    <Dropdown.Item><Link to="/admin/profile/patient">View</Link></Dropdown.Item>
-                                                    <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                    <Dropdown.Item><Link to="/admin/profile/provider">View</Link></Dropdown.Item>
+                                                    <Dropdown.Item href="#">Verify</Dropdown.Item>
                                                     <Dropdown.Item href="#" className="text-danger">Delete</Dropdown.Item>
+                                                    <Dropdown.Item href="#">Add to free plan</Dropdown.Item>
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                         </td>
                                     </tr>
-                                </tbody>
+                                    </tbody>
                             </Table>
                         </div>
                         <div className="d-flex">
@@ -148,4 +148,4 @@ function Patients() {
     )
 }
 
-export default Patients
+export default Providers

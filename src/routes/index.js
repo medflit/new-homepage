@@ -11,9 +11,12 @@ import Partners from '../pages/Partners';
 //import Admin pages
 import Dashboard from '../pages/admin/Dashboard';
 import Patients from '../pages/admin/Patients';
+import Providers from '../pages/admin/Providers';
 
 //import profiles
 import Patient from '../pages/admin/profile/Patient'
+import Provider from '../pages/admin/profile/Provider'
+
 
 // import router components
 import { BrowserRouter as Router, Route, Link, HashRouter } from 'react-router-dom';
@@ -31,9 +34,11 @@ const Routes = () => {
             {/* Admin routes */}
             <Route path="/admin/dashboard" component={ Dashboard }/>
             <Route path="/admin/patients" component={ Patients }/>
+            <Route path="/admin/providers" component={ Providers }/>
 
             {/* Profile routes */}
             <Route path="/admin/profile/patient" component={ Patient }/>
+            <Route path="/admin/profile/provider" component={ Provider }/>
         </HashRouter>
     )
 }

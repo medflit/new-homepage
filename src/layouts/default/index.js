@@ -10,7 +10,7 @@ const DefaultLayout = ( {children} ) => {
     return (
         <div>
             <Navigation/>
-            <div>{children}</div>
+                <div>{children}</div>
             <Footer/>
         </div>
     )

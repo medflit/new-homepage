@@ -17,17 +17,38 @@ function Patient() {
                                 <div className="">
                                     <Row>
                                         <Col sm={4}>
-                                            <img src={ ProfileImage } className="w-80 avatar img-fluid"/>
+                                            <img src={ ProfileImage } className="w-80 avatar img-fluid mb-3"/>
                                         </Col>
                                         <Col sm={8}>
                                             <div className="page-title m-auto">
+                                                <small className="text-muted">Patient</small>
                                                 <h2 className="text-md text-highlight">Samson Samuels</h2>
-                                                <small className="text-muted">Patient
-                                                </small>
+                                            </div>
+                                            <hr/>
+                                            <div className="page-title m-auto">
+                                                <small className="text-muted">Current balance</small>
+                                                <h2 className="text-md text-highlight">#4,500</h2>
                                             </div>
                                         </Col>
                                     </Row>
                                     
+                                </div>
+                            </Card.Body>
+                        </Card>
+                        <Card>
+                            <Card.Header>
+                                Subscription
+                            </Card.Header>
+                            <Card.Body>
+                                <div className="">
+                                    <Row>
+                                        <Col sm={12}>
+                                            <div className="mb-3">
+                                                <small className="text-muted">You have not subscribed yet. Subscribe now to make unlimited calls to doctors.</small>
+                                            </div>
+                                            <Button variant="primary">Subscribe</Button>
+                                        </Col>
+                                    </Row>
                                 </div>
                             </Card.Body>
                         </Card>
