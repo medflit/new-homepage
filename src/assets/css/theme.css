@@ -4745,3 +4745,10 @@ textarea.md-input {
 .text-bold {
   font-weight: 700;
 }
+
+p.pro-serv {
+  font-size: 18px;
+  color: #444;
+  margin-top: 20px;
+  font-weight: 800;
+}

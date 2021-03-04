@@ -22,7 +22,7 @@ function Provider() {
                                         <Col sm={8}>
                                             <div className="page-title m-auto">
                                                 <h2 className="text-md text-highlight">Samson Samuels</h2>
-                                                <small className="text-muted">Patient
+                                                <small className="text-muted">Provider
                                                 </small>
                                             </div>
                                         </Col>
@@ -332,33 +332,33 @@ function Provider() {
                                                         <h5>Services and Procedures</h5>
                                                     </div>
                                                     <hr/>
-                                                    <p>Clinical services</p>
+                                                    <p className="pro-serv">Clinical services</p>
                                                     <div className="form-row">
-                                                        <div class="form-check">
+                                                        <div class="form-check mr-2">
                                                             <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
                                                             <label class="form-check-label" for="defaultCheck1">
                                                                 Paediatrics
                                                             </label>
                                                         </div>
-                                                        <div class="form-check ml-2">
+                                                        <div class="form-check mr-2">
                                                             <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
                                                             <label class="form-check-label" for="defaultCheck1">
                                                             Anaesthesia
                                                             </label>
                                                         </div>
-                                                        <div class="form-check ml-2">
+                                                        <div class="form-check mr-2">
                                                             <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
                                                             <label class="form-check-label" for="defaultCheck1">
                                                             Intensive care
                                                             </label>
                                                         </div>
-                                                        <div class="form-check ml-2">
+                                                        <div class="form-check mr-2">
                                                             <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
                                                             <label class="form-check-label" for="defaultCheck1">
                                                             Diabetes
                                                             </label>
                                                         </div>
-                                                        <div class="form-check ml-2">
+                                                        <div class="form-check mr-2">
                                                             <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
                                                             <label class="form-check-label" for="defaultCheck1">
                                                             Obstetrics&Gynaecology
@@ -366,7 +366,151 @@ function Provider() {
                                                         </div>
                                                     </div>
 
-                                                    <div className="text-right">
+
+                                                    <p className="pro-serv">Surgical services</p>
+                                                    <div className="form-row">
+                                                        <div class="form-check mr-2">
+                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            Orthopeadic surgery
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mr-2">
+                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            Neuro surgery
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mr-2">
+                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            Urology
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mr-2">
+                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            Plastic surgery
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mr-2">
+                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            General surgery
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mr-2">
+                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            Vascular surgery
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mr-2">
+                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            Maxillofacial surgery
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <p className="pro-serv">Medical services</p>
+                                                    <div className="form-row">
+                                                        <div class="form-check mr-2">
+                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            General medicine
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mr-2">
+                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            Dermatology
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mr-2">
+                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            Cardiology
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mr-2">
+                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            Neurology
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mr-2">
+                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            Nephrology
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mr-2">
+                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            Rheumatology
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mr-2">
+                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            Oncology
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mr-2">
+                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            Haematology
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <p className="pro-serv">Diagnostics services</p>
+                                                    <div className="form-row">
+                                                        <div class="form-check mr-2">
+                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            Radiology
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mr-2">
+                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            Laboratory
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mr-2">
+                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            Electrophysiology
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <p className="pro-serv">Support services</p>
+                                                    <div className="form-row">
+                                                        <div class="form-check mr-2">
+                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            Physiotherapy
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mr-2">
+                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            Pharmacy
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mr-2">
+                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            Prosthetics & OrthoticElectrophysiology
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div className="text-right mt-4">
                                                         <button type="submit" className="btn btn-primary">Update Profile</button>
                                                     </div>
                                                 </div>
@@ -407,10 +551,29 @@ function Provider() {
                             </div>
                             <div className="tab-pane fade" id="tab_3">
                                 <Card id="feed-1">
+                                    <Card.Header>
+                                        <p>Bank Details</p>
+                                    </Card.Header>
                                     <Card.Body>
-                                        <span className="btn btn-md text-muted">
-                                            <span className="d-sm-inline mx-1 breadcrumb-text">Bank details here</span>
-                                        </span>
+                                        <form>
+                                            <div className="form-row">
+                                                <div className="form-group col-sm-6">
+                                                    <label>Bank Name</label>
+                                                    <select className="form-control">
+                                                        <option value="">Select bank</option>
+                                                        <option value="">GTB</option>
+                                                        <option value="">UBA</option>
+                                                    </select>
+                                                </div>
+                                                <div className="form-group col-sm-6">
+                                                    <label>Account Number</label>
+                                                    <input type="text" className="form-control" placeholder=""/>
+                                                </div>
+                                            </div>
+                                            <div className="text-right mt-4">
+                                                <button type="submit" className="btn btn-primary">Add Bank</button>
+                                            </div>
+                                        </form>
                                     </Card.Body>
                                 </Card>
                             </div>
@@ -459,35 +622,27 @@ function Provider() {
                                                 </form>
                                             </Accordion.Collapse>
                                         </Accordion>
-                                        <Accordion.Toggle as={Button} variant="link" eventKey="2">
-                                            <div className="d-flex align-items-center b-t pointer">
-                                                <FeatherIcon icon="lock" size="16"/>
-                                                <div className="px-3">
-                                                    <div>Password</div>
-                                                </div>
-                                                <div className="flex"></div>
-                                                <div>
-                                                    <FeatherIcon icon="chevron-right" size="16"/>
-                                                </div>
+                                        <div className="mt-4 align-items-center b-t pointer">
+                                            <div className="mb-3">
+                                                <div><p className="pro-serv">Change Password</p></div>
                                             </div>
-                                        </Accordion.Toggle>
-                                        <Accordion.Collapse eventKey="2">
-                                                <form role="form">
-                                                    <div className="form-group">
-                                                        <label>Old Password</label>
-                                                        <input type="password" className="form-control"/>
-                                                    </div>
-                                                    <div className="form-group">
-                                                        <label>New Password</label>
-                                                        <input type="password" className="form-control"/>
-                                                    </div>
-                                                    <div className="form-group">
-                                                        <label>New Password Again</label>
-                                                        <input type="password" className="form-control"/>
-                                                    </div>
-                                                    <button type="submit" className="btn btn-primary mt-2">Update</button>
-                                                </form>
-                                        </Accordion.Collapse>
+                                            <div className="flex"></div>
+                                            <form role="form">
+                                                <div className="form-group">
+                                                    <label>Old Password</label>
+                                                    <input type="password" className="form-control"/>
+                                                </div>
+                                                <div className="form-group">
+                                                    <label>New Password</label>
+                                                    <input type="password" className="form-control"/>
+                                                </div>
+                                                <div className="form-group">
+                                                    <label>New Password Again</label>
+                                                    <input type="password" className="form-control"/>
+                                                </div>
+                                                <button type="submit" className="btn btn-primary mt-2">Update</button>
+                                            </form>
+                                        </div>
                                         
                                     </Card.Body>
                                 </Card>

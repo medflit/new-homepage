@@ -24,11 +24,6 @@ const Navigation = () => {
                     </form>
                 </div>
                 <ul className="nav navbar-menu order-1 order-lg-2">
-                    <li className="nav-item d-none d-sm-block">
-                        <a className="nav-link px-2" data-toggle="fullscreen" data-plugin="fullscreen">
-                            <FeatherIcon icon="maximize" size="18"/>
-                        </a>
-                    </li>
                     <li className="nav-item dropdown">
                         <a className="nav-link px-2" data-toggle="dropdown">
                             <FeatherIcon icon="settings" size="18"/>

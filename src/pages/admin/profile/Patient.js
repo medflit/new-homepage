@@ -223,35 +223,27 @@ function Patient() {
                                                 </form>
                                             </Accordion.Collapse>
                                         </Accordion>
-                                        <Accordion.Toggle as={Button} variant="link" eventKey="2">
-                                            <div class="d-flex align-items-center b-t pointer">
-                                                <FeatherIcon icon="lock" size="16"/>
-                                                <div class="px-3">
-                                                    <div>Password</div>
-                                                </div>
-                                                <div class="flex"></div>
-                                                <div>
-                                                    <FeatherIcon icon="chevron-right" size="16"/>
-                                                </div>
+                                        <div className="mt-4 align-items-center b-t pointer">
+                                            <div className="mb-3">
+                                                <div><p className="pro-serv">Change Password</p></div>
                                             </div>
-                                        </Accordion.Toggle>
-                                        <Accordion.Collapse eventKey="2">
-                                                <form role="form">
-                                                    <div class="form-group">
-                                                        <label>Old Password</label>
-                                                        <input type="password" class="form-control"/>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>New Password</label>
-                                                        <input type="password" class="form-control"/>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>New Password Again</label>
-                                                        <input type="password" class="form-control"/>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary mt-2">Update</button>
-                                                </form>
-                                        </Accordion.Collapse>
+                                            <div className="flex"></div>
+                                            <form role="form">
+                                                <div className="form-group">
+                                                    <label>Old Password</label>
+                                                    <input type="password" className="form-control"/>
+                                                </div>
+                                                <div className="form-group">
+                                                    <label>New Password</label>
+                                                    <input type="password" className="form-control"/>
+                                                </div>
+                                                <div className="form-group">
+                                                    <label>New Password Again</label>
+                                                    <input type="password" className="form-control"/>
+                                                </div>
+                                                <button type="submit" className="btn btn-primary mt-2">Update</button>
+                                            </form>
+                                        </div>
                                         
                                     </Card.Body>
                                 </Card>
