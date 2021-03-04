@@ -113,6 +113,7 @@ function Dashboard() {
                         </Card>
                     </Col>
                     <Col md={3} xs={6}>
+                        <Link to="/admin/consultations">
                         <Card>
                             <Card.Body>
                                 <div className="d-md-flex">
@@ -127,6 +128,7 @@ function Dashboard() {
                                 </Row>
                             </Card.Body>
                         </Card>
+                        </Link>
                     </Col>
                     <Col md={3} xs={6}>
                         <Card>
