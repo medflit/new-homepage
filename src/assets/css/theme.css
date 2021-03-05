@@ -4097,6 +4097,13 @@ Scrollable
   .touch .scrollable {
     overflow-y: auto !important; }
 
+@media(max-width: 768px) {
+  .scrollable {
+    max-height: 800px;
+    overflow-y: scroll;
+  }
+}
+
 .scroll-x,
 .scroll-y {
   overflow: hidden;

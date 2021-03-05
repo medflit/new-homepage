@@ -63,7 +63,7 @@ const Inbox = () => {
                                                 <strong>Patients</strong>
                                             </div>
 
-                                            <a href="#" className="list-group-item list-group-item-action border-0">
+                                            <Link to="/admin/inbox/show-inbox" className="list-group-item list-group-item-action border-0">
                                                 <div className="float-right"><span className="small time">13:24</span> <br/><span className="badge bg-primary float-right">5</span></div>
                                                 
                                                 <div className="d-flex align-items-start">
@@ -73,7 +73,7 @@ const Inbox = () => {
                                                         <div className="small h-1x"><span className="fa fa-circle chat-online"></span> Please take a look at the image I sent to you</div>
                                                     </div>
                                                 </div>
-                                            </a>
+                                            </Link>
 
                                             <a href="#" className="list-group-item list-group-item-action border-0">
                                                 <div className="float-right"><span className="small time">13:24</span></div>

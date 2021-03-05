@@ -18,6 +18,7 @@ import Providers from '../pages/admin/Providers';
 import Consultations from '../pages/admin/Consultations';
 import ConsultationTransaction from '../pages/admin/ConsultationTransaction';
 import Inbox from '../pages/admin/Inbox';
+import InboxShow from '../pages/admin/inbox/ShowInbox';
 
 //import profiles routes
 import Patient from '../pages/admin/profile/Patient'
@@ -47,7 +48,9 @@ const Routes = () => {
             <Route exact path="/admin/providers" component={ Providers }/>
             <Route path="/admin/consultations" component={ Consultations }/>
             <Route path="/admin/consultation-transaction" component={ ConsultationTransaction }/>
-            <Route path="/admin/inbox" component={ Inbox }/>
+            <Route exact path="/admin/inbox" component={ Inbox }/>
+            <Route path="/admin/inbox/show-inbox" component={ InboxShow }/>
+
 
 
             {/* Profile routes */}
