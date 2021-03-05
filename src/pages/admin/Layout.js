@@ -1,20 +1,20 @@
 import React from 'react'
 
 import AuthLayout from '../../layouts/auth'
-import ConsultationLog from './snippets/ConsultationLog'
-import DirectConsultation from './snippets/DirectConsultation'
 
 import FeatherIcon from 'feather-icons-react'
 
-import {Container} from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
-const Consultations = () => {
+import { Container, Row, Col, Table, Card } from 'react-bootstrap'
+
+const Component = () => {
     return (
         <AuthLayout>
             <div className="page-hero page-container " id="page-hero">
                 <div className="padding d-flex">
                     <div className="page-title">
-                        <h2 className="text-md text-highlight">Consultations</h2>
+                        <h2 className="text-md text-highlight">Title</h2>
                     </div>
                     <div className="flex"></div>
                     <div>
@@ -26,15 +26,11 @@ const Consultations = () => {
                 </div>
             </div>
             <Container>
-                <div className="consultation-log">
-                    <ConsultationLog/>
-                </div>
-                <div className="direct-consult mt-5">
-                    <DirectConsultation/>
-                </div>
+
             </Container>
+
         </AuthLayout>
     )
 }
 
-export default Consultations
+export default Component

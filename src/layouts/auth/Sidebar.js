@@ -69,7 +69,7 @@ const Sidebar = () => {
                                     <span className="nav-text">All Users</span>
                                 </Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link to="/admin/patients">
                                     <span className="nav-icon "><FeatherIcon icon="users" size="18"/></span>
                                     <span className="nav-text">Patients Dashboard</span>
@@ -98,7 +98,7 @@ const Sidebar = () => {
                                     <span className="nav-icon "><FeatherIcon icon="home" size="18"/></span>
                                     <span className="nav-text">Hospital Dashboard</span>
                                 </Link>
-                            </li>
+                            </li> */}
                             <li>
                                 <Link to="/">
                                     <span className="nav-icon "><FeatherIcon icon="users" size="18"/></span>
@@ -113,7 +113,7 @@ const Sidebar = () => {
                             </li>
                             <li>
                                 <Link to="/">
-                                    <span className="nav-icon "><FeatherIcon icon="home" size="18"/></span>
+                                    <span className="nav-icon "><FeatherIcon icon="credit-card" size="18"/></span>
                                     <span className="nav-text">Withdrawals</span>
                                 </Link>
                             </li>
@@ -121,6 +121,18 @@ const Sidebar = () => {
                                 <Link to="/">
                                     <span className="nav-icon "><FeatherIcon icon="share" size="18"/></span>
                                     <span className="nav-text">Appointments</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/admin/inbox">
+                                    <span className="nav-icon "><FeatherIcon icon="inbox" size="18"/></span>
+                                    <span className="nav-text">Inbox</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/admin/consultation-transaction">
+                                    <span className="nav-icon "><FeatherIcon icon="share" size="18"/></span>
+                                    <span className="nav-text">Consultation Trans.</span>
                                 </Link>
                             </li>
                             <li>

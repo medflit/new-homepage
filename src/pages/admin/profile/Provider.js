@@ -9,6 +9,20 @@ import AuthLayout from '../../../layouts/auth'
 function Provider() {
     return (
         <AuthLayout>
+            <div className="page-hero page-container " id="page-hero">
+                <div className="padding d-flex">
+                    <div className="page-title">
+                        <h2 className="text-md text-highlight">Provider Profile</h2>
+                    </div>
+                    <div className="flex"></div>
+                    <div>
+                        <span class="btn btn-md text-muted">
+                            <span class="d-sm-inline mx-1 breadcrumb-text"></span>
+                            <FeatherIcon icon="arrow-right" size="14"/>
+                        </span>
+                    </div>
+                </div>
+            </div>
             <Container>
                 <Row>
                     <Col md={4} className="order-md-2">
