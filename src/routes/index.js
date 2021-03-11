@@ -27,7 +27,8 @@ import Provider from '../pages/admin/profile/Provider'
 //import providers components
 import CurrentTransaction from '../pages/admin/providers/CurrentTransaction'
 import PastTransaction from '../pages/admin/providers/PastTransaction'
-import Stats from '../pages/admin/providers/Stats'
+import CurrentStats from '../pages/admin/providers/CurrentStats'
+import PastStats from '../pages/admin/providers/PastStats'
 import Payments from '../pages/admin/providers/Payment'
 
 
@@ -60,7 +61,8 @@ const Routes = () => {
             {/* Providers routes */}
             <Route path="/admin/providers/current-transaction" component={ CurrentTransaction }/>
             <Route path="/admin/providers/past-transaction" component={ PastTransaction }/>
-            <Route path="/admin/providers/stats" component={ Stats }/>
+            <Route path="/admin/providers/current-stats" component={ CurrentStats }/>
+            <Route path="/admin/providers/past-stats" component={ PastStats }/>
             <Route path="/admin/providers/payment" component={ Payments }/>
         </HashRouter>
     )

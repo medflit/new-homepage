@@ -29,12 +29,12 @@ const Sidebar = () => {
                                     <span className="nav-text">Dashboard</span>
                                 </Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link to="/">
                                     <span className="nav-icon "><FeatherIcon icon="user" size="18"/></span>
                                     <span className="nav-text">Update Profile</span>
                                 </Link>
-                            </li>
+                            </li> */}
                             {/* <li>
                                 <a href="#" class="">
                                     <span class="nav-icon"><i data-feather='file'></i></span>
@@ -49,7 +49,7 @@ const Sidebar = () => {
                                     </li>
                                 </ul>
                             </li> */}
-                            <li>
+                            {/* <li>
                                 <a href="#" className="">
                                     <span className="nav-icon "><FeatherIcon icon="settings" size="18"/></span>
                                     <span className="nav-text">System Settings</span>
@@ -62,7 +62,7 @@ const Sidebar = () => {
                                         </Link>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> */}
                             <li>
                                 <Link to="/">
                                     <span className="nav-icon "><FeatherIcon icon="users" size="18"/></span>
@@ -99,7 +99,7 @@ const Sidebar = () => {
                                     <span className="nav-text">Hospital Dashboard</span>
                                 </Link>
                             </li> */}
-                            <li>
+                            {/* <li>
                                 <Link to="/">
                                     <span className="nav-icon "><FeatherIcon icon="users" size="18"/></span>
                                     <span className="nav-text">User Benefits</span>
@@ -110,8 +110,8 @@ const Sidebar = () => {
                                     <span className="nav-icon "><FeatherIcon icon="star" size="18"/></span>
                                     <span className="nav-text">Reviews</span>
                                 </Link>
-                            </li>
-                            <li>
+                            </li> */}
+                            {/* <li>
                                 <Link to="/">
                                     <span className="nav-icon "><FeatherIcon icon="credit-card" size="18"/></span>
                                     <span className="nav-text">Withdrawals</span>
@@ -122,7 +122,7 @@ const Sidebar = () => {
                                     <span className="nav-icon "><FeatherIcon icon="share" size="18"/></span>
                                     <span className="nav-text">Appointments</span>
                                 </Link>
-                            </li>
+                            </li> */}
                             <li>
                                 <Link to="/admin/inbox">
                                     <span className="nav-icon "><FeatherIcon icon="inbox" size="18"/></span>
@@ -135,19 +135,19 @@ const Sidebar = () => {
                                     <span className="nav-text">Consultation Trans.</span>
                                 </Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link to="/">
                                     <span className="nav-icon "><FeatherIcon icon="phone-forwarded" size="18"/></span>
                                     <span className="nav-text">Call Logs</span>
                                 </Link>
-                            </li>
+                            </li> */}
                             <li>
                                 <Link to="/admin/consultations">
                                     <span className="nav-icon "><FeatherIcon icon="list" size="18"/></span>
                                     <span className="nav-text">Consultations</span>
                                 </Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link to="/">
                                     <span className="nav-icon "><FeatherIcon icon="target" size="18"/></span>
                                     <span className="nav-text">Order Logs</span>
@@ -158,8 +158,8 @@ const Sidebar = () => {
                                     <span className="nav-icon "><FeatherIcon icon="bar-chart-2" size="18"/></span>
                                     <span className="nav-text">Analytics</span>
                                 </Link>
-                            </li>
-                            <li>
+                            </li> */}
+                            {/* <li>
                                 <Link to="/">
                                     <span className="nav-icon "><FeatherIcon icon="mail" size="18"/></span>
                                     <span className="nav-text">Bulk Emails</span>
@@ -170,8 +170,8 @@ const Sidebar = () => {
                                     <span className="nav-icon "><FeatherIcon icon="menu" size="18"/></span>
                                     <span className="nav-text">Transactions</span>
                                 </Link>
-                            </li>
-                            <li>
+                            </li> */}
+                            {/* <li>
                                 <Link to="/">
                                     <span className="nav-icon "><FeatherIcon icon="message-square" size="18"/></span>
                                     <span className="nav-text">Support</span>
@@ -182,7 +182,7 @@ const Sidebar = () => {
                                     <span className="nav-icon "><FeatherIcon icon="menu" size="18"/></span>
                                     <span className="nav-text">Activity Log</span>
                                 </Link>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </div>

@@ -1,19 +1,18 @@
-import React from 'react'
+import React from "react";
 
-import AuthLayout from '../../../layouts/auth'
-
-import { Row, Col, Container, Table, Dropdown, Card } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-
+import { Container, Row, Col, Card, Table, Dropdown } from 'react-bootstrap'
 import FeatherIcon from 'feather-icons-react'
 
-const PastTransaction = () => {
+import AuthLayout from "../../../layouts/auth";
+import { Link } from "react-router-dom";
+
+const PastStats = () => {
     return (
         <AuthLayout>
             <div className="page-hero page-container " id="page-hero">
                 <div className="padding d-flex">
                     <div className="page-title">
-                        <h2 className="text-md text-highlight">Past Transaction</h2>
+                        <h2 className="text-md text-highlight">Past Stats</h2>
                     </div>
                     <div className="flex"></div>
                     <div>
@@ -27,7 +26,23 @@ const PastTransaction = () => {
             <Container>
                 <Row>
                     <Col sm={12}>
-                        <p className="">Consultation stats</p>
+                        <p className="">Patient stats</p>
+                    </Col>
+                    <Col md={4} xs={12}>
+                        <Card>
+                            <Card.Body>
+                                <div className="d-md-flex">
+                                    <div className="flex">
+                                        {/* <div class="text-highlight">30%</div> */}
+                                        <small className="h-1x">Medflit pays ₦1,000k per patient consulted a month</small>
+                                    </div>
+                                </div>
+                                <Row className="text-primary">
+                                    <Col><span className="text-highlight text-bold text-md">N1,000</span></Col>
+                                    <Col><FeatherIcon className="mt-2 pull-right" icon="dollar-sign" size="24"/></Col>
+                                </Row>
+                            </Card.Body>
+                        </Card>
                     </Col>
                     <Col md={4} xs={12}>
                         <Card>
@@ -38,8 +53,8 @@ const PastTransaction = () => {
                                         <small className="h-1x">Number of patients consulted</small>
                                     </div>
                                 </div>
-                                <Row className="text-primary">
-                                    <Col><span className="text-highlight text-bold text-md">44</span></Col>
+                                <Row className="text-danger">
+                                    <Col><span className="text-highlight text-bold text-md">4</span></Col>
                                     <Col><FeatherIcon className="mt-2 pull-right" icon="users" size="24"/></Col>
                                 </Row>
                             </Card.Body>
@@ -55,8 +70,8 @@ const PastTransaction = () => {
                                     </div>
                                 </div>
                                 <Row className="text-danger">
-                                    <Col><span className="text-highlight text-bold text-md">N3,200</span></Col>
-                                    <Col><FeatherIcon className="mt-2 pull-right" icon="dollar" size="24"/></Col>
+                                    <Col><span className="text-highlight text-bold text-md">N5,000</span></Col>
+                                    <Col><FeatherIcon className="mt-2 pull-right" icon="dollar-sign" size="24"/></Col>
                                 </Row>
                             </Card.Body>
                         </Card>
@@ -95,10 +110,10 @@ const PastTransaction = () => {
                                         <tr>
                                             <th style={{width: "20px"}}>S/N
                                             </th>
-                                            <th className="text-muted">Provider Name</th>
+                                            <th className="text-muted">Doctor's Name</th>
                                             <th className="text-muted">Unique ID.</th>
-                                            <th className="text-muted"><span>Total Amount</span></th>
-                                            <th className="text-muted"><span>Total Month</span></th>
+                                            <th className="text-muted">Total Amount</th>
+                                            <th className="text-muted"><span>Months</span></th>
                                             <th style={{width: "50px"}}></th>
                                         </tr>
                                     </thead>
@@ -108,33 +123,78 @@ const PastTransaction = () => {
                                                 1
                                             </td>
                                             <td>
-                                                <div className="item-title text-color ">Samson Samuels</div>                                            
+                                                <div className="item-title text-color ">Ayodele Joseph</div>                                            
                                             </td>
                                             <td>
                                                 <div className="item-title text-color ">MDFT1234</div>                                            
                                             </td>
                                             <td>
                                                 <span className="item-title text-color">
-                                                    N5,000
+                                                    N3,000
                                                 </span>
                                             </td>
-
                                             <td>
                                                 <span className="item-title text-color">
-                                                    3 months
+                                                   February
                                                 </span>
                                             </td>
                                             <td>
-                                            <Dropdown>
-                                                <Dropdown.Toggle size="xs" variant="secondary" id="dropdown-basic">
-                                                    <FeatherIcon icon="more-vertical" size="16"/>
-                                                </Dropdown.Toggle>
+                                                <Link to="/">
+                                                    <span className="badge badge-secondary badge-md">View details</span>
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                        <tr className=" v-middle" dataId="15">
+                                            <td>
+                                                2
+                                            </td>
+                                            <td>
+                                                <div className="item-title text-color ">Ayodele Joseph</div>                                            
+                                            </td>
+                                            <td>
+                                                <div className="item-title text-color ">MDFT1234</div>                                            
+                                            </td>
+                                            <td>
+                                                <span className="item-title text-color">
+                                                    N1,000
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span className="item-title text-color">
+                                                   March
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <Link to="/">
+                                                    <span className="badge badge-secondary badge-md">View details</span>
+                                                </Link>
+                                            </td>
+                                        </tr>
 
-                                                <Dropdown.Menu>
-                                                    <Dropdown.Item><Link to="/admin/providers/past-stats">View stats</Link></Dropdown.Item>
-                                                    <Dropdown.Item><Link to="/admin/providers/payment">Make payment</Link></Dropdown.Item>
-                                                </Dropdown.Menu>
-                                            </Dropdown>
+                                        <tr className=" v-middle" dataId="15">
+                                            <td>
+                                                3
+                                            </td>
+                                            <td>
+                                                <div className="item-title text-color ">Ayodele Joseph</div>                                            
+                                            </td>
+                                            <td>
+                                                <div className="item-title text-color ">MDFT1234</div>                                            
+                                            </td>
+                                            <td>
+                                                <span className="item-title text-color">
+                                                    N1,000
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span className="item-title text-color">
+                                                   April
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <Link to="/">
+                                                    <span className="badge badge-secondary badge-md">View details</span>
+                                                </Link>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -176,9 +236,9 @@ const PastTransaction = () => {
                     </ul>
                     <small className="text-muted py-2 mx-2">Total <span id="count">15</span> items</small>
                 </div>
+
             </Container>
         </AuthLayout>
     )
 }
-
-export default PastTransaction
+export default PastStats

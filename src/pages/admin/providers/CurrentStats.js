@@ -6,13 +6,13 @@ import FeatherIcon from 'feather-icons-react'
 import AuthLayout from "../../../layouts/auth";
 import { Link } from "react-router-dom";
 
-const Stats = () => {
+const CurrentStats = () => {
     return (
         <AuthLayout>
             <div className="page-hero page-container " id="page-hero">
                 <div className="padding d-flex">
                     <div className="page-title">
-                        <h2 className="text-md text-highlight">Consultation Stats</h2>
+                        <h2 className="text-md text-highlight">Current Stats</h2>
                     </div>
                     <div className="flex"></div>
                     <div>
@@ -54,7 +54,7 @@ const Stats = () => {
                                     </div>
                                 </div>
                                 <Row className="text-danger">
-                                    <Col><span className="text-highlight text-bold text-md">32</span></Col>
+                                    <Col><span className="text-highlight text-bold text-md">4</span></Col>
                                     <Col><FeatherIcon className="mt-2 pull-right" icon="users" size="24"/></Col>
                                 </Row>
                             </Card.Body>
@@ -70,7 +70,7 @@ const Stats = () => {
                                     </div>
                                 </div>
                                 <Row className="text-danger">
-                                    <Col><span className="text-highlight text-bold text-md">N3,000</span></Col>
+                                    <Col><span className="text-highlight text-bold text-md">N4,000</span></Col>
                                     <Col><FeatherIcon className="mt-2 pull-right" icon="dollar-sign" size="24"/></Col>
                                 </Row>
                             </Card.Body>
@@ -110,10 +110,10 @@ const Stats = () => {
                                         <tr>
                                             <th style={{width: "20px"}}>S/N
                                             </th>
-                                            <th className="text-muted">Patient Name</th>
+                                            <th className="text-muted">Patient's Name</th>
                                             <th className="text-muted">Unique ID.</th>
-                                            <th className="text-muted">Total Amount</th>
-                                            <th className="text-muted"><span>Month</span></th>
+                                            <th className="text-muted">Diagnosis</th>
+                                            <th className="text-muted"><span>Date</span></th>
                                             <th style={{width: "50px"}}></th>
                                         </tr>
                                     </thead>
@@ -130,12 +130,12 @@ const Stats = () => {
                                             </td>
                                             <td>
                                                 <span className="item-title text-color">
-                                                    N5,000
+                                                    Complete Miscarriage
                                                 </span>
                                             </td>
                                             <td>
                                                 <span className="item-title text-color">
-                                                    February
+                                                   4th Jan, 2021 at 12:43
                                                 </span>
                                             </td>
                                             <td>
@@ -188,4 +188,4 @@ const Stats = () => {
         </AuthLayout>
     )
 }
-export default Stats
+export default CurrentStats

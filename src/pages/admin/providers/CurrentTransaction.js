@@ -97,7 +97,7 @@ const CurrentTransaction = () => {
                                             </th>
                                             <th className="text-muted">Provider Name</th>
                                             <th className="text-muted">Unique ID.</th>
-                                            <th className="text-muted"><span>Month</span></th>
+                                            <th className="text-muted"><span>Date</span></th>
                                             <th style={{width: "50px"}}></th>
                                         </tr>
                                     </thead>
@@ -114,7 +114,7 @@ const CurrentTransaction = () => {
                                             </td>
                                             <td>
                                                 <span className="item-title text-color">
-                                                    January
+                                                    4th Feb, 2021 at 16:43
                                                 </span>
                                             </td>
                                             <td>
@@ -124,7 +124,7 @@ const CurrentTransaction = () => {
                                                 </Dropdown.Toggle>
 
                                                 <Dropdown.Menu>
-                                                    <Dropdown.Item><Link to="/admin/providers/stats">View stats</Link></Dropdown.Item>
+                                                    <Dropdown.Item><Link to="/admin/providers/current-stats">View stats</Link></Dropdown.Item>
                                                     <Dropdown.Item><Link to="/admin/providers/payment">Make payment</Link></Dropdown.Item>
                                                 </Dropdown.Menu>
                                             </Dropdown>

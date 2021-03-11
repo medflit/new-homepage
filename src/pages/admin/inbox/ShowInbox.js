@@ -30,14 +30,24 @@ const InboxShow = () => {
                     <Col sm={12}>
                         <Card>
                             <Card.Body>
-                                <div class="py-2 px-4 border-bottom d-none d-lg-block">
-                                    <div class="d-flex align-items-center py-1">
+                                <div class="py-2 border-bottom row">
+                                    <div class="d-flex  py-1 col-6">
                                         <div class="position-relative">
                                             <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40"/>
                                         </div>
                                         <div class="flex-grow-1 pl-3">
                                             <strong>Dr Alex Samuel</strong>
-                                            <div class="text-muted small"><em>Kemi MD00087</em></div>
+                                            <div class="text-muted small"><em>MD00087</em></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex py-1 col-6">
+                                        <div class="position-relative">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40"/>
+                                        </div>
+                                        <div class="flex-grow-1 pl-3">
+                                            <strong>Sam Smith</strong>
+                                            <div class="text-muted small"><em>MDFT00087</em></div>
                                         </div>
                                     </div>
                                 </div>
@@ -49,7 +59,7 @@ const InboxShow = () => {
                                                 <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"/>
                                                 <div class="text-muted small text-nowrap mt-2">2:33 am</div>
                                             </div>
-                                            <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="flex-shrink-1 bg-primary rounded py-2 px-3 mr-3">
                                                 <div class="font-weight-bold mb-1">You</div>
                                                 Lorem ipsum dolor sit amet, vis erat denique in, dicunt prodesset te vix.
                                             </div>
@@ -71,7 +81,7 @@ const InboxShow = () => {
                                                 <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"/>
                                                 <div class="text-muted small text-nowrap mt-2">2:35 am</div>
                                             </div>
-                                            <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="flex-shrink-1 bg-primary rounded py-2 px-3 mr-3">
                                                 <div class="font-weight-bold mb-1">You</div>
                                                 Cum ea graeci tractatos.
                                             </div>
@@ -105,7 +115,7 @@ const InboxShow = () => {
                                                 <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"/>
                                                 <div class="text-muted small text-nowrap mt-2">2:38 am</div>
                                             </div>
-                                            <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="flex-shrink-1 bg-primary rounded py-2 px-3 mr-3">
                                                 <div class="font-weight-bold mb-1">You</div>
                                                 Lorem ipsum dolor sit amet, vis erat denique in, dicunt prodesset te vix.
                                             </div>
@@ -127,7 +137,7 @@ const InboxShow = () => {
                                                 <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"/>
                                                 <div class="text-muted small text-nowrap mt-2">2:40 am</div>
                                             </div>
-                                            <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="flex-shrink-1 bg-primary rounded py-2 px-3 mr-3">
                                                 <div class="font-weight-bold mb-1">You</div>
                                                 Cum ea graeci tractatos.
                                             </div>
@@ -138,7 +148,7 @@ const InboxShow = () => {
                                                 <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"/>
                                                 <div class="text-muted small text-nowrap mt-2">2:41 am</div>
                                             </div>
-                                            <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="flex-shrink-1 bg-primary rounded py-2 px-3 mr-3">
                                                 <div class="font-weight-bold mb-1">You</div>
                                                 Morbi finibus, lorem id placerat ullamcorper, nunc enim ultrices massa, id dignissim metus urna eget purus.
                                             </div>
@@ -161,7 +171,7 @@ const InboxShow = () => {
                                                 <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"/>
                                                 <div class="text-muted small text-nowrap mt-2">2:43 am</div>
                                             </div>
-                                            <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="flex-shrink-1 bg-primary rounded py-2 px-3 mr-3">
                                                 <div class="font-weight-bold mb-1">You</div>
                                                 Lorem ipsum dolor sit amet, vis erat denique in, dicunt prodesset te vix.
                                             </div>

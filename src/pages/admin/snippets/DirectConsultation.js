@@ -44,8 +44,7 @@ const DirectConsultation = () => {
                                         <th className="text-muted">Patient</th>
                                         <th className="text-muted">Unique ID</th>
                                         <th className="text-muted">Doctor</th>
-                                        <th className="text-muted"><span className="">Diagnosis</span></th>
-                                        <th className="text-muted"><span>Consultation No.</span></th>
+                                        <th className="text-muted">Diagnosis</th>
                                         <th className="text-muted"><span>Date</span></th>
                                         <th style={{width: "50px"}}></th>
                                     </tr>
@@ -69,11 +68,6 @@ const DirectConsultation = () => {
                                             <div className="item-title text-color ">
                                                 Headache
                                             </div>
-                                        </td>
-                                        <td>
-                                            <span className="item-title text-color ">
-                                                CON443344
-                                            </span>
                                         </td>
                                         <td>
                                             <span className="item-title text-color ">

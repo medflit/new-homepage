@@ -29,7 +29,7 @@ function Dashboard() {
             </div>
             <Container className="">
                 <Row>
-                    <Col md={3} xs={6}>
+                    <Col md={3} xs={12}>
                         <Link to="/admin/patients">
                         <Card>
                             <Card.Body>
@@ -47,7 +47,7 @@ function Dashboard() {
                         </Card>
                         </Link>
                     </Col>
-                    <Col md={3} xs={6}>
+                    <Col md={3} xs={12}>
                         <Link to="/admin/providers">
                         <Card>
                             <Card.Body>
@@ -65,7 +65,7 @@ function Dashboard() {
                         </Card>
                         </Link>
                     </Col>
-                    <Col md={3} xs={6}>
+                    <Col md={3} xs={12}>
                         <Card>
                             <Card.Body>
                                 <div className="d-md-flex">
@@ -81,7 +81,7 @@ function Dashboard() {
                             </Card.Body>
                         </Card>
                     </Col>
-                    <Col md={3} xs={6}>
+                    <Col md={3} xs={12}>
                         <Card>
                             <Card.Body>
                                 <div className="d-md-flex">
@@ -97,7 +97,7 @@ function Dashboard() {
                             </Card.Body>
                         </Card>
                     </Col>
-                    <Col md={3} xs={6}>
+                    <Col md={3} xs={12}>
                         <Card>
                             <Card.Body>
                                 <div className="d-md-flex">
@@ -113,7 +113,7 @@ function Dashboard() {
                             </Card.Body>
                         </Card>
                     </Col>
-                    <Col md={3} xs={6}>
+                    <Col md={3} xs={12}>
                         <Card>
                             <Card.Body>
                                 <div className="d-md-flex">
@@ -129,7 +129,7 @@ function Dashboard() {
                             </Card.Body>
                         </Card>
                     </Col>
-                    <Col md={3} xs={6}>
+                    <Col md={3} xs={12}>
                         <Link to="/admin/consultations">
                         <Card>
                             <Card.Body>
@@ -147,7 +147,7 @@ function Dashboard() {
                         </Card>
                         </Link>
                     </Col>
-                    <Col md={3} xs={6}>
+                    <Col md={3} xs={12}>
                         <Card>
                             <Card.Body>
                                 <div className="d-md-flex">
@@ -163,7 +163,7 @@ function Dashboard() {
                             </Card.Body>
                         </Card>
                     </Col>
-                    <Col md={3} xs={6}>
+                    <Col md={3} xs={12}>
                         <Card>
                             <Card.Body>
                                 <div className="d-md-flex">
