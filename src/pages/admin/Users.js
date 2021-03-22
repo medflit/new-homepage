@@ -3,23 +3,21 @@ import { Row, Container, Table, Dropdown } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import config from '../../api/index'
 
-import {dateFormatting} from '../../helpers/functions'
-
 import FeatherIcon from 'feather-icons-react'
 
 import AuthLayout from '../../layouts/auth'
 
-function Patients() {
-    const [patients, setPatient] = useState([]);
+function Users() {
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        getAllPatients();
+        getAllUsers();
     }, [])
 
 
-    const url = '/patients/find';
+    const url = '/admin/users';
 
-    const getAllPatients = async () => {
+    const getAllUsers = async () => {
         const response = await fetch(`${config.baseUrl}` + url, {
             method: "GET",
             headers: {
@@ -29,16 +27,26 @@ function Patients() {
         });
 
         const jsonData = await response.json();
-
-        setPatient(jsonData.data);
+        // console.log(jsonData.data.data)
+        setUsers(jsonData.data.data);
     };
+
+    const dateFormat = (ddd) => {
+        // let ddd = "";
+        ddd = ddd.split("-");
+        let newDate = new Date( ddd[2], ddd[1] - 1, ddd[0]);
+        console.log(newDate.getTime());
+
+        return (newDate.getDate())
+    }
+
 
     return (
         <AuthLayout>
             <div className="page-hero page-container " id="page-hero">
                 <div className="padding d-flex">
                     <div className="page-title">
-                        <h2 className="text-md text-highlight">Patients List</h2>
+                        <h2 className="text-md text-highlight">All Users</h2>
                     </div>
                     <div className="flex"></div>
                     <div>
@@ -85,18 +93,18 @@ function Patients() {
                                         <th className="text-muted">First Name</th>
                                         <th className="text-muted">Last Name</th>
                                         <th className="text-muted">Unique ID</th>
-                                        <th className="text-muted">Sub status</th>
-                                        <th className="text-muted">Sub Expiry</th>
-                                        <th className="text-muted">Date</th>
-                                        <th className="text-muted">Status</th>
+                                        <th className="text-muted">Email</th>
+                                        <th className="text-muted">Gender</th>
+                                        <th className="text-muted">Phone</th>
+                                        <th className="text-muted">Type</th>
                                         <th style={{width: "50px"}}></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                { patients.map((patient, index) => {
-                                    // console.log(patient); 
+                                { users.map((user, index) => {
+                                    // console.log(user); 
                                       return(  
-                                        <tr className="v-middle" key={patient.id}>
+                                        <tr className="v-middle" key={user.id}>
                                         <td>
                                             <label className="ui-check m-0 ">
                                                 <input type="checkbox" name="id" value="15"/>
@@ -104,25 +112,25 @@ function Patients() {
                                             </label>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{patient.profile.firstname}</div>
+                                            <div className="item-title text-color">{user.usertype === 2 ? user.profile.firstname : "-"}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{patient.profile.lastname}</div>
+                                            <div className="item-title text-color">{user.usertype === 2 ? user.profile.lastname : "-"}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{patient.profile.medical_id}</div>
+                                            <div className="item-title text-color">{user.usertype === 2 ? user.profile.medical_id : "-"}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{patient.subscription.active ? <span class='badge badge-success'>Subscribed</span> : <span class='badge badge-secondary'>Not subscribed</span>}</div>
+                                            <div className="item-title text-color">{user.email}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{patient.subscription.expires_at ? patient.subscription.expires_at : "Not Subscribed"}</div>
+                                            <div className="item-title text-color">{user.usertype === 2 ? user.profile.gender : "-"}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{dateFormatting(patient.profile.created_at)}</div>
+                                            <div className="item-title text-color">{user.phone}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{patient.subscription.active ? <span class='badge badge-success'>Active</span> : <span class='badge badge-secondary'>Not Active</span> }</div> 
+                                            <div className="item-title text-color">{(user.usertype === 2 ? "Patient" : "Provider")}</div> 
                                         </td>
                                         <td>
                                             <Dropdown>
@@ -132,7 +140,7 @@ function Patients() {
 
                                                 <Dropdown.Menu>
                                                     <Dropdown.Item><Link to="/admin/profile/patient">View</Link></Dropdown.Item>
-                                                    <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                    {/* <Dropdown.Item href="#">Block</Dropdown.Item> */}
                                                     <Dropdown.Item href="#" className="text-danger">Delete</Dropdown.Item>
                                                 </Dropdown.Menu>
                                             </Dropdown>
@@ -183,4 +191,4 @@ function Patients() {
     )
 }
 
-export default Patients
+export default Users

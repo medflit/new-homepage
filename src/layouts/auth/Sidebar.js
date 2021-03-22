@@ -1,4 +1,6 @@
-import React, {Component} from 'react'
+import React, { useEffect, useState } from 'react'
+import {useHistory} from 'react-router-dom'
+
 import logo from '../../assets/images/medflit-logo.png';
 
 import FeatherIcon from 'feather-icons-react'
@@ -8,6 +10,18 @@ import { Route, Link, NavLink } from 'react-router-dom';
 
 
 const Sidebar = () => {
+
+    const history = useHistory();
+
+    const logout = () => {
+        const toLogout = true;
+
+        if(toLogout) {
+            localStorage.clear();
+            history.push('/admin-login');
+        }
+    };
+
     return (
         <div id="aside" className="page-sidenav no-shrink bg-light nav-dropdown fade" aria-hidden="true">
             <div className="sidenav h-100 modal-dialog bg-light">
@@ -64,7 +78,7 @@ const Sidebar = () => {
                                 </ul>
                             </li> */}
                             <li>
-                                <Link to="/">
+                                <Link to="/admin/users">
                                     <span className="nav-icon "><FeatherIcon icon="users" size="18"/></span>
                                     <span className="nav-text">All Users</span>
                                 </Link>
@@ -130,6 +144,12 @@ const Sidebar = () => {
                                 </Link>
                             </li>
                             <li>
+                                <Link to="/admin/consultations">
+                                    <span className="nav-icon "><FeatherIcon icon="list" size="18"/></span>
+                                    <span className="nav-text">Consultations</span>
+                                </Link>
+                            </li>
+                            <li>
                                 <Link to="/admin/consultation-transaction">
                                     <span className="nav-icon "><FeatherIcon icon="share" size="18"/></span>
                                     <span className="nav-text">Consultation Trans.</span>
@@ -141,12 +161,6 @@ const Sidebar = () => {
                                     <span className="nav-text">Call Logs</span>
                                 </Link>
                             </li> */}
-                            <li>
-                                <Link to="/admin/consultations">
-                                    <span className="nav-icon "><FeatherIcon icon="list" size="18"/></span>
-                                    <span className="nav-text">Consultations</span>
-                                </Link>
-                            </li>
                             {/* <li>
                                 <Link to="/">
                                     <span className="nav-icon "><FeatherIcon icon="target" size="18"/></span>
@@ -182,6 +196,11 @@ const Sidebar = () => {
                                     <span className="nav-icon "><FeatherIcon icon="menu" size="18"/></span>
                                     <span className="nav-text">Activity Log</span>
                                 </Link>
+                            </li> */}
+
+                            {/* <li>
+                                <span className="nav-icon "><FeatherIcon icon="door" size="18"/></span>
+                                <span className="nav-text">Logout</span>
                             </li> */}
                         </ul>
                     </div>

@@ -1,10 +1,23 @@
 import React from 'react'
+import {useHistory} from 'react-router-dom'
+
 import logo from '../../assets/images/medflit-logo.png';
 import FeatherIcon from 'feather-icons-react'
 
 import { Route, Link, NavLink } from 'react-router-dom';
 
 const Navigation = () => {
+
+    const history = useHistory();
+
+    const logout = () => {
+        const toLogout = true;
+
+        if(toLogout) {
+            localStorage.clear();
+            history.push('/admin-login');
+        }
+    };
 
     return (
         <div id="header" className="page-header">
@@ -223,7 +236,7 @@ const Navigation = () => {
                             <a className="dropdown-item" href="page.setting.html">
                                 <span>Account Settings</span>
                             </a>
-                            <a className="dropdown-item" href="signin.html">Sign out</a>
+                            <a className="dropdown-item"  onClick={() => logout()} href="">Sign out</a>
                         </div>
                     </li>
                     <li className="nav-item d-lg-none">

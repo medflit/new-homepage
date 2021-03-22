@@ -60,6 +60,7 @@ function Footer() {
                                     <NavLink to="/"><p>Android</p></NavLink>
                                     <NavLink to="/"><p>iOS</p></NavLink>
                                     <NavLink to="/faq"><p>Faq</p></NavLink>
+                                    <a href="https://blog.medflit.com">Blog</a>
                                 </div>                                    
                             </Col>
                         </Row>

@@ -1,12 +1,39 @@
 import React from 'react'
-import { Card, Row, Col, Container, Table, Dropdown } from 'react-bootstrap'
+import { Row, Container, Table, Dropdown } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import {useState, useEffect} from 'react'
+import config from '../../api/index'
+
+import { capitalize, checkResume, checkMedicalLicense, checkUniCert } from '../../helpers/functions'
 
 import FeatherIcon from 'feather-icons-react'
 
 import AuthLayout from '../../layouts/auth'
 
 function Providers() {
+    const [providers, setProvider] = useState([]);
+
+    useEffect(() => {
+        getAllProviders();
+    }, [])
+
+
+    const url = '/providers';
+
+    const getAllProviders = async () => {
+        const response = await fetch(`${config.baseUrl}` + url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("access_token"),
+            },
+        });
+
+        const jsonData = await response.json();
+
+        setProvider(jsonData.data);
+    };
+
     return (
         <AuthLayout>
             <div className="page-hero page-container " id="page-hero">
@@ -58,69 +85,84 @@ function Providers() {
                                         </th>
                                         <th className="text-muted">Full Name</th>
                                         <th className="text-muted">Prof. Class</th>
-                                        <th className="text-muted d-none d-sm-block">Medical Org.</th>
-                                        <th className="text-muted d-none d-sm-block">Org. Tel</th>
-                                        <th className="text-muted"><span className="">License ID</span></th>
-                                        <th className="text-muted"><span className="">Resume</span></th>
-                                        <th className="text-muted"><span className="">Uni. Cert.</span></th>
-                                        <th className="text-muted"><span className="">Med. License.</span></th>
-                                        <th className="text-muted"><span className="d-none d-sm-block">Provider status</span></th>
+                                        <th className="text-muted">Medical Org.</th>
+                                        <th className="text-muted">Org. Tel</th>
+                                        <th className="text-muted">License ID</th>
+                                        <th className="text-muted">Resume</th>
+                                        <th className="text-muted">Uni. Cert.</th>
+                                        <th className="text-muted">Med. License.</th>
+                                        <th className="text-muted">Provider status</th>
                                         <th style={{width: "50px"}}></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr className=" v-middle" dataId="15">
-                                        <td>
-                                            <label className="ui-check m-0 ">
-                                                <input type="checkbox" name="id" value="15"/>
-                                                <i></i>
-                                            </label>
-                                        </td>
-                                        <td>
-                                            <div className="item-title text-color ">Samson S.</div>                                            
-                                        </td>
-                                        <td className="flex">
-                                            <div className=" d-none d-sm-block item-title text-color ">---</div>
-                                        </td>
-                                        <td className="flex">
-                                            <div className=" d-none d-sm-block item-title text-color ">---</div>
-                                        </td>
-                                        <td>
-                                            <div className="item-except text-muted text-sm h-1x">
-                                                MDFT1234543
-                                            </div>
-                                        </td>
-                                        <td className="flex">
-                                            <div className=" d-none d-sm-block item-title text-color ">---</div>
-                                        </td>
+                                    {providers.map((provider, index) => {
+                                        console.log(provider);
                                         
-                                        <td className="flex">
-                                            <div className=" d-none d-sm-block item-title text-color ">---</div>
-                                        </td>
-                                        <td className="flex">
-                                            <div className=" d-none d-sm-block item-title text-color ">---</div>
-                                        </td>
-                                        <td>
-                                            <span className=" d-none d-sm-block badge badge-secondary badge-sm">
-                                                Unverify
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <Dropdown>
-                                                <Dropdown.Toggle size="xs" variant="secondary" id="dropdown-basic">
-                                                    <FeatherIcon icon="more-vertical" size="16"/>
-                                                </Dropdown.Toggle>
+                                        return (
+                                            <tr className=" v-middle" key={provider.id}>
+                                                <td>
+                                                    <label className="ui-check m-0 ">
+                                                        <input type="checkbox" name="id" value="15"/>
+                                                        <i></i>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <div className="item-title text-color ">{provider.profile === null ? "-" : capitalize(provider.profile.firstname + " " + provider.profile.lastname) }</div>                                            
+                                                </td>
+                                                <td className="flex">
+                                                    <div className="item-title text-color ">{provider.profile === null ? "-" : provider.provider.profession_label}</div>
+                                                </td>
+                                                <td className="flex">
+                                                    <div className="item-title text-color ">{provider.profile === null ? "-" : provider.provider.hospital_name}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="item-title text-color">
+                                                    {provider.profile === null ? "-" : provider.phone}
+                                                    </div>
+                                                </td>
+                                                <td className="flex">
+                                                    <div className="item-title text-color ">{provider.profile === null ? "-" : provider.provider.licenses.id_number}</div>
+                                                </td>
+                                                
+                                                <td className="flex">
+                                                    <div className="item-title text-color ">
+                                                    {provider.profile === null ? "-" : <a href={checkResume(provider.provider.uploaded_documents).url}>View</a>}
+                                                    </div>
+                                                </td>
+                                                <td className="flex">
+                                                    <div className=" item-title text-color ">{provider.profile === null ? "-" : <a href={checkMedicalLicense(provider.provider.uploaded_documents).url}>View</a>}</div>
+                                                </td>
+                                                <td className="flex">
+                                                    <div className=" item-title text-color ">{provider.profile === null ? "-" : <a href={checkUniCert(provider.provider.uploaded_documents).url}>View</a>}</div>
+                                                </td>
+                                                <td>
+                                                    {provider.publish ? <span className="badge badge-success">
+                                                        Verified
+                                                    </span> : <span className=" badge badge-secondary">
+                                                        Not verified
+                                                    </span>}
+                                                    
+                                                </td>
+                                                <td>
+                                                    <Dropdown>
+                                                        <Dropdown.Toggle size="xs" variant="secondary" id="dropdown-basic">
+                                                            <FeatherIcon icon="more-vertical" size="16"/>
+                                                        </Dropdown.Toggle>
 
-                                                <Dropdown.Menu>
-                                                    <Dropdown.Item><Link to="/admin/profile/provider">View</Link></Dropdown.Item>
-                                                    <Dropdown.Item href="#">Verify</Dropdown.Item>
-                                                    <Dropdown.Item href="#" className="text-danger">Delete</Dropdown.Item>
-                                                    <Dropdown.Item href="#">Add to free plan</Dropdown.Item>
-                                                </Dropdown.Menu>
-                                            </Dropdown>
-                                        </td>
-                                    </tr>
-                                    </tbody>
+                                                        <Dropdown.Menu>
+                                                            <Dropdown.Item><Link to="/admin/profile/provider">View</Link></Dropdown.Item>
+                                                            <Dropdown.Item href="#">Verify</Dropdown.Item>
+                                                            <Dropdown.Item href="#" className="text-danger">Delete</Dropdown.Item>
+                                                            <Dropdown.Item href="#">Add to free plan</Dropdown.Item>
+                                                        </Dropdown.Menu>
+                                                    </Dropdown>
+                                                </td>
+                                            </tr>
+                                            
+                                        )
+                                    })}
+                                </tbody>
                             </Table>
                         </div>
                         <div className="d-flex">

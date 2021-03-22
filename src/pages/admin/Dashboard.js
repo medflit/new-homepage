@@ -1,4 +1,7 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
+import {useHistory} from 'react-router-dom'
+
+import config from '../../api/index'
 
 import { Row, Col, Container, Card } from 'react-bootstrap'
 import FeatherIcon from 'feather-icons-react'
@@ -8,6 +11,59 @@ import { Link } from 'react-router-dom'
 import AuthLayout from '../../layouts/auth'
 
 function Dashboard() {
+    const [patient, getPatients] = useState();
+    const [provider, getProviders] = useState();
+    const [user, getUSers] = useState();
+    const [consultation, getConsultations] = useState();
+
+    useEffect(() => {
+        dashboardData();
+    }, [])
+
+    const dashboardData = async () => {
+
+       Promise.all([
+            fetch('http://helloworld.com.ng/medflit-api/api/patients/find', {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("access_token"),
+                }
+            }),
+            fetch('http://helloworld.com.ng/medflit-api/api/providers', {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("access_token"),
+                }
+            }),
+            fetch('http://helloworld.com.ng/medflit-api/api/admin/users', {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("access_token"),
+                }
+            }),
+            fetch('http://helloworld.com.ng/medflit-api/api/reports/all-consultations', {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("access_token"),
+                }
+            }),
+        ]).then((responses) => {
+            // Get a JSON object from each of the responses
+            return Promise.all(responses.map(function (response) {
+                // console.log(response.json())
+                return response.json();
+            }));
+        }).then((res) => {
+            getPatients(res[0].data.length);
+            getProviders(res[1].data.length);
+            getUSers(res[2].data.total);
+            getConsultations(res[3].data.total);
+        }).catch((error) => {
+            console.log(error);
+        })
+    };
+
+
     return(
         <AuthLayout>
             <div className="page-hero page-container " id="page-hero">
@@ -40,7 +96,7 @@ function Dashboard() {
                                     </div>
                                 </div>
                                 <Row className="text-primary">
-                                    <Col><span className="text-highlight text-bold text-md">44</span></Col>
+                                    <Col><span className="text-highlight text-bold text-md">{patient}</span></Col>
                                     <Col><FeatherIcon className="mt-2 pull-right" icon="users" size="24"/></Col>
                                 </Row>
                             </Card.Body>
@@ -58,7 +114,7 @@ function Dashboard() {
                                     </div>
                                 </div>
                                 <Row className="text-danger">
-                                    <Col><span className="text-highlight text-bold text-md">32</span></Col>
+                                    <Col><span className="text-highlight text-bold text-md">{provider}</span></Col>
                                     <Col><FeatherIcon className="mt-2 pull-right" icon="user" size="24"/></Col>
                                 </Row>
                             </Card.Body>
@@ -75,7 +131,7 @@ function Dashboard() {
                                     </div>
                                 </div>
                                 <Row className="text-info">
-                                    <Col><span className="text-highlight text-bold text-md">123</span></Col>
+                                    <Col><span className="text-highlight text-bold text-md">-</span></Col>
                                     <Col><FeatherIcon className="mt-2 pull-right" icon="users" size="24"/></Col>
                                 </Row>
                             </Card.Body>
@@ -91,7 +147,7 @@ function Dashboard() {
                                     </div>
                                 </div>
                                 <Row className="text-warning">
-                                    <Col><span className="text-highlight text-bold text-md">65</span></Col>
+                                    <Col><span className="text-highlight text-bold text-md">-</span></Col>
                                     <Col><FeatherIcon className="mt-2 pull-right" icon="users" size="24"/></Col>
                                 </Row>
                             </Card.Body>
@@ -107,7 +163,7 @@ function Dashboard() {
                                     </div>
                                 </div>
                                 <Row className="text-primary">
-                                    <Col><span className="text-highlight text-bold text-md">444</span></Col>
+                                    <Col><span className="text-highlight text-bold text-md">-</span></Col>
                                     <Col><FeatherIcon className="mt-2 pull-right" icon="home" size="24"/></Col>
                                 </Row>
                             </Card.Body>
@@ -123,7 +179,7 @@ function Dashboard() {
                                     </div>
                                 </div>
                                 <Row className="text-success">
-                                    <Col><span className="text-highlight text-bold text-md">5,654</span></Col>
+                                    <Col><span className="text-highlight text-bold text-md">{user}</span></Col>
                                     <Col><FeatherIcon className="mt-2 pull-right" icon="users" size="24"/></Col>
                                 </Row>
                             </Card.Body>
@@ -140,7 +196,7 @@ function Dashboard() {
                                     </div>
                                 </div>
                                 <Row className="text-secondary">
-                                    <Col><span className="text-highlight text-bold text-md">9</span></Col>
+                                    <Col><span className="text-highlight text-bold text-md">{consultation}</span></Col>
                                     <Col><FeatherIcon className="mt-2 pull-right" icon="list" size="24"/></Col>
                                 </Row>
                             </Card.Body>
@@ -157,7 +213,7 @@ function Dashboard() {
                                     </div>
                                 </div>
                                 <Row className="text-secondary">
-                                    <Col><span className="text-highlight text-bold text-md">0</span></Col>
+                                    <Col><span className="text-highlight text-bold text-md">-</span></Col>
                                     <Col><FeatherIcon className="mt-2 pull-right" icon="menu" size="24"/></Col>
                                 </Row>
                             </Card.Body>
@@ -172,7 +228,7 @@ function Dashboard() {
                                     </div>
                                 </div>
                                 <Row className="text-secondary">
-                                    <Col><span className="text-highlight text-bold text-md">10</span></Col>
+                                    <Col><span className="text-highlight text-bold text-md">-</span></Col>
                                     <Col><FeatherIcon className="mt-2 pull-right" icon="phone-forwarded" size="24"/></Col>
                                 </Row>
                             </Card.Body>
