@@ -54,8 +54,8 @@ function Dashboard() {
                 return response.json();
             }));
         }).then((res) => {
-            getPatients(res[0].data.length);
-            getProviders(res[1].data.length);
+            getPatients(res[0].paginator.total);
+            getProviders(res[1].paginator.total);
             getUSers(res[2].data.total);
             getConsultations(res[3].data.total);
         }).catch((error) => {
@@ -170,6 +170,7 @@ function Dashboard() {
                         </Card>
                     </Col>
                     <Col md={3} xs={12}>
+                    <Link to="/admin/users">
                         <Card>
                             <Card.Body>
                                 <div className="d-md-flex">
@@ -184,6 +185,7 @@ function Dashboard() {
                                 </Row>
                             </Card.Body>
                         </Card>
+                        </Link>
                     </Col>
                     <Col md={3} xs={12}>
                         <Link to="/admin/consultations">

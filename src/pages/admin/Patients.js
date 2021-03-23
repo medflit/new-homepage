@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Row, Container, Table, Dropdown } from 'react-bootstrap'
+import { Row, Container, Table, Dropdown, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import config from '../../api/index'
 
@@ -11,16 +11,19 @@ import AuthLayout from '../../layouts/auth'
 
 function Patients() {
     const [patients, setPatient] = useState([]);
+    const [total, setTotal] = useState();
+    const [perPage, setPerPage] = useState();
+    const [currentPage, setCurrentPage] = useState();
 
     useEffect(() => {
-        getAllPatients();
+        getAllPatients(1);
     }, [])
 
 
     const url = '/patients/find';
 
-    const getAllPatients = async () => {
-        const response = await fetch(`${config.baseUrl}` + url, {
+    const getAllPatients = async (pageNumber) => {
+        const response = await fetch(`${config.baseUrl}` + url + `?page=${pageNumber}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -31,7 +34,29 @@ function Patients() {
         const jsonData = await response.json();
 
         setPatient(jsonData.data);
+        setTotal(jsonData.paginator.total);
+        setPerPage(jsonData.paginator.per_page);
+        setCurrentPage(jsonData.paginator.current_page);
     };
+
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(total / perPage); i++) {
+        pageNumbers.push(i);
+    }
+
+    let renderPageNumbers;
+
+    renderPageNumbers = pageNumbers.map(number => {
+        let classes = currentPage === number ? 'page-item active' : 'page-item';
+      
+        return (
+            
+            <li className={classes}>
+                <span className="page-link" key={number} onClick={() => getAllPatients(number)}>{number}</span>
+            </li>
+        );
+    });
+
 
     return (
         <AuthLayout>
@@ -51,6 +76,11 @@ function Patients() {
             </div>
             <Container>
                 <Row>
+                    <Card>
+                        <Card.Header>
+                            Patients List
+                        </Card.Header>
+                    <Card.Body>
                     <div className="mb-5">
                         <div className="toolbar ">
                             <div className="btn-group">
@@ -145,37 +175,25 @@ function Patients() {
                         </div>
                         <div className="d-flex">
                             <ul className="pagination">
-                                <li className="page-item disabled">
-                                    <a className="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
+                                <li className="page-item">
+                                    <span className="page-link" aria-label="Previous">
+                                        <span aria-hidden="true" onClick={() => getAllPatients(currentPage - 1)}>&laquo;</span>
                                         <span className="sr-only">Previous</span>
-                                    </a>
+                                    </span>
                                 </li>
-                                <li className="page-item active">
-                                    <a className="page-link" href="#">1 <span className="sr-only">(current)</span></a>
-                                </li>
+                                    {renderPageNumbers}
                                 <li className="page-item">
-                                    <a className="page-link" href="#">2</a>
-                                </li>
-                                <li className="page-item">
-                                    <a className="page-link" href="#">3</a>
-                                </li>
-                                <li className="page-item">
-                                    <a className="page-link" href="#">4</a>
-                                </li>
-                                <li className="page-item">
-                                    <a className="page-link" href="#">5</a>
-                                </li>
-                                <li className="page-item">
-                                    <a className="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
+                                    <span className="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true" onClick={() => getAllPatients(currentPage + 1)}>&raquo;</span>
                                         <span className="sr-only">Next</span>
-                                    </a>
+                                    </span>
                                 </li>
                             </ul>
-                            <small className="text-muted py-2 mx-2">Total <span id="count">15</span> items</small>
+                            <small className="text-muted py-2 mx-2">Total <span id="count">{total}</span> items</small>
                         </div>
                     </div>
+                    </Card.Body>
+                    </Card>
                 </Row>
             </Container>
         </AuthLayout>

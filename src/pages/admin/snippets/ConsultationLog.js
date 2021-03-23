@@ -1,11 +1,62 @@
 import React from "react";
+import { useState, useEffect } from 'react'
+import config from '../../../api/index'
 
 import { Row, Col, Container, Table, Dropdown, Card } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { dateFormatting } from '../../../helpers/functions'
 
 import FeatherIcon from 'feather-icons-react'
 
 const ConsultationLog = () => {
+    const [consultations, setConsultations] = useState([]);
+    const [total, setTotal] = useState();
+    const [perPage, setPerPage] = useState();
+    const [currentPage, setCurrentPage] = useState();
+
+
+    useEffect(() => {
+        getAllConsultations(1);
+    }, []);
+
+    const url = '/reports/all-consultations';
+
+    const getAllConsultations = async (pageNumber) => {
+        const response = await fetch(`${config.baseUrl}` + url + `?page=${pageNumber}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("access_token"),
+            },
+        });
+
+        const jsonData = await response.json();
+
+        setConsultations(jsonData.data.data);
+        setTotal(jsonData.data.total);
+        setPerPage(jsonData.data.per_page);
+        setCurrentPage(jsonData.data.current_page);
+    };
+
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(total / perPage); i++) {
+        pageNumbers.push(i);
+    }
+
+    let renderPageNumbers;
+
+    renderPageNumbers = pageNumbers.map(number => {
+        let classes = currentPage === number ? 'page-item active' : 'page-item';
+      
+        return (
+            
+            <li className={classes}>
+                <span className="page-link" key={number} onClick={() => getAllConsultations(number)}>{number}</span>
+            </li>
+        );
+    });
+
+
+
     return (
         <div>
             <Row>
@@ -50,34 +101,40 @@ const ConsultationLog = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr className=" v-middle" dataId="15">
+                                    {consultations.map((consultation, index) => {
+                                        console.log(consultation);
+
+                                        return (
+                                        <tr className=" v-middle" key={consultation.id}>
                                         <td>
-                                            1
+                                            {index + 1}
                                         </td>
                                         <td>
-                                            <div className="item-title text-color ">Samson Samuels</div>                                            
+                                            <div className="item-title text-color ">{consultation.patient.firstname + " " + consultation.patient.lastname}</div>                                            
                                         </td>
                                         <td>
-                                            <div className="item-title text-color ">MDFT1234</div>                                            
+                                            <div className="item-title text-color ">{consultation.patient.medical_id}</div>                                            
                                         </td>
                                         <td>
-                                            <div className="item-title text-color ">Sim Shagaya</div>
+                                            <div className="item-title text-color ">{consultation.provider.firstname + " " + consultation.provider.lastname}</div>
                                             
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">
-                                                Headache
+                                            <div className="item-title text-color h-1x">
+                                                {consultation.dianosis}
                                             </div>
                                         </td>
                                         <td>
                                             <span className="item-title text-color">
-                                                Wed, 14th Feb, 2021
+                                                {dateFormatting(consultation.created_at)}
                                             </span>
                                         </td>
                                         <td>
                                             <a href="#" className="badge badge-secondary badge-md">View</a>
                                         </td>
                                     </tr>
+                                    )
+                                })}
                                 </tbody>
                             </Table>
                         </div>
@@ -88,35 +145,21 @@ const ConsultationLog = () => {
                 </Row>
                 <div className="d-flex">
                     <ul className="pagination">
-                        <li className="page-item disabled">
-                            <a className="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
+                        <li className="page-item">
+                            <span className="page-link" aria-label="Previous">
+                                <span aria-hidden="true" onClick={() => getAllConsultations(currentPage - 1)}>&laquo;</span>
                                 <span className="sr-only">Previous</span>
-                            </a>
+                            </span>
                         </li>
-                        <li className="page-item active">
-                            <a className="page-link" href="#">1 <span className="sr-only">(current)</span></a>
-                        </li>
+                            {renderPageNumbers}
                         <li className="page-item">
-                            <a className="page-link" href="#">2</a>
-                        </li>
-                        <li className="page-item">
-                            <a className="page-link" href="#">3</a>
-                        </li>
-                        <li className="page-item">
-                            <a className="page-link" href="#">4</a>
-                        </li>
-                        <li className="page-item">
-                            <a className="page-link" href="#">5</a>
-                        </li>
-                        <li className="page-item">
-                            <a className="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
+                            <span className="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true" onClick={() => getAllConsultations(currentPage + 1)}>&raquo;</span>
                                 <span className="sr-only">Next</span>
-                            </a>
+                            </span>
                         </li>
                     </ul>
-                    <small className="text-muted py-2 mx-2">Total <span id="count">15</span> items</small>
+                    <small className="text-muted py-2 mx-2">Total <span id="count">{total}</span> items</small>
                 </div>
         </div>
     )

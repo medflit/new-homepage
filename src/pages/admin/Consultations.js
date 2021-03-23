@@ -29,9 +29,6 @@ const Consultations = () => {
                 <div className="consultation-log">
                     <ConsultationLog/>
                 </div>
-                <div className="direct-consult mt-5">
-                    <DirectConsultation/>
-                </div>
             </Container>
         </AuthLayout>
     )
