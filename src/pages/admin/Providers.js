@@ -1,8 +1,11 @@
 import React from 'react'
 import { Row, Container, Table, Card, Dropdown } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import config from '../../api/index'
+import { Link, useHistory } from "react-router-dom";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { capitalize, checkResume, checkMedicalLicense, checkUniCert } from '../../helpers/functions'
 
@@ -12,14 +15,48 @@ import AuthLayout from '../../layouts/auth'
 
 function Providers() {
     const [providers, setProvider] = useState([]);
+    const [user, setUser] = useState([]);
     const [total, setTotal] = useState();
     const [perPage, setPerPage] = useState();
     const [currentPage, setCurrentPage] = useState();
 
+    const history = useHistory();
+
     useEffect(() => {
         getAllProviders(1);
+        // verify();
     }, [])
 
+    const verify = async (email) => {
+        const response = await fetch(`${config.baseUrl}` + "/admin/users/publish"  + `?email=${email}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("access_token"),
+            },
+        })
+
+        const jsonData = await response.json()
+       
+        .then(({error, response}) => {            
+            !error &&
+                toast.success("User verified successfully!", {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+                setTimeout(() => {
+                    window.location.reload();
+                }, 3000);
+
+            error && 
+            toast.error("Cannot verify user!", {
+                position: toast.POSITION.TOP_RIGHT
+            });
+        });
+    };
+
+    const unverify = () => {
+
+    };
 
     const url = '/providers';
 
@@ -50,16 +87,18 @@ function Providers() {
     renderPageNumbers = pageNumbers.map(number => {
         let classes = currentPage === number ? 'page-item active' : 'page-item';
       
-        return (
-            
-            <li className={classes}>
-                <span className="page-link" key={number} onClick={() => getAllProviders(number)}>{number}</span>
-            </li>
-        );
+        if (number == 1 || number == total || (number >= currentPage - 2 && number <= currentPage + 2)) {
+            return (
+                <li className={classes}>
+                    <span className="page-link" key={number} onClick={() => getAllProviders(number)}>{number}</span>
+                </li>
+            );
+        }
     });
 
     return (
         <AuthLayout>
+            <ToastContainer />
             <div className="page-hero page-container " id="page-hero">
                 <div className="padding d-flex">
                     <div className="page-title">
@@ -84,7 +123,7 @@ function Providers() {
                             <div className="mb-5">
                                 <div className="toolbar ">
                                     <div className="btn-group">
-                                        <button className="btn btn-sm btn-icon btn-white" dataToggle="tooltip" title="Trash" id="btn-trash">
+                                        <button className="btn btn-sm btn-icon btn-white" title="Trash" id="btn-trash">
                                             <FeatherIcon icon="trash" className="text-muted"/>
                                         </button>
                                         <button className="btn btn-sm btn-icon btn-white sort " data-sort="item-title" data-toggle="tooltip" title="Sort">
@@ -126,7 +165,7 @@ function Providers() {
                                         </thead>
                                         <tbody>
                                             {providers.map((provider, index) => {
-                                                console.log(provider);
+                                                // console.log(provider);
                                                 
                                                 return (
                                                     <tr className=" v-middle" key={provider.id}>
@@ -181,9 +220,10 @@ function Providers() {
 
                                                                 <Dropdown.Menu>
                                                                     <Dropdown.Item><Link to="/admin/profile/provider">View</Link></Dropdown.Item>
-                                                                    <Dropdown.Item href="#">Verify</Dropdown.Item>
-                                                                    <Dropdown.Item href="#" className="text-danger">Delete</Dropdown.Item>
-                                                                    <Dropdown.Item href="#">Add to free plan</Dropdown.Item>
+                                                                    {provider.publish ? <Dropdown.Item onClick={() => unverify(provider.email)} >Unverify</Dropdown.Item> : <Dropdown.Item onClick={() => verify(provider.email)} >Verify</Dropdown.Item> }
+                                                                    
+                                                                    <Dropdown.Item className="text-danger">Delete</Dropdown.Item>
+                                                                    <Dropdown.Item>Add to free plan</Dropdown.Item>
                                                                 </Dropdown.Menu>
                                                             </Dropdown>
                                                         </td>

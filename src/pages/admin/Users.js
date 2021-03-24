@@ -47,12 +47,13 @@ function Users() {
     renderPageNumbers = pageNumbers.map(number => {
         let classes = currentPage === number ? 'page-item active' : 'page-item';
       
-        return (
-            
-            <li className={classes}>
-                <span className="page-link" key={number} onClick={() => getAllUsers(number)}>{number}</span>
-            </li>
-        );
+        if (number == 1 || number == total || (number >= currentPage - 2 && number <= currentPage + 2)) {
+            return (
+                <li className={classes}>
+                    <span className="page-link" key={number} onClick={() => getAllUsers(number)}>{number}</span>
+                </li>
+            );
+        }
     });
 
 

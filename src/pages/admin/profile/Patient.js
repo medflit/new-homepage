@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import { Row, Col, Card, Container, Nav, Accordion, Button } from 'react-bootstrap'
+import React, {useState} from 'react'
+import { Row, Col, Card, Container, Accordion, Button, Modal } from 'react-bootstrap'
 
 import FeatherIcon from 'feather-icons-react'
 import ProfileImage from '../../../assets/images/customer.png'
@@ -7,8 +7,37 @@ import ProfileImage from '../../../assets/images/customer.png'
 import AuthLayout from '../../../layouts/auth'
 
 function Patient() {
+    const [modalShow, setModalShow] = useState(false);
+
+    const ActivateModal = (props) => {
+        return (
+          <Modal
+            {...props}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+          >
+            <Modal.Body className="p-5">
+                <Row className="text-center">
+                    <Col>
+                        <h6>Activate Subscription</h6>
+                        <Button variant="info">Subscription plan</Button>
+                    </Col>
+                    <Col>
+                        <h6>Activate Treatment</h6>
+                        <Button variant="secondary">Treatment plan</Button>
+                    </Col>
+                </Row>
+            </Modal.Body>
+          </Modal>
+        );
+    }
     return (
         <AuthLayout>
+            <ActivateModal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+            />
             <div className="page-hero page-container " id="page-hero">
                 <div className="padding d-flex">
                     <div className="page-title">
@@ -60,7 +89,7 @@ function Patient() {
                                             <div className="mb-3">
                                                 <small className="text-muted">You have not subscribed yet. Subscribe now to make unlimited calls to doctors.</small>
                                             </div>
-                                            <Button variant="primary">Activate</Button>
+                                            <Button variant="primary" onClick={() => setModalShow(true)}>Activate</Button>
                                         </Col>
                                     </Row>
                                 </div>

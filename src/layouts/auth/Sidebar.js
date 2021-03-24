@@ -4,9 +4,8 @@ import {useHistory} from 'react-router-dom'
 import logo from '../../assets/images/medflit-logo.png';
 
 import FeatherIcon from 'feather-icons-react'
-import { Modal } from 'react-bootstrap'
 
-import { Route, Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const Sidebar = () => {
@@ -38,10 +37,10 @@ const Sidebar = () => {
                                 <span className="text-muted">Main</span>
                             </li>
                             <li>
-                                <Link to="/admin/dashboard">
+                                <a href="/admin/dashboard">
                                     <span className="nav-icon"><FeatherIcon icon="home" size="18"/></span>
                                     <span className="nav-text">Dashboard</span>
-                                </Link>
+                                </a>
                             </li>
                             {/* <li>
                                 <Link to="/">
@@ -78,10 +77,10 @@ const Sidebar = () => {
                                 </ul>
                             </li> */}
                             <li>
-                                <Link to="/admin/users">
+                                <a href="/admin/users">
                                     <span className="nav-icon "><FeatherIcon icon="users" size="18"/></span>
                                     <span className="nav-text">All Users</span>
-                                </Link>
+                                </a>
                             </li>
                             {/* <li>
                                 <Link to="/admin/patients">
@@ -138,22 +137,22 @@ const Sidebar = () => {
                                 </Link>
                             </li> */}
                             <li>
-                                <Link to="/admin/inbox">
+                                <a href="/admin/inbox">
                                     <span className="nav-icon "><FeatherIcon icon="inbox" size="18"/></span>
                                     <span className="nav-text">Inbox</span>
-                                </Link>
+                                </a>
                             </li>
                             <li>
-                                <Link to="/admin/consultations">
+                                <a href="/admin/consultations">
                                     <span className="nav-icon "><FeatherIcon icon="list" size="18"/></span>
                                     <span className="nav-text">Consultations</span>
-                                </Link>
+                                </a>
                             </li>
                             <li>
-                                <Link to="/admin/consultation-transaction">
+                                <a href="/admin/consultation-transaction">
                                     <span className="nav-icon "><FeatherIcon icon="share" size="18"/></span>
                                     <span className="nav-text">Consultation Trans.</span>
-                                </Link>
+                                </a>
                             </li>
                             {/* <li>
                                 <Link to="/">

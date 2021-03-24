@@ -13,19 +13,6 @@ import DefaultLayout from '../layouts/default'
 
 import { useHistory } from "react-router-dom";
 
-// async function LoginAdmin(credentials) {
-//     // let history = useHistory();
-//     return fetch(`${config.baseUrl}/login`, {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//             body: JSON.stringify(credentials)
-//         })
-//         .then(data => data.json()
-//     )
-// }
-
 // {setToken}
 function AdminLogin() {
     const { register, handleSubmit, errors } = useForm();
