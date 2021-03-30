@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Container, Table, Dropdown, Card } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from "react-router-dom";
 import config from '../../api/index'
 
 import {dateFormatting} from '../../helpers/functions'
@@ -15,14 +15,14 @@ function Patients() {
     const [perPage, setPerPage] = useState();
     const [currentPage, setCurrentPage] = useState();
 
+    const history = useHistory();
+
     useEffect(() => {
         getAllPatients(1);
     }, [])
 
-
-    const url = '/patients/find';
-
     const getAllPatients = async (pageNumber) => {
+        const url = '/patients/find';
         const response = await fetch(`${config.baseUrl}` + url + `?page=${pageNumber}`, {
             method: "GET",
             headers: {
@@ -162,7 +162,11 @@ function Patients() {
                                                 </Dropdown.Toggle>
 
                                                 <Dropdown.Menu>
-                                                    <Dropdown.Item><Link to="/admin/profile/patient">View</Link></Dropdown.Item>
+                                                {/* onClick={() => viewUser(patient.id)} */}
+                                                
+                                                    <Dropdown.Item>
+                                                        <Link to={{pathname: `/admin/profile/patient/${patient.id}`, state: { "id": patient.id}}}>View</Link>
+                                                    </Dropdown.Item>
                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
                                                     <Dropdown.Item href="#" className="text-danger">Delete</Dropdown.Item>
                                                 </Dropdown.Menu>
@@ -171,7 +175,7 @@ function Patients() {
                                     </tr>
                                       )
                                     })}
-                                </tbody>
+                                </tbody> 
                             </Table>
                         </div>
                         <div className="d-flex">

@@ -54,8 +54,31 @@ function Providers() {
         });
     };
 
-    const unverify = () => {
+    const unverify = async (email) => {
+        const response = await fetch(`${config.baseUrl}` + "/admin/users/publish"  + `?email=${email}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("access_token"),
+            },
+        })
 
+        const jsonData = await response.json()
+       
+        .then(({error, response}) => {            
+            !error &&
+                toast.success("User unverified successfully!", {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+                setTimeout(() => {
+                    window.location.reload();
+                }, 3000);
+
+            error && 
+            toast.error("Cannot unverify user!", {
+                position: toast.POSITION.TOP_RIGHT
+            });
+        });
     };
 
     const url = '/providers';
@@ -219,8 +242,8 @@ function Providers() {
                                                                 </Dropdown.Toggle>
 
                                                                 <Dropdown.Menu>
-                                                                    <Dropdown.Item><Link to="/admin/profile/provider">View</Link></Dropdown.Item>
-                                                                    {provider.publish ? <Dropdown.Item onClick={() => unverify(provider.email)} >Unverify</Dropdown.Item> : <Dropdown.Item onClick={() => verify(provider.email)} >Verify</Dropdown.Item> }
+                                                                    <Dropdown.Item><Link to={{pathname: `/admin/profile/provider/${provider.id}`, state: { "id": provider.id}}}>View</Link></Dropdown.Item>
+                                                                    {provider.publish ? <Dropdown.Item>Unverify</Dropdown.Item> : <Dropdown.Item onClick={() => verify(provider.email)} >Verify</Dropdown.Item> }
                                                                     
                                                                     <Dropdown.Item className="text-danger">Delete</Dropdown.Item>
                                                                     <Dropdown.Item>Add to free plan</Dropdown.Item>

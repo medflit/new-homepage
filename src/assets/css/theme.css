@@ -905,7 +905,10 @@ pagination
   color: inherit !important;
   background-color: transparent !important;
   border-color: rgba(160, 175, 185, 0.15) !important;
-  display: block; }
+  display: block; 
+  cursor: pointer;
+
+}
   .pagination .page-link:hover, .pagination .page-link:focus,
   .pagination li a:hover,
   .pagination li a:focus {

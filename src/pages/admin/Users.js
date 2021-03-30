@@ -134,19 +134,19 @@ function Users() {
                                                     </label>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{user.usertype === 2 ? user.profile.firstname : "-"}</div>
+                                                    <div className="item-title text-color">{user.profile.firstname}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{user.usertype === 2 ? user.profile.lastname : "-"}</div>
+                                                    <div className="item-title text-color">{user.profile.lastname}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{user.usertype === 2 ? user.profile.medical_id : "-"}</div>
+                                                    <div className="item-title text-color">{user.profile.medical_id}</div>
                                                 </td>
                                                 <td>
                                                     <div className="item-title text-color">{user.email}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{user.usertype === 2 ? user.profile.gender : "-"}</div>
+                                                    <div className="item-title text-color">{user.profile.gender}</div>
                                                 </td>
                                                 <td>
                                                     <div className="item-title text-color">{user.phone}</div>
@@ -161,8 +161,8 @@ function Users() {
                                                         </Dropdown.Toggle>
 
                                                         <Dropdown.Menu>
-                                                            <Dropdown.Item><Link to="/admin/profile/patient">View</Link></Dropdown.Item>
-                                                            {/* <Dropdown.Item href="#">Block</Dropdown.Item> */}
+                                                            {user.usertype === 2 ? <Dropdown.Item><Link to={{pathname: `/admin/profile/patient/${user.id}`, state: { "id": user.id}}}>View</Link></Dropdown.Item> : <Dropdown.Item><Link to={{pathname: `/admin/profile/provider/${user.id}`, state: { "id": user.id}}}>View</Link></Dropdown.Item> }
+                                                            
                                                             <Dropdown.Item href="#" className="text-danger">Delete</Dropdown.Item>
                                                         </Dropdown.Menu>
                                                     </Dropdown>

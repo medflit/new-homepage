@@ -1,5 +1,8 @@
-import React, {Component} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Row, Col, Card, Container, Nav, Accordion, Button, Table } from 'react-bootstrap'
+import config from '../../../api'
+
+import { useLocation, useRouteMatch } from 'react-router-dom'
 
 import FeatherIcon from 'feather-icons-react'
 import ProfileImage from '../../../assets/images/customer.png'
@@ -7,6 +10,44 @@ import ProfileImage from '../../../assets/images/customer.png'
 import AuthLayout from '../../../layouts/auth'
 
 function Provider() {
+    const [provider, setProviderProfile] = useState();
+
+    const location = useLocation();
+
+    console.log("Location: ", location.state.id);
+
+    // const url = '/patients/find/';
+    // const { match: { params } } = props;
+
+
+    useEffect(() => {
+        getProviderProfile(getID());  
+        // getID();
+    }, []);
+    const getID = () => {
+        const id = location.state.id;
+
+        console.log("My ID - ", id);
+        return id;
+    }
+
+    const url = '/admin/users/find?id=';
+    // const id = getID();
+    const getProviderProfile = async (id) => {
+        const response = await fetch(`${config.baseUrl}` + url + `${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("access_token"),
+            },
+        });
+
+        const jsonData = await response.json();
+
+        setProviderProfile(jsonData.data);
+        console.log(jsonData)
+    };
+
     return (
         <AuthLayout>
             <div className="page-hero page-container " id="page-hero">
@@ -35,8 +76,8 @@ function Provider() {
                                         </Col>
                                         <Col sm={8}>
                                             <div className="page-title m-auto">
-                                                <h2 className="text-md text-highlight">Samson Samuels</h2>
-                                                <small className="text-muted">Provider
+                                                <h2 className="text-md text-highlight">{provider?.profile?.firstname} {provider?.profile?.lastname}</h2>
+                                                <small className="text-muted">{provider?.profile?.medical_id}
                                                 </small>
                                             </div>
                                         </Col>
@@ -126,36 +167,34 @@ function Provider() {
                                                     <div className="form-row">
                                                         <div className="form-group col-sm-6">
                                                             <label>Firstname</label>
-                                                            <input type="text" className="form-control" required/>
+                                                            <input type="text" className="form-control" value={provider?.profile?.firstname} required/>
                                                         </div>
                                                         <div className="form-group col-sm-6">
                                                             <label>Lastname</label>
-                                                            <input type="text" className="form-control" required/>
+                                                            <input type="text" className="form-control" value={provider?.profile?.lastname} required/>
                                                         </div>
                                                     </div>                                            
                                                     <div className="form-row">
                                                         <div className="form-group col-sm-6">
                                                             <label>Email Address</label>
-                                                            <input type="email" className="form-control" required />
+                                                            <input type="email" className="form-control" value={provider?.email} required />
                                                         </div>
                                                         <div className="form-group col-sm-6">
                                                             <label>Username</label>
-                                                            <input type="text" className="form-control" required/>
+                                                            <input type="text" className="form-control" value={provider?.username} required/>
                                                         </div>
                                                     </div>
                                                     <div className="form-row">
                                                         <div className="form-group col-sm-6">
                                                             <label>Marital Status</label>
                                                             <select className="form-control" data-plugin="select2" data-option="{}" data-minimum-results-for-search="Infinity">
-                                                                <option value="one">First</option>
-                                                                <option value="three">Third</option>
+                                                                <option value={provider?.marital_status}>{provider?.marital_status}</option>
                                                             </select>
                                                         </div>
                                                         <div className="form-group col-sm-6">
                                                             <label>Gender</label>
                                                             <select className="form-control" data-plugin="select2" data-option="{}" data-minimum-results-for-search="Infinity">
-                                                                <option value="one">First</option>
-                                                                <option value="three">Third</option>
+                                                                <option value="one">{provider?.profile?.gender}</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -163,24 +202,23 @@ function Provider() {
                                                     <div className="form-row">
                                                         <div className="form-group col-sm-6">
                                                             <label>Telephone</label>
-                                                            <input type="text" className="form-control" placeholder="XXX-XXX-XXXX" required/>
+                                                            <input type="text" className="form-control" value={provider?.phone} required/>
                                                         </div>
                                                         <div className="form-group col-sm-6">
                                                             <label>Select Country</label>
                                                             <select className="form-control" data-plugin="select2" data-option="{}" data-minimum-results-for-search="Infinity">
-                                                                <option value="one">First</option>
-                                                                <option value="three">Third</option>
+                                                                <option value="one">{provider?.profile?.country}</option>
                                                             </select>
                                                         </div>
                                                     </div>  
                                                     <div className="form-row">
                                                         <div className="form-group col-sm-6">
                                                             <label>Address</label>
-                                                            <textarea className="form-control" rows="6" data-minwords="6" required placeholder="Type your message"></textarea>
+                                                            <textarea className="form-control" rows="6" value={provider?.addresses[0]?.street + ", " + provider?.profile?.city} data-minwords="6" required>{provider?.addresses[0]?.street + ", " + provider?.profile?.city}</textarea>
                                                         </div>
                                                         <div className="form-group col-sm-6">
                                                             <label>Doctor's bio</label>
-                                                            <textarea className="form-control" rows="6" data-minwords="6" required placeholder="Type your message"></textarea>
+                                                            <textarea className="form-control" rows="6" value={provider?.profile?.bio} data-minwords="6" required>{provider?.profile?.bio}</textarea>
                                                         </div>
                                                     </div>
                                                     <div className="form-row">
@@ -251,7 +289,7 @@ function Provider() {
                                                             <div className="form-group col-md-6">
                                                                 <label className="text-muted">Profession</label>
                                                                 <select className="form-control" data-plugin="select2" data-option="{}" data-minimum-results-for-search="Infinity">
-                                                                    <option value="one">Medical Doctor</option>
+                                                                    <option value="one">{provider?.provider?.profession?.name}</option>
                                                                 </select>
                                                             </div>
                                                             <div className="form-group col-md-6">
@@ -340,7 +378,7 @@ function Provider() {
                                                 <div className="tab-pane" id="tab3">
                                                     <div className="form-group">
                                                         <label className="text-muted">Hospital Name</label>
-                                                        <input type="text" className="form-control"/>
+                                                        <input type="text" value={provider?.provider?.hospital_name} className="form-control"/>
                                                     </div>
                                                     <div className="form-group">
                                                         <h5>Services and Procedures</h5>

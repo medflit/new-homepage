@@ -85,8 +85,8 @@ const Routes = (props) => {
 
 
                 {/* Profile routes */}
-                <Route path="/admin/profile/patient" render={authGuard(Patient)}/>
-                <Route path="/admin/profile/provider" render={authGuard(Provider)}/>
+                <Route path="/admin/profile/patient/:id" render={authGuard(Patient)}/>
+                <Route path="/admin/profile/provider/:id" render={authGuard(Provider)}/>
 
                 {/* Providers routes */}
                 <Route path="/admin/providers/current-transaction" render={authGuard(CurrentTransaction)}/>

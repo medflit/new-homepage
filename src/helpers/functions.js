@@ -52,4 +52,8 @@ export const checkUniCert = (documents) => {
     }
 }
 
+export const fullname = (firstname, lastname) => {
+    return firstname + " " + lastname;
+}
+
 // export default {capitalize, dateFormatting, dateFormat}

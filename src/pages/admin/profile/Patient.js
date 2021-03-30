@@ -1,5 +1,8 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Row, Col, Card, Container, Accordion, Button, Modal } from 'react-bootstrap'
+import config from '../../../api'
+import {capitalize} from '../../../helpers/functions'
+import { useLocation } from 'react-router-dom'
 
 import FeatherIcon from 'feather-icons-react'
 import ProfileImage from '../../../assets/images/customer.png'
@@ -8,6 +11,58 @@ import AuthLayout from '../../../layouts/auth'
 
 function Patient() {
     const [modalShow, setModalShow] = useState(false);
+    const [patient, setPatientProfile] = useState();
+    const [subscription, setSubscription] = useState();
+
+    const location = useLocation();
+
+    console.log("Location: ", location);
+
+    // const url = '/patients/find/';
+    // const { match: { params } } = props;
+
+
+    useEffect(() => {
+        getPatientProfile(getID());  
+        // getID();
+    }, []);
+    const getID = () => {
+        const id = location.state.id;
+
+        console.log("My ID - ", id);
+        return id;
+    }
+
+    const url = '/admin/users/find?id=';
+    // const id = getID();
+    const getPatientProfile = async (id) => {
+        const response = await fetch(`${config.baseUrl}` + url + `${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("access_token"),
+            },
+        });
+
+        const jsonData = await response.json();
+
+        setPatientProfile(jsonData.data);
+        console.log(jsonData)
+    };
+
+    // const activateSub = () => {
+    //     const response = await fetch(`${config.baseUrl}/subscriptions/edit`, {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "Authorization": "Bearer " + localStorage.getItem("access_token"),
+    //         },
+    //     });
+
+    //     const jsonData = await response.json();
+    //     setSubscription(jsonData);
+    //     console.log("Subscription: " + jsonData);
+    // }
 
     const ActivateModal = (props) => {
         return (
@@ -64,8 +119,8 @@ function Patient() {
                                         </Col>
                                         <Col sm={8}>
                                             <div className="page-title m-auto">
-                                                <small className="text-muted">Patient</small>
-                                                <h2 className="text-md text-highlight">Samson Samuels</h2>
+                                                <small className="text-muted">{patient?.profile?.medical_id}</small>
+                                                <h2 className="text-md text-highlight">{patient?.profile?.firstname + " " + patient?.profile?.lastname}</h2>
                                             </div>
                                             <hr/>
                                             <div className="page-title m-auto">
@@ -86,10 +141,19 @@ function Patient() {
                                 <div className="">
                                     <Row>
                                         <Col sm={12}>
-                                            <div className="mb-3">
-                                                <small className="text-muted">You have not subscribed yet. Subscribe now to make unlimited calls to doctors.</small>
-                                            </div>
-                                            <Button variant="primary" onClick={() => setModalShow(true)}>Activate</Button>
+                                            {patient?.subscription?.active === false ?
+                                                <div>
+                                                    <div className="mb-3">
+                                                        <small className="text-muted">You have not subscribed yet. Subscribe now to make unlimited calls to doctors.</small>
+                                                    </div>
+                                                    <Button variant="primary" onClick={() => setModalShow(true)}>Activate</Button>
+                                                </div>
+                                                
+                                                 :  <div className="page-title m-auto">
+                                                        <small className="text-muted">Plan:</small>
+                                                        <h2 className="text-md text-highlight">{patient?.subscription?.plan?.name}</h2>
+                                                    </div>   
+                                            }
                                         </Col>
                                     </Row>
                                 </div>
@@ -128,81 +192,76 @@ function Patient() {
                                             <div className="form-row">
                                                 <div className="form-group col-sm-6">
                                                     <label>Firstname</label>
-                                                    <input type="text" className="form-control" required/>
+                                                    <input type="text" className="form-control" value={patient?.profile?.firstname} required/>
                                                 </div>
                                                 <div className="form-group col-sm-6">
                                                     <label>Lastname</label>
-                                                    <input type="text" className="form-control" required/>
+                                                    <input type="text" className="form-control" value={patient?.profile?.lastname} required/>
                                                 </div>
                                             </div>                                            
                                             <div className="form-row">
                                                 <div className="form-group col-sm-6">
                                                     <label>Email Address</label>
-                                                    <input type="email" className="form-control" required />
+                                                    <input type="email" className="form-control" value={patient?.email} required />
                                                 </div>
                                                 <div className="form-group col-sm-6">
                                                     <label>Username</label>
-                                                    <input type="text" className="form-control" required/>
+                                                    <input type="text" className="form-control" value={patient?.username} required/>
                                                 </div>
                                             </div>
                                             <div className="form-row">
                                                 <div className="form-group col-sm-6">
                                                     <label>Marital Status</label>
                                                     <select className="form-control" data-plugin="select2" data-option="{}" data-minimum-results-for-search="Infinity">
-                                                        <option value="one">First</option>
-                                                        <option value="three">Third</option>
+                                                        <option value={patient?.marital_status}>{patient?.marital_status}</option>
                                                     </select>
                                                 </div>
                                                 <div className="form-group col-sm-6">
                                                     <label>Gender</label>
                                                     <select className="form-control" data-plugin="select2" data-option="{}" data-minimum-results-for-search="Infinity">
-                                                        <option value="one">First</option>
-                                                        <option value="three">Third</option>
+                                                        <option value={patient?.profile?.gender}>{patient?.profile?.gender}</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div className="form-row">
                                                 <div className="form-group col-sm-6">
                                                     <label>Occupation</label>
-                                                    <input type="text" className="form-control" required/>
+                                                    <input type="text" className="form-control" value={patient?.occupation} required/>
                                                 </div>
                                                 <div className="form-group col-sm-6">
                                                     <label>Date of Birth</label>
-                                                    <input type="text" className="form-control" required/>
+                                                    <input type="text" className="form-control" value={patient?.profile?.dob} required/>
                                                 </div>
                                             </div>  
                                             <div className="form-row">
                                                 <div className="form-group col-sm-6">
                                                     <label>Genotype</label>
                                                     <select className="form-control" data-plugin="select2" data-option="{}" data-minimum-results-for-search="Infinity">
-                                                        <option value="one">First</option>
-                                                        <option value="three">Third</option>
+                                                        <option value={patient?.profile?.patient?.genotype}>{patient?.profile?.patient?.genotype}</option>
                                                     </select>
                                                 </div>
                                                 <div className="form-group col-sm-6">
                                                     <label>Blood group</label>
                                                     <select className="form-control" data-plugin="select2" data-option="{}" data-minimum-results-for-search="Infinity">
-                                                        <option value="one">First</option>
-                                                        <option value="three">Third</option>
+                                                        <option value={patient?.profile?.patient?.blood_group}>{patient?.profile?.patient?.blood_group}</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div className="form-row">
                                                 <div className="form-group col-sm-6">
                                                     <label>Telephone</label>
-                                                    <input type="text" className="form-control" placeholder="XXX-XXX-XXXX" required/>
+                                                    <input type="text" className="form-control" value={patient?.phone} required/>
                                                 </div>
                                                 <div className="form-group col-sm-6">
                                                     <label>Select Country</label>
                                                     <select className="form-control" data-plugin="select2" data-option="{}" data-minimum-results-for-search="Infinity">
-                                                        <option value="one">First</option>
-                                                        <option value="three">Third</option>
+                                                        <option value="one">{patient?.profile?.country}</option>
                                                     </select>
                                                 </div>
                                             </div>  
                                             <div className="form-group">
                                                 <label>Address</label>
-                                                <textarea className="form-control" rows="6" data-minwords="6" required placeholder="Type your message"></textarea>
+                                                <textarea className="form-control" rows="6" data-minwords="6" required placeholder="Type your message" value={patient?.addresses[0]?.street + ", " + patient?.profile?.city}>{patient?.addresses[0]?.street + ", " + patient?.profile?.city}</textarea>
                                             </div>
 
                                             
