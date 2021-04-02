@@ -17,6 +17,7 @@ import Patients from '../pages/admin/Patients';
 import Providers from '../pages/admin/Providers';
 import Users from '../pages/admin/Users';
 import Consultations from '../pages/admin/Consultations';
+import Transactions from '../pages/admin/Transactions';
 import ConsultationTransaction from '../pages/admin/ConsultationTransaction';
 import Inbox from '../pages/admin/Inbox';
 import InboxShow from '../pages/admin/inbox/ShowInbox';
@@ -24,6 +25,7 @@ import InboxShow from '../pages/admin/inbox/ShowInbox';
 //import profiles routes
 import Patient from '../pages/admin/profile/Patient'
 import Provider from '../pages/admin/profile/Provider'
+import ConsultationDetails from '../pages/admin/snippets/ConsultationDetails'
 
 //import providers components
 import CurrentTransaction from '../pages/admin/providers/CurrentTransaction'
@@ -78,6 +80,7 @@ const Routes = (props) => {
                 <Route exact path="/admin/providers" render={authGuard(Providers)}/>
                 <Route path="/admin/users" render={authGuard(Users)}/>
                 <Route path="/admin/consultations" render={authGuard(Consultations)}/>
+                <Route path="/admin/transactions" render={authGuard(Transactions)}/>
                 <Route path="/admin/consultation-transaction" render={authGuard(ConsultationTransaction)}/>
                 <Route exact path="/admin/inbox" render={authGuard(Inbox)}/>
                 <Route path="/admin/inbox/show-inbox" render={authGuard(InboxShow)}/>
@@ -87,6 +90,7 @@ const Routes = (props) => {
                 {/* Profile routes */}
                 <Route path="/admin/profile/patient/:id" render={authGuard(Patient)}/>
                 <Route path="/admin/profile/provider/:id" render={authGuard(Provider)}/>
+                <Route path="/admin/snippets/consultation-details/:id" render={authGuard(ConsultationDetails)}/>
 
                 {/* Providers routes */}
                 <Route path="/admin/providers/current-transaction" render={authGuard(CurrentTransaction)}/>

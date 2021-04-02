@@ -126,7 +126,7 @@ function Users() {
                                         { users.map((user, index) => {
                                             // console.log(user); 
                                             return(  
-                                                <tr className="v-middle" key={user.id}>
+                                                <tr className="v-middle" key={user?.id}>
                                                 <td>
                                                     <label className="ui-check m-0 ">
                                                         <input type="checkbox" name="id" value="15"/>
@@ -134,22 +134,22 @@ function Users() {
                                                     </label>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{user.profile.firstname}</div>
+                                                    <div className="item-title text-color">{user?.profile?.firstname}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{user.profile.lastname}</div>
+                                                    <div className="item-title text-color">{user?.profile?.lastname}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{user.profile.medical_id}</div>
+                                                    <div className="item-title text-color">{user?.profile?.medical_id}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{user.email}</div>
+                                                    <div className="item-title text-color">{user?.email}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{user.profile.gender}</div>
+                                                    <div className="item-title text-color">{user?.profile?.gender}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{user.phone}</div>
+                                                    <div className="item-title text-color">{user?.phone}</div>
                                                 </td>
                                                 <td>
                                                     <div className="item-title text-color">{(user.usertype === 2 ? "Patient" : "Provider")}</div> 

@@ -2,7 +2,8 @@ import React from "react";
 import { useState, useEffect } from 'react'
 import config from '../../../api/index'
 
-import { Row, Col, Container, Table, Dropdown, Card } from 'react-bootstrap'
+import { Row, Table, Card } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import { dateFormatting } from '../../../helpers/functions'
 
 import FeatherIcon from 'feather-icons-react'
@@ -131,7 +132,8 @@ const ConsultationLog = () => {
                                             </span>
                                         </td>
                                         <td>
-                                            <a href="#" className="badge badge-secondary badge-md">View</a>
+                                            <Link to={{pathname: `/admin/snippets/consultation-details/${consultation.id}`, state: { "id": consultation.id}}} className="badge badge-secondary badge-md">View</Link>
+                                            {/* <a href="#" className="badge badge-secondary badge-md">View</a> */}
                                         </td>
                                     </tr>
                                     )

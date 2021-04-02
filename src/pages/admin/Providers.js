@@ -199,33 +199,33 @@ function Providers() {
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <div className="item-title text-color ">{provider.profile === null ? "-" : capitalize(provider.profile.firstname + " " + provider.profile.lastname) }</div>                                            
+                                                            <div className="item-title text-color ">{provider.profile === null ? "-" : capitalize(provider?.profile?.firstname + " " + provider?.profile?.lastname) }</div>                                            
                                                         </td>
                                                         <td className="flex">
-                                                            <div className="item-title text-color ">{provider.profile === null ? "-" : provider.provider.profession_label}</div>
+                                                            <div className="item-title text-color ">{provider.profile === null ? "-" : provider?.provider?.profession_label}</div>
                                                         </td>
                                                         <td className="flex">
-                                                            <div className="item-title text-color ">{provider.profile === null ? "-" : provider.provider.hospital_name}</div>
+                                                            <div className="item-title text-color ">{provider.profile === null ? "-" : provider?.provider?.hospital_name}</div>
                                                         </td>
                                                         <td>
                                                             <div className="item-title text-color">
-                                                            {provider.profile === null ? "-" : provider.phone}
+                                                            {provider.profile === null ? "-" : provider?.phone}
                                                             </div>
                                                         </td>
                                                         <td className="flex">
-                                                            <div className="item-title text-color ">{provider.profile === null ? "-" : provider.provider.licenses.id_number}</div>
+                                                            <div className="item-title text-color ">{provider.profile === null ? "-" : provider?.provider?.licenses?.id_number}</div>
                                                         </td>
                                                         
                                                         <td className="flex">
                                                             <div className="item-title text-color ">
-                                                            {provider.profile === null ? "-" : <a href={checkResume(provider.provider.uploaded_documents).url}>View</a>}
+                                                            {provider.profile === null ? "-" : <a href={checkResume(provider?.provider?.uploaded_documents).url}>View</a>}
                                                             </div>
                                                         </td>
                                                         <td className="flex">
-                                                            <div className=" item-title text-color ">{provider.profile === null ? "-" : <a href={checkMedicalLicense(provider.provider.uploaded_documents).url}>View</a>}</div>
+                                                            <div className=" item-title text-color ">{provider.profile === null ? "-" : <a href={checkMedicalLicense(provider?.provider?.uploaded_documents).url}>View</a>}</div>
                                                         </td>
                                                         <td className="flex">
-                                                            <div className=" item-title text-color ">{provider.profile === null ? "-" : <a href={checkUniCert(provider.provider.uploaded_documents).url}>View</a>}</div>
+                                                            <div className=" item-title text-color ">{provider.profile === null ? "-" : <a href={checkUniCert(provider?.provider?.uploaded_documents).url}>View</a>}</div>
                                                         </td>
                                                         <td>
                                                             {provider.publish ? <span className="badge badge-success">

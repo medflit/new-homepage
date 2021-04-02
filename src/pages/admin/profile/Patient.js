@@ -33,9 +33,10 @@ function Patient() {
         return id;
     }
 
-    const url = '/admin/users/find?id=';
+    
     // const id = getID();
     const getPatientProfile = async (id) => {
+        const url = '/admin/users/find?id=';
         const response = await fetch(`${config.baseUrl}` + url + `${id}`, {
             method: "GET",
             headers: {

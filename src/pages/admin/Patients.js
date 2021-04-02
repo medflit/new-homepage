@@ -127,7 +127,7 @@ function Patients() {
                                 { patients.map((patient, index) => {
                                     // console.log(patient); 
                                       return(  
-                                        <tr className="v-middle" key={patient.id}>
+                                        <tr className="v-middle" key={patient?.id}>
                                         <td>
                                             <label className="ui-check m-0 ">
                                                 <input type="checkbox" name="id" value="15"/>
@@ -135,25 +135,25 @@ function Patients() {
                                             </label>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{patient.profile.firstname}</div>
+                                            <div className="item-title text-color">{patient?.profile?.firstname}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{patient.profile.lastname}</div>
+                                            <div className="item-title text-color">{patient?.profile?.lastname}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{patient.profile.medical_id}</div>
+                                            <div className="item-title text-color">{patient?.profile?.medical_id}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{patient.subscription.active ? <span class='badge badge-success'>Subscribed</span> : <span class='badge badge-secondary'>Not subscribed</span>}</div>
+                                            <div className="item-title text-color">{patient?.subscription?.active ? <span class='badge badge-success'>Subscribed</span> : <span class='badge badge-secondary'>Not subscribed</span>}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{patient.subscription.expires_at ? patient.subscription.expires_at : "Not Subscribed"}</div>
+                                            <div className="item-title text-color">{patient?.subscription?.expires_at ? patient.subscription.expires_at : "Not Subscribed"}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{dateFormatting(patient.profile.created_at)}</div>
+                                            <div className="item-title text-color">{dateFormatting(patient?.profile?.created_at)}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{patient.subscription.active ? <span class='badge badge-success'>Active</span> : <span class='badge badge-secondary'>Not Active</span> }</div> 
+                                            <div className="item-title text-color">{patient?.subscription?.active ? <span class='badge badge-success'>Active</span> : <span class='badge badge-secondary'>Not Active</span> }</div> 
                                         </td>
                                         <td>
                                             <Dropdown>

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { Row, Col, Card, Container, Nav, Accordion, Button, Table } from 'react-bootstrap'
+import { Row, Col, Card, Container, Accordion, Button, Table } from 'react-bootstrap'
 import config from '../../../api'
 
 import { useLocation, useRouteMatch } from 'react-router-dom'
@@ -566,7 +566,7 @@ function Provider() {
                                                         <button type="submit" className="btn btn-primary">Update Profile</button>
                                                     </div>
                                                 </div>
-                                                <div className="row py-3">
+                                                {/* <div className="row py-3">
                                                     <div className="col-6">
                                                         <button type="button" className="btn btn-white button-next">
                                                             <FeatherIcon icon="chevron-left" size="18"/>
@@ -585,7 +585,7 @@ function Provider() {
                                                             </button>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> */}
                                             </div>
                                         </div>
                                     </form>    

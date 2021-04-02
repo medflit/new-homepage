@@ -177,13 +177,13 @@ const Sidebar = () => {
                                     <span className="nav-icon "><FeatherIcon icon="mail" size="18"/></span>
                                     <span className="nav-text">Bulk Emails</span>
                                 </Link>
-                            </li>
+                            </li> */}
                             <li>
-                                <Link to="/">
+                                <Link to="/admin/transactions">
                                     <span className="nav-icon "><FeatherIcon icon="menu" size="18"/></span>
                                     <span className="nav-text">Transactions</span>
                                 </Link>
-                            </li> */}
+                            </li>
                             {/* <li>
                                 <Link to="/">
                                     <span className="nav-icon "><FeatherIcon icon="message-square" size="18"/></span>
