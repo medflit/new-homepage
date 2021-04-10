@@ -3,7 +3,7 @@ import {Table, Col, Row, Container, Card, Dropdown} from 'react-bootstrap'
 import { Link, useLocation } from "react-router-dom";
 import config from '../../api/index'
 
-import {dateFormatting, formatNumber} from '../../helpers/functions'
+import {formatNumber, getPaymentType} from '../../helpers/functions'
 
 import FeatherIcon from 'feather-icons-react'
 
@@ -15,14 +15,14 @@ const Transactions = () => {
     const [total, setTotal] = useState();
     const [perPage, setPerPage] = useState();
     const [currentPage, setCurrentPage] = useState();
-    const [name, getName] = useState();
-
-    // const location = useLocation();
-    // console.log(location);
+    const [name, setName] = useState();
+    // const [id, getID] = useState();
 
     useEffect(() => {
         getAllTransactions();
-        // getUsername();
+        getUsername(25);
+        // getIDS();
+        // ggg();
     }, []);
 
     const getAllTransactions = async (pageNumber) => {
@@ -38,11 +38,59 @@ const Transactions = () => {
         const jsonData = await response.json();
         console.log(jsonData.data.data);
         setTransaction(jsonData.data.data);
+
         setTotal(jsonData.data.total);
         setPerPage(jsonData.data.per_page);
         setCurrentPage(jsonData.data.current_page);
+
     };
 
+    const getID = async () => {
+        await transactions.map((transaction) => {
+            // console.log(transaction);
+            let userID;
+            userID = transaction.user_id;
+            console.log(userID);
+        })
+    }
+
+
+    // const ggg = async (pageNumber) => {
+    //     const url1 = '/payment/all';
+    //     const url2 = '/admin/users/find?id=';
+    //     Promise.all([
+    //         fetch(`${config.baseUrl}` + url1 + `?page=${pageNumber}`, {
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //                 "Authorization": "Bearer " + localStorage.getItem("access_token"),
+    //             }
+    //          }),
+    //          fetch(`${config.baseUrl}/admin/users/find?id=` + `${id}`, {
+    //              headers: {
+    //                  "Content-Type": "application/json",
+    //                  "Authorization": "Bearer " + localStorage.getItem("access_token"),
+    //              }
+    //          }),
+    //      ]).then((responses) => {
+    //          // Get a JSON object from each of the responses
+    //          return Promise.all(responses.map(function (response) {
+    //              return response.json();
+    //          }));
+    //      }).then((res) => {
+    //         setTransaction(res[0].data.data);
+    //         setTotal(res[0].data.total);
+    //         setPerPage(res[0].data.per_page);
+    //         setCurrentPage(res[0].data.current_page);
+
+    //         // const id = getIDS();
+
+    //         setName(res[1].data);
+    //         console.log(res[1].data)
+    //      }).catch((error) => {
+    //          console.log(error);
+    //      })
+    // };
+    
     const getUsername = async (id) => {
         const url = '/admin/users/find?id=';
         const response = await fetch(`${config.baseUrl}` + url + `${id}`, {
@@ -51,28 +99,13 @@ const Transactions = () => {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("access_token"),
             },
-        })
-        
-        // .then(res => {
-        //     console.log("res: ", res.json())
-
-        //     return res.json();
-        // }).then(data => {
-        //     console.log(data);
-
-        //     return getName(data.data.profile.firstname);
-
-        //     // let firstname = response?.data?.profile?.firstname;
-        //     // let lastname = response?.data?.profile?.lastname;
-        //     // return firstname + " " + lastname;
-        // })
+        });
 
         const jsonData = await response.json();
-        console.log(jsonData.data)
-        getName(jsonData.data);
-        let firstname = jsonData?.data?.profile?.firstname;
-        let lastname = jsonData?.data?.profile?.lastname;
-        return firstname + " " + lastname;
+
+        // transactions.map(())
+
+        setName(jsonData.data);
     }
 
     const pageNumbers = [];
@@ -143,10 +176,11 @@ const Transactions = () => {
                                 <thead>
                                     <tr>
                                         <th className="text-muted">#</th>
-                                        <th className="text-muted">Reference</th>
                                         <th className="text-muted">User</th>
+                                        <th className="text-muted">ID No</th>
                                         <th className="text-muted">Payment Type</th>
                                         <th className="text-muted">Amount</th>
+                                        <th className="text-muted">Reason</th>
                                         <th className="text-muted">Status</th>
                                         <th className="text-muted">Date</th>
                                     </tr>
@@ -158,19 +192,22 @@ const Transactions = () => {
                                             <tr className="v-middle" >
                                             
                                                 <td>
-                                                    <div className="item-title text-color">{transaction?.id}</div>
+                                                    <div className="item-title text-color">{index + 1}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{transaction?.reference}</div>
+                                                    <div className="item-title text-color">{name?.profile?.firstname}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color"></div>
+                                                    <div className="item-title text-color">{name?.profile?.medical_id}</div>
                                                 </td>
                                                 <td>
                                                     <div className="item-title text-color">{transaction?.provider?.channel === "card" ? <span className="badge badge-success badge-sm">Card</span> : <span className="badge badge-warning badge-sm">Transfer</span>}</div>
                                                 </td>
                                                 <td>
                                                     <div className="item-title text-color">N{formatNumber(transaction?.provider?.amount)}</div>
+                                                </td>
+                                                <td>
+                                                    <div className="item-title text-color">{getPaymentType(transaction?.payable_type)}</div>
                                                 </td>
                                                 <td>
                                                     <div className="item-title text-color">

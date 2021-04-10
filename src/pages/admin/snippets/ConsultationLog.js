@@ -94,8 +94,10 @@ const ConsultationLog = () => {
                                     <tr>
                                         <th style={{width: "20px"}}>S/N
                                         </th>
+                                        <th className="text-muted">Consult. ID</th>
                                         <th className="text-muted">Patient</th>
                                         <th className="text-muted">Unique ID.</th>
+                                        <th className="text-muted">Email</th>
                                         <th className="text-muted">Doctor</th>
                                         <th className="text-muted">Diagnosis</th>
                                         <th className="text-muted"><span>Date</span></th>
@@ -112,18 +114,24 @@ const ConsultationLog = () => {
                                             {index + 1}
                                         </td>
                                         <td>
-                                            <div className="item-title text-color ">{consultation.patient.firstname + " " + consultation.patient.lastname}</div>                                            
+                                            {consultation?.id}
                                         </td>
                                         <td>
-                                            <div className="item-title text-color ">{consultation.patient.medical_id}</div>                                            
+                                            <div className="item-title text-color ">{consultation?.patient?.firstname + " " + consultation?.patient?.lastname}</div>                                            
                                         </td>
                                         <td>
-                                            <div className="item-title text-color ">{consultation.provider.firstname + " " + consultation.provider.lastname}</div>
+                                            <div className="item-title text-color ">{consultation?.patient?.medical_id}</div>                                            
+                                        </td>
+                                        <td>
+                                            <div className="item-title text-color ">{consultation?.patient?.email}</div>                                            
+                                        </td>
+                                        <td>
+                                            <div className="item-title text-color ">{consultation?.provider?.firstname + " " + consultation?.provider?.lastname}</div>
                                             
                                         </td>
                                         <td>
                                             <div className="item-title text-color h-1x">
-                                                {consultation.dianosis}
+                                                {consultation?.dianosis}
                                             </div>
                                         </td>
                                         <td>
@@ -132,7 +140,7 @@ const ConsultationLog = () => {
                                             </span>
                                         </td>
                                         <td>
-                                            <Link to={{pathname: `/admin/snippets/consultation-details/${consultation.id}`, state: { "id": consultation.id}}} className="badge badge-secondary badge-md">View</Link>
+                                            <Link to={{pathname: `/admin/consultation-details/${consultation.id}`, state: { "patient_id": consultation?.patient?.user_id, "id": consultation?.id}}} className="badge badge-secondary badge-md">View</Link>
                                             {/* <a href="#" className="badge badge-secondary badge-md">View</a> */}
                                         </td>
                                     </tr>

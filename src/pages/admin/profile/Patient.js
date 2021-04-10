@@ -26,6 +26,7 @@ function Patient() {
         getPatientProfile(getID());  
         // getID();
     }, []);
+    
     const getID = () => {
         const id = location.state.id;
 

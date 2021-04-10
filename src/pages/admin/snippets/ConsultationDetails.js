@@ -12,7 +12,7 @@ const ConsultationDetails = () => {
 
     const location = useLocation();
 
-    console.log("Location: ", location.state.id);
+    console.log("Location: ", location.state.patient_id);
 
     // const url = '/patients/find/';
     // const { match: { params } } = props;
@@ -22,14 +22,17 @@ const ConsultationDetails = () => {
         getConsultation(getID());  
         // getID();
     }, []);
-    const getID = () => {
-        const id = location.state.id;
 
+    const id = location.state.patient_id;
+    const id2 = location.state.id;
+
+    const getID = () => {
         console.log("My ID - ", id);
+        console.log("My ID2 - ", id2);
         return id;
     }
 
-    const url = '/reports/all-consultations?id=';
+    const url = '/reports/consultations?user_id=';
     // const id = getID();
     const getConsultation = async (id) => {
         const response = await fetch(`${config.baseUrl}` + url + `${id}`, {
@@ -42,8 +45,8 @@ const ConsultationDetails = () => {
 
         const jsonData = await response.json();
 
-        setConsultation(jsonData.data.data);
-        console.log(jsonData.data.data[0])
+        setConsultation(jsonData.data.data[0]);
+        // console.log(jsonData.data.data)
     };
     return (
         <AuthLayout>
@@ -119,17 +122,21 @@ const ConsultationDetails = () => {
                                             <div className="tab-content p-3">
                                                 <div className="tab-pane active" id="tab1">
                                                     <div className="form-row">
+                                                        {/* {consultation.map((consult) => {
+                                                            // console.log(consult);
+                                                            consult.id === id2 ? "" : ""
+                                                        })} */}
                                                         <div className="form-group col-sm-4">
                                                             <label>Patient's complain</label>
-                                                            <textarea className="form-control" rows="6" data-minwords="6" required></textarea>
+                                                            <textarea className="form-control" value={consultation?.reason_for_consult} rows="6" data-minwords="6" required></textarea>
                                                         </div>
                                                         <div className="form-group col-sm-4">
                                                             <label>Observations</label>
-                                                            <textarea className="form-control" rows="6" data-minwords="6" required></textarea>
+                                                            <textarea className="form-control" value={consultation?.observation} rows="6" data-minwords="6" required></textarea>
                                                         </div>
                                                         <div className="form-group col-sm-4">
                                                             <label>Conclusions</label>
-                                                            <textarea className="form-control" rows="6" data-minwords="6" required></textarea>
+                                                            <textarea className="form-control" value={consultation?.provider_advice} rows="6" data-minwords="6" required></textarea>
                                                         </div>
                                                     </div>
                                                     <div className="form-row">
@@ -137,24 +144,44 @@ const ConsultationDetails = () => {
                                                         <label>What kind of issue is the patient experiencing?</label> <br/>
 
                                                         </div>
-                                                        <div class="form-radio mr-2">
-                                                            <input class="form-radio-input" name="radio1" type="radio" value="" id="defaultRadio1" checked/>
-                                                            <label class="form-radio-label" for="defaultRadio1">
-                                                                Medical &nbsp;&nbsp;
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-radio mr-2">
-                                                            <input class="form-radio-input" name="radio1" type="radio" value="" id="defaultRadio2"/>
-                                                            <label class="form-radio-label" for="defaultRadio2">
-                                                                Mental &nbsp;&nbsp;
-                                                            </label>
-                                                        </div>
+                                                        { consultation?.issue === "medical" ? 
+                                                            <div class="form-radio mr-2">
+                                                                <input class="form-radio-input" name="radio1" type="radio" value="" id="defaultRadio1" checked/>
+                                                                <label class="form-radio-label" for="defaultRadio1">
+                                                                    Medical &nbsp;&nbsp;
+                                                                </label>
+                                                            </div>
+                                                        : 
+                                                            <div class="form-radio mr-2">
+                                                                <input class="form-radio-input" name="radio1" type="radio" value="" id="defaultRadio1" />
+                                                                <label class="form-radio-label" for="defaultRadio1">
+                                                                    Medical &nbsp;&nbsp;
+                                                                </label>
+                                                            </div>
+                                                        }
+
+                                                        { consultation?.issue === "mental" ? 
+                                                            <div class="form-radio mr-2">
+                                                                <input class="form-radio-input" name="radio1" type="radio" value="" id="defaultRadio1" checked/>
+                                                                <label class="form-radio-label" for="defaultRadio1">
+                                                                    Mental &nbsp;&nbsp;
+                                                                </label>
+                                                            </div>
+                                                        : 
+                                                            <div class="form-radio mr-2">
+                                                                <input class="form-radio-input" name="radio1" type="radio" value="" id="defaultRadio1" />
+                                                                <label class="form-radio-label" for="defaultRadio1">
+                                                                    Mental &nbsp;&nbsp;
+                                                                </label>
+                                                            </div>
+                                                        }
+                                                        
                                                     </div>  
                                                     <hr/>
                                                     <div className="form-row">
                                                         <div className="form-group col-sm-8">
                                                             <label>Diagnosis</label>
-                                                            <input type="text" className="form-control" required />
+                                                            <input type="text" className="form-control" value={consultation?.dianosis} required />
                                                         </div>
                                                     </div>                                                  
                                                 </div>

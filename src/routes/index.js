@@ -1,7 +1,7 @@
 import React from 'react';
 
 // import router components
-import { BrowserRouter as Router,  Route, Switch, Redirect, HashRouter } from 'react-router-dom';
+import { BrowserRouter as Router,  Route, Switch, Redirect } from 'react-router-dom';
 
 // import pages
 import Home from '../pages/Home';
@@ -90,7 +90,7 @@ const Routes = (props) => {
                 {/* Profile routes */}
                 <Route path="/admin/profile/patient/:id" render={authGuard(Patient)}/>
                 <Route path="/admin/profile/provider/:id" render={authGuard(Provider)}/>
-                <Route path="/admin/snippets/consultation-details/:id" render={authGuard(ConsultationDetails)}/>
+                <Route path="/admin/consultation-details/:id" render={authGuard(ConsultationDetails)}/>
 
                 {/* Providers routes */}
                 <Route path="/admin/providers/current-transaction" render={authGuard(CurrentTransaction)}/>
