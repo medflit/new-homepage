@@ -1,21 +1,20 @@
 import React, {useEffect, useState} from 'react'
-import { Row, Col, Card, Container, Accordion, Button, Modal } from 'react-bootstrap'
+import { Row, Col, Card, Container, Accordion, Button, Modal, Form } from 'react-bootstrap'
 import config from '../../../api'
-import {capitalize} from '../../../helpers/functions'
 import { useLocation } from 'react-router-dom'
+
+import { ToastContainer, toast } from 'react-toastify';
 
 import FeatherIcon from 'feather-icons-react'
 import ProfileImage from '../../../assets/images/customer.png'
 
 import AuthLayout from '../../../layouts/auth'
 
-import { ToastContainer, toast } from 'react-toastify';
-
-
 function Patient() {
     const [modalShow, setModalShow] = useState(false);
     const [patient, setPatientProfile] = useState();
-    const [subscription, setSubscription] = useState();
+    // const [subscription, setSubscription] = useState();
+    const [amount, setAmount] = useState();
 
     const location = useLocation();
 
@@ -51,14 +50,12 @@ function Patient() {
         console.log(jsonData)
     };
 
-    const getBalance = () => {
-
-    }     
+    let profileID = patient?.profile?.id;
 
     const activateSub = async () => {
         const data = {
             "paid_at": "29-03-2021",
-            // "profile_id": 138,
+            "profile_id": profileID,
             "channel": "Transfer",
             "description": "Subscription",
             "amount": 1000,
@@ -77,8 +74,9 @@ function Patient() {
             body: JSON.stringify(data)
         });
 
-        const jsonData = await response.json();
-        setSubscription(jsonData)
+        const jsonData = await response.json()
+        // console.log(jsonData);
+        // setSubscription(jsonData)
 
         .then(({error, response}) => {            
             !error &&
@@ -87,7 +85,7 @@ function Patient() {
                 });
                 setTimeout(() => {
                     window.location.reload();
-                }, 3000);
+                }, 1000);
 
             error && 
             toast.error("Error activating subscription!", {
@@ -99,13 +97,13 @@ function Patient() {
     const activateTreatment = async () => {
         const data = {
             "paid_at": "29-03-2021",
-            "profile_id": 138,
+            "profile_id": profileID,
             "channel": "Transfer",
             "description": "Treatment",
-            "amount": 2000,
+            "amount": 1000,
             "payable_id": 1,
             "payable_type": "App\\Models\\Treatment",
-            "payment_for": "treatment",
+            "payment_for": "Treatment",
             "duration_id": 1,
             "treatment_id": 1
         }
@@ -118,8 +116,7 @@ function Patient() {
             body: JSON.stringify(data)
         });
 
-        const jsonData = await response.json();
-        setSubscription(jsonData)
+        const jsonData = await response.json()
 
         .then(({error, response}) => {            
             !error &&
@@ -128,7 +125,7 @@ function Patient() {
                 });
                 setTimeout(() => {
                     window.location.reload();
-                }, 3000);
+                }, 1000);
 
             error && 
             toast.error("Error activating subscription!", {
@@ -137,35 +134,79 @@ function Patient() {
         });
     }
 
-    const ActivateModal = (props) => {
-        return (
-          <Modal
-            {...props}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-          >
-            <Modal.Body className="p-5">
-                <Row className="text-center">
-                    <Col>
-                        <h6>Activate Subscription</h6>
-                        <Button variant="info" onClick={()=> activateSub()}>Subscription plan</Button>
-                    </Col>
-                    <Col>
-                        <h6>Activate Treatment</h6>
-                        <Button variant="secondary">Treatment plan</Button>
-                    </Col>
-                </Row>
-            </Modal.Body>
-          </Modal>
-        );
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const data = {
+            "paid_at": "29-03-2021",
+            "profile_id": profileID,
+            "channel": "Transfer",
+            "description": "Treatment",
+            "amount": amount,
+            "payable_id": 1,
+            "payable_type": "App\\Models\\Treatment",
+            "payment_for": "Treatment",
+            "duration_id": 1,
+            "treatment_id": 1
+        }
+        const response = await fetch(`${config.baseUrl}/admin/banks`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("access_token"),
+            },
+            body: JSON.stringify(data)
+        });
+
+        const jsonData = await response.json()
+
+        .then(({error, response}) => {            
+            !error &&
+                toast.success("Treatment plan activated successfully!", {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+
+            error && 
+            toast.error("Error activating treatment plan!", {
+                position: toast.POSITION.TOP_RIGHT
+            });
+        });
     }
+
     return (
         <AuthLayout>
-            <ActivateModal
+            <Modal
+                size="sm"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
                 show={modalShow}
                 onHide={() => setModalShow(false)}
-            />
+                >
+                {/* <Modal.Header closeButton>
+                </Modal.Header> */}
+                <Modal.Body>
+                    <Form className="text-center" onSubmit={handleSubmit}>
+                        <div className="form-row">
+                            <div className="form-group col-md-12">
+                                <label>Enter Amount</label>
+                                <input type="text" className="form-control" onChange={e => setAmount(e.target.value)}  required/>
+                            </div>
+                        </div>
+                        <Row className="justify-center">
+                            <div className="mr-2">
+                                <Button size="xs" variant="outline-primary" onClick={() => setModalShow(false)}>Cancel</Button>
+                            </div>
+                            <div>
+                                <Button size="xs" type="submit" variant="primary">Activate</Button>
+                            </div>
+                        </Row>
+                    </Form>
+                </Modal.Body>
+            </Modal>
+
+            <ToastContainer />
             <div className="page-hero page-container " id="page-hero">
                 <div className="padding d-flex">
                     <div className="page-title">
@@ -219,7 +260,7 @@ function Patient() {
                                                     <div className="mb-3">
                                                         <small className="text-muted">You have not subscribed yet. Subscribe now to make unlimited calls to doctors.</small>
                                                     </div>
-                                                    <Button variant="primary" onClick={() => setModalShow(true)}>Activate</Button>
+                                                    <Button variant="primary" size="xs"  onClick={()=> activateSub()}>Activate</Button>
                                                 </div>
                                                 
                                                  :  <div className="page-title m-auto">
@@ -231,6 +272,42 @@ function Patient() {
                                     </Row>
                                 </div>
                             </Card.Body>
+                        </Card>
+                        <Card>
+                            <Card.Header>
+                                Treatment Plans
+                            </Card.Header>
+                            <Card.Body>
+                                <div className="">
+                                    <Row>
+                                        <Col sm={12}>
+                                            { patient?.treatmentPlans?.total === 0 ?
+                                                <div>
+                                                    <div className="mb-3">
+                                                        <small className="text-muted">You do not have an active treatment plan.</small>
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                                :  
+                                                <div className="page-title m-auto">
+                                                    <small className="text-muted">Plans:</small>
+                                                    { patient?.treatmentPlans?.data.map((plan, index) => {
+                                                        return (
+                                                            
+                                                            <li className="text-sm text-highlight">{plan?.treatmentPlan?.name}</li>
+                                                        )
+                                                    }) }
+                                                    {/* <h4 className="text-md text-highlight">{patient?.treatmentPlans?.data[0]?.treatmentPlan?.name}</h4> */}
+                                                </div>   
+                                            }
+                                        </Col>
+                                    </Row>
+                                </div>
+                            </Card.Body>
+                            <Card.Footer>
+                                <Button variant="primary" size="xs" onClick={() => setModalShow(true)}>Activate Treatment</Button>
+                            </Card.Footer>
                         </Card>
                     </Col>
                     <Col md={8} className="order-md-1">

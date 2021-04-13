@@ -47,11 +47,12 @@ const ConsultationDetails = () => {
 
         const jsonData = await response.json();
 
+        console.log(jsonData.data)
         setConsultation(jsonData.data.consultations.data);
         setPrescription(jsonData.data.prescriptions.data);
         console.log(jsonData.data.prescriptions.data);
         setLabTest(jsonData.data.labTests.data);
-        // console.log(jsonData.data)
+        console.log(jsonData.data.labTests.data)
     };
     return (
         <AuthLayout>
@@ -205,22 +206,29 @@ const ConsultationDetails = () => {
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <tr className=" v-middle" dataId="15">
-                                                                        <td>
-                                                                            1
-                                                                        </td>
-                                                                        <td>
-                                                                            <div className="item-title text-color ">
-                                                                                <input type="text" className="form-control" placeholder=""/>
-                                                                            </div>                                            
-                                                                        </td>
-                                                                        <td className="flex">
-                                                                            <div className=" "><input type="text" className="form-control" placeholder=""/></div>
-                                                                        </td>
-                                                                        <td>
-                                                                            
-                                                                        </td>
-                                                                    </tr>
+
+                                                                    { labTest && labTest.map((test, index) => {
+
+                                                                        return (
+                                                                            <tr className=" v-middle" dataId="15">
+                                                                                <td>
+                                                                                    {index + 1}
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div className="item-title text-color ">
+                                                                                        <input type="text" className="form-control" value={test?.test_name} placeholder=""/>
+                                                                                    </div>                                            
+                                                                                </td>
+                                                                                <td className="flex">
+                                                                                    <div className=" "><input type="text" className="form-control" value={test.instruction} placeholder=""/></div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    
+                                                                                </td>
+                                                                            </tr>
+                                                                        )
+                                                                    }) }
+                                                                    
                                                                 </tbody>
                                                             </Table>
                                                         </div>

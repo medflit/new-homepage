@@ -436,6 +436,10 @@ select {
 
 /* Forms */
 
+.justify-center {
+  justify-content: center;
+}
+
 .bordered {
   border: 1px solid #cdcdcd;
   border-radius: 10px;
