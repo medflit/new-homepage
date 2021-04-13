@@ -179,10 +179,10 @@ const Sidebar = () => {
                                 </Link>
                             </li> */}
                             <li>
-                                <Link to="/admin/transactions">
+                                <a href="/admin/transactions">
                                     <span className="nav-icon "><FeatherIcon icon="menu" size="18"/></span>
                                     <span className="nav-text">Transactions</span>
-                                </Link>
+                                </a>
                             </li>
                             {/* <li>
                                 <Link to="/">

@@ -20,7 +20,7 @@ const Transactions = () => {
 
     useEffect(() => {
         getAllTransactions();
-        getUsername(25);
+        // getUsername(25);
         // getIDS();
         // ggg();
     }, []);
@@ -91,21 +91,25 @@ const Transactions = () => {
     //      })
     // };
     
-    const getUsername = async (id) => {
+    const getUsername = (id) => {
         const url = '/admin/users/find?id=';
-        const response = await fetch(`${config.baseUrl}` + url + `${id}`, {
+        fetch(`${config.baseUrl}` + url + `${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("access_token"),
             },
-        });
+        }).then((res) => {
+            return res.json();
+        }).then((data) => {
+            console.log(data.data.firstname);
+            return data.data.usertype;
+        })
 
-        const jsonData = await response.json();
 
-        // transactions.map(())
-
-        setName(jsonData.data);
+        // console.log(jsonData.data.profile?.);
+        
+        // return jsonData.data.profile?.firstname;
     }
 
     const pageNumbers = [];
@@ -187,6 +191,16 @@ const Transactions = () => {
                                 </thead>
                                 <tbody>
                                     { transactions && transactions.map((transaction, index) => {
+                                        // let name = "Fish";
+
+                                        // transactions[index].name = getUsername(transaction?.user_id);
+                                        // getUsername(transaction?.user_id).then((user) => {
+                                        //     console.log(user);
+                                        //     name = user;
+                                        // });
+                                        // console.log(name);
+
+                                        // console.log(transaction);
                                         // console.log(transaction);
                                         return (
                                             <tr className="v-middle" >
@@ -195,10 +209,10 @@ const Transactions = () => {
                                                     <div className="item-title text-color">{index + 1}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{name?.profile?.firstname}</div>
+                                                    <div className="item-title text-color">Name: </div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{name?.profile?.medical_id}</div>
+                                                    <div className="item-title text-color"></div>
                                                 </td>
                                                 <td>
                                                     <div className="item-title text-color">{transaction?.provider?.channel === "card" ? <span className="badge badge-success badge-sm">Card</span> : <span className="badge badge-warning badge-sm">Transfer</span>}</div>

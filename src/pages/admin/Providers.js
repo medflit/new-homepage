@@ -5,7 +5,6 @@ import config from '../../api/index'
 import { Link, useHistory } from "react-router-dom";
 
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import { capitalize, checkResume, checkMedicalLicense, checkUniCert } from '../../helpers/functions'
 
@@ -54,32 +53,32 @@ function Providers() {
         });
     };
 
-    const unverify = async (email) => {
-        const response = await fetch(`${config.baseUrl}` + "/admin/users/publish"  + `?email=${email}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("access_token"),
-            },
-        })
+    // const unverify = async (email) => {
+    //     const response = await fetch(`${config.baseUrl}` + "/admin/users/publish"  + `?email=${email}`, {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "Authorization": "Bearer " + localStorage.getItem("access_token"),
+    //         },
+    //     })
 
-        const jsonData = await response.json()
+    //     const jsonData = await response.json()
        
-        .then(({error, response}) => {            
-            !error &&
-                toast.success("User unverified successfully!", {
-                    position: toast.POSITION.TOP_RIGHT
-                });
-                setTimeout(() => {
-                    window.location.reload();
-                }, 3000);
+    //     .then(({error, response}) => {            
+    //         !error &&
+    //             toast.success("User unverified successfully!", {
+    //                 position: toast.POSITION.TOP_RIGHT
+    //             });
+    //             setTimeout(() => {
+    //                 window.location.reload();
+    //             }, 3000);
 
-            error && 
-            toast.error("Cannot unverify user!", {
-                position: toast.POSITION.TOP_RIGHT
-            });
-        });
-    };
+    //         error && 
+    //         toast.error("Cannot unverify user!", {
+    //             position: toast.POSITION.TOP_RIGHT
+    //         });
+    //     });
+    // };
 
     const url = '/providers';
 

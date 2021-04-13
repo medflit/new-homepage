@@ -9,6 +9,8 @@ import FeatherIcon from 'feather-icons-react'
 
 const ConsultationDetails = () => {
     const [consultation, setConsultation] = useState();
+    const [prescription, setPrescription] = useState();
+    const [labTest, setLabTest] = useState();
 
     const location = useLocation();
 
@@ -32,7 +34,7 @@ const ConsultationDetails = () => {
         return id;
     }
 
-    const url = '/reports/consultations?user_id=';
+    const url = '/reports/user-report?user_id=';
     // const id = getID();
     const getConsultation = async (id) => {
         const response = await fetch(`${config.baseUrl}` + url + `${id}`, {
@@ -45,8 +47,11 @@ const ConsultationDetails = () => {
 
         const jsonData = await response.json();
 
-        setConsultation(jsonData.data.data[0]);
-        // console.log(jsonData.data.data)
+        setConsultation(jsonData.data.consultations.data);
+        setPrescription(jsonData.data.prescriptions.data);
+        console.log(jsonData.data.prescriptions.data);
+        setLabTest(jsonData.data.labTests.data);
+        // console.log(jsonData.data)
     };
     return (
         <AuthLayout>
@@ -106,7 +111,7 @@ const ConsultationDetails = () => {
                                                     <a className="nav-link text-center" href="#tab2" data-toggle="tab">
                                                         <span className="w-32 d-inline-flex align-items-center justify-content-center circle bg-light active-bg-success">2</span>
                                                         <div className="mt-2">
-                                                            <div className="text-muted">Laboratory</div>
+                                                            <div className="text-muted">Prescription</div>
                                                         </div>
                                                     </a>
                                                 </li>
@@ -114,7 +119,7 @@ const ConsultationDetails = () => {
                                                     <a className="nav-link text-center" href="#tab3" data-toggle="tab">
                                                         <span className="w-32 d-inline-flex align-items-center justify-content-center circle bg-light active-bg-success">3</span>
                                                         <div className="mt-2">
-                                                            <div className="text-muted">Prescription</div>
+                                                            <div className="text-muted">Laboratory</div>
                                                         </div>
                                                     </a>
                                                 </li>
@@ -128,15 +133,15 @@ const ConsultationDetails = () => {
                                                         })} */}
                                                         <div className="form-group col-sm-4">
                                                             <label>Patient's complain</label>
-                                                            <textarea className="form-control" value={consultation?.reason_for_consult} rows="6" data-minwords="6" required></textarea>
+                                                            <textarea className="form-control" value={consultation && consultation[0]?.reason_for_consult} rows="6" data-minwords="6" required></textarea>
                                                         </div>
                                                         <div className="form-group col-sm-4">
                                                             <label>Observations</label>
-                                                            <textarea className="form-control" value={consultation?.observation} rows="6" data-minwords="6" required></textarea>
+                                                            <textarea className="form-control" value={consultation && consultation[0]?.observation} rows="6" data-minwords="6" required></textarea>
                                                         </div>
                                                         <div className="form-group col-sm-4">
                                                             <label>Conclusions</label>
-                                                            <textarea className="form-control" value={consultation?.provider_advice} rows="6" data-minwords="6" required></textarea>
+                                                            <textarea className="form-control" value={consultation && consultation[0]?.provider_advice} rows="6" data-minwords="6" required></textarea>
                                                         </div>
                                                     </div>
                                                     <div className="form-row">
@@ -144,7 +149,7 @@ const ConsultationDetails = () => {
                                                         <label>What kind of issue is the patient experiencing?</label> <br/>
 
                                                         </div>
-                                                        { consultation?.issue === "medical" ? 
+                                                        { consultation && consultation[0]?.issue === "medical" ? 
                                                             <div class="form-radio mr-2">
                                                                 <input class="form-radio-input" name="radio1" type="radio" value="" id="defaultRadio1" checked/>
                                                                 <label class="form-radio-label" for="defaultRadio1">
@@ -160,7 +165,7 @@ const ConsultationDetails = () => {
                                                             </div>
                                                         }
 
-                                                        { consultation?.issue === "mental" ? 
+                                                        { consultation && consultation[0]?.issue === "mental" ? 
                                                             <div class="form-radio mr-2">
                                                                 <input class="form-radio-input" name="radio1" type="radio" value="" id="defaultRadio1" checked/>
                                                                 <label class="form-radio-label" for="defaultRadio1">
@@ -181,11 +186,11 @@ const ConsultationDetails = () => {
                                                     <div className="form-row">
                                                         <div className="form-group col-sm-8">
                                                             <label>Diagnosis</label>
-                                                            <input type="text" className="form-control" value={consultation?.dianosis} required />
+                                                            <input type="text" className="form-control" value={consultation && consultation[0]?.dianosis} required />
                                                         </div>
                                                     </div>                                                  
                                                 </div>
-                                                <div className="tab-pane" id="tab2">
+                                                <div className="tab-pane" id="tab3">
                                                     <div className="form-row">
                                                         <div className="table-responsive">
                                                             <Table className="table table-theme table-row v-middle">
@@ -222,7 +227,7 @@ const ConsultationDetails = () => {
                         
                                                     </div>
                                                 </div>
-                                                <div className="tab-pane" id="tab3">
+                                                <div className="tab-pane" id="tab2">
                                                     <div className="form-row">
                                                         <div className="table-responsive">
                                                             <Table className="table table-theme table-row v-middle">
@@ -240,23 +245,27 @@ const ConsultationDetails = () => {
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <tr className=" v-middle" dataId="15">
+
+                                                                    { prescription && prescription.map((item, index) => {
+
+                                                                        return (
+                                                                        <tr className=" v-middle" key={item?.id}>
                                                                         <td>
-                                                                            1
+                                                                            {index + 1}
                                                                         </td>
                                                                         <td>
                                                                             <div className="item-title text-color ">
-                                                                                <input type="text" className="form-control" placeholder=""/>
+                                                                                <input type="text" className="form-control" value={item?.medication_name} placeholder=""/>
                                                                             </div>                                            
                                                                         </td>
                                                                         <td className="flex">
-                                                                            <div className=" "><input type="text" className="form-control" placeholder=""/></div>
+                                                                            <div className=" "><input type="text" className="form-control" value={item?.dosage} placeholder=""/></div>
                                                                         </td>
                                                                         <td className="flex">
-                                                                            <div className=" "><input type="text" className="form-control" placeholder=""/></div>
+                                                                            <div className=" "><input type="text" className="form-control" value={item?.frequency} placeholder=""/></div>
                                                                         </td>
                                                                         <td className="flex">
-                                                                            <div className=" "><input type="text" className="form-control" placeholder=""/></div>
+                                                                            <div className=" "><input type="text" className="form-control" value={item?.duration} placeholder=""/></div>
                                                                         </td>
                                                                         <td className="flex">
                                                                             <div className=" ">
@@ -273,6 +282,11 @@ const ConsultationDetails = () => {
                                                                             
                                                                         </td>
                                                                     </tr>
+                                                                
+                                                                        )
+                                                                    }) }
+                                                                    
+                                                                
                                                                 </tbody>
                                                             </Table>
                                                         </div>

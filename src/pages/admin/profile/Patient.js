@@ -9,6 +9,9 @@ import ProfileImage from '../../../assets/images/customer.png'
 
 import AuthLayout from '../../../layouts/auth'
 
+import { ToastContainer, toast } from 'react-toastify';
+
+
 function Patient() {
     const [modalShow, setModalShow] = useState(false);
     const [patient, setPatientProfile] = useState();
@@ -18,15 +21,11 @@ function Patient() {
 
     console.log("Location: ", location);
 
-    // const url = '/patients/find/';
-    // const { match: { params } } = props;
-
-
     useEffect(() => {
         getPatientProfile(getID());  
         // getID();
     }, []);
-    
+
     const getID = () => {
         const id = location.state.id;
 
@@ -52,19 +51,91 @@ function Patient() {
         console.log(jsonData)
     };
 
-    // const activateSub = () => {
-    //     const response = await fetch(`${config.baseUrl}/subscriptions/edit`, {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "Authorization": "Bearer " + localStorage.getItem("access_token"),
-    //         },
-    //     });
+    const getBalance = () => {
 
-    //     const jsonData = await response.json();
-    //     setSubscription(jsonData);
-    //     console.log("Subscription: " + jsonData);
-    // }
+    }     
+
+    const activateSub = async () => {
+        const data = {
+            "paid_at": "29-03-2021",
+            // "profile_id": 138,
+            "channel": "Transfer",
+            "description": "Subscription",
+            "amount": 1000,
+            "payable_id": 1,
+            "payable_type": "App\\Models\\Subscription",
+            "payment_for": "subscribe",
+            "duration_id": 1,
+            "treatment_id": 1
+        }
+        const response = await fetch(`${config.baseUrl}/admin/banks`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("access_token"),
+            },
+            body: JSON.stringify(data)
+        });
+
+        const jsonData = await response.json();
+        setSubscription(jsonData)
+
+        .then(({error, response}) => {            
+            !error &&
+                toast.success("Subscription activated successfully!", {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+                setTimeout(() => {
+                    window.location.reload();
+                }, 3000);
+
+            error && 
+            toast.error("Error activating subscription!", {
+                position: toast.POSITION.TOP_RIGHT
+            });
+        });
+    }
+
+    const activateTreatment = async () => {
+        const data = {
+            "paid_at": "29-03-2021",
+            "profile_id": 138,
+            "channel": "Transfer",
+            "description": "Treatment",
+            "amount": 2000,
+            "payable_id": 1,
+            "payable_type": "App\\Models\\Treatment",
+            "payment_for": "treatment",
+            "duration_id": 1,
+            "treatment_id": 1
+        }
+        const response = await fetch(`${config.baseUrl}/admin/banks`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("access_token"),
+            },
+            body: JSON.stringify(data)
+        });
+
+        const jsonData = await response.json();
+        setSubscription(jsonData)
+
+        .then(({error, response}) => {            
+            !error &&
+                toast.success("Subscription activated successfully!", {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+                setTimeout(() => {
+                    window.location.reload();
+                }, 3000);
+
+            error && 
+            toast.error("Error activating subscription!", {
+                position: toast.POSITION.TOP_RIGHT
+            });
+        });
+    }
 
     const ActivateModal = (props) => {
         return (
@@ -78,7 +149,7 @@ function Patient() {
                 <Row className="text-center">
                     <Col>
                         <h6>Activate Subscription</h6>
-                        <Button variant="info">Subscription plan</Button>
+                        <Button variant="info" onClick={()=> activateSub()}>Subscription plan</Button>
                     </Col>
                     <Col>
                         <h6>Activate Treatment</h6>
@@ -127,7 +198,7 @@ function Patient() {
                                             <hr/>
                                             <div className="page-title m-auto">
                                                 <small className="text-muted">Current balance</small>
-                                                <h2 className="text-md text-highlight">#4,500</h2>
+                                                <h2 className="text-md text-highlight">N0</h2>
                                             </div>
                                         </Col>
                                     </Row>

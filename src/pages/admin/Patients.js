@@ -113,6 +113,7 @@ function Patients() {
                                                 <i></i>
                                             </label>
                                         </th>
+                                        <th className="text-muted">ID</th>
                                         <th className="text-muted">First Name</th>
                                         <th className="text-muted">Last Name</th>
                                         <th className="text-muted">Unique ID</th>
@@ -133,6 +134,9 @@ function Patients() {
                                                 <input type="checkbox" name="id" value="15"/>
                                                 <i></i>
                                             </label>
+                                        </td>
+                                        <td>
+                                            <div className="item-title text-color">{patient?.id}</div>
                                         </td>
                                         <td>
                                             <div className="item-title text-color">{patient?.profile?.firstname}</div>
