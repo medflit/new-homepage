@@ -11,6 +11,7 @@ import AuthLayout from '../../../layouts/auth'
 
 function Provider() {
     const [provider, setProviderProfile] = useState();
+    const [countries, setCountry] = useState();
 
     const location = useLocation();
 
@@ -29,6 +30,21 @@ function Provider() {
 
         console.log("My ID - ", id);
         return id;
+    }
+
+    const getCountry = () => {
+        let url = 'https://helloworld.com.ng/medflit-api/api/list-options';
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("access_token"),
+            },
+        }).then((res) => {
+            return res.json();
+        }).then((data) => {
+            setCountry(data.data.countries);
+        })        
     }
 
     const url = '/admin/users/find?id=';
@@ -207,7 +223,13 @@ function Provider() {
                                                         <div className="form-group col-sm-6">
                                                             <label>Select Country</label>
                                                             <select className="form-control" data-plugin="select2" data-option="{}" data-minimum-results-for-search="Infinity">
-                                                                <option value="one">{provider?.profile?.country}</option>
+                                                                { countries?.map((country, index) => {
+                                                                    if(country?.id === provider?.profile?.country) {
+                                                                        let curCountry = country?.name
+                                                                        return (<option value={curCountry}>{curCountry}</option>)
+                                                                    }
+                                                                    }) 
+                                                                }   
                                                             </select>
                                                         </div>
                                                     </div>  

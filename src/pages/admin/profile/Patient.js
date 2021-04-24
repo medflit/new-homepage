@@ -10,28 +10,53 @@ import ProfileImage from '../../../assets/images/customer.png'
 
 import AuthLayout from '../../../layouts/auth'
 
+import {formatNumber} from '../../../helpers/functions'
+
+// import getList from '../../../helpers/functions' 
+
 function Patient() {
     const [modalShow, setModalShow] = useState(false);
     const [patient, setPatientProfile] = useState();
+    const [treat, setTreatment] = useState();
     // const [subscription, setSubscription] = useState();
     const [amount, setAmount] = useState();
+    const [countries, setCountry] = useState();
+    const [treatmentPlan, setTreatmentPlan] = useState();
+    const [treatmentPlanID, setTreatmentPlanID] = useState(1);
 
     const location = useLocation();
 
-    console.log("Location: ", location);
+    // console.log("Location: ", location);
 
     useEffect(() => {
-        getPatientProfile(getID());  
-        // getID();
+        getPatientProfile(getID());
+        treatmentPlans(getID());
+        listOption();
     }, []);
 
     const getID = () => {
         const id = location.state.id;
 
-        console.log("My ID - ", id);
+        // console.log("My ID - ", id);
         return id;
     }
 
+    const listOption = () => {
+        let url = 'https://helloworld.com.ng/medflit-api/api/list-options';
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("access_token"),
+            },
+        }).then((res) => {
+            return res.json();
+        }).then((data) => {
+            setCountry(data.data.countries);
+            // console.log(data.data.treatmentPlans);
+            setTreatmentPlan(data.data.treatmentPlans);
+        })        
+    }
     
     // const id = getID();
     const getPatientProfile = async (id) => {
@@ -47,15 +72,19 @@ function Patient() {
         const jsonData = await response.json();
 
         setPatientProfile(jsonData.data);
-        console.log(jsonData)
+        // console.log(jsonData)
     };
 
-    let profileID = patient?.profile?.id;
+    let patientProfileID = patient?.profile?.id;
+
+    let subID = patient?.subscription?.id;
+
+    let providerProfileID = patient?.subscription?.assigned_doctor?.provider?.profile_id;
 
     const activateSub = async () => {
         const data = {
             "paid_at": "29-03-2021",
-            "profile_id": profileID,
+            "profile_id": patientProfileID,
             "channel": "Transfer",
             "description": "Subscription",
             "amount": 1000,
@@ -94,91 +123,112 @@ function Patient() {
         });
     }
 
-    const activateTreatment = async () => {
-        const data = {
-            "paid_at": "29-03-2021",
-            "profile_id": profileID,
-            "channel": "Transfer",
-            "description": "Treatment",
-            "amount": 1000,
-            "payable_id": 1,
-            "payable_type": "App\\Models\\Treatment",
-            "payment_for": "Treatment",
-            "duration_id": 1,
-            "treatment_id": 1
-        }
-        const response = await fetch(`${config.baseUrl}/admin/banks`, {
-            method: "POST",
+    const handleChange = (e) => {
+        setTreatmentPlanID(e.target.dataset.amount);
+        console.log("Treatment Plan Selected!! " + treatmentPlanID);
+    }
+
+    const treatmentPlans = async (id) => {
+        const url = '/calls/treatment/get?user_id=';
+        const response = await fetch(`${config.baseUrl}` + url + `${id}`, {
+            method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("access_token"),
             },
-            body: JSON.stringify(data)
         });
 
-        const jsonData = await response.json()
+        const jsonData = await response.json();
 
-        .then(({error, response}) => {            
-            !error &&
-                toast.success("Subscription activated successfully!", {
-                    position: toast.POSITION.TOP_RIGHT
-                });
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1000);
-
-            error && 
-            toast.error("Error activating subscription!", {
-                position: toast.POSITION.TOP_RIGHT
-            });
-        });
+        setTreatment(jsonData.data);
+        console.log(jsonData.data)
     }
+
+    // const treatmentAmount = e => {
+    //     const amount = e.target.dataset.amount;
+
+    //     return amount;
+    // }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const data = {
-            "paid_at": "29-03-2021",
-            "profile_id": profileID,
-            "channel": "Transfer",
-            "description": "Treatment",
-            "amount": amount,
-            "payable_id": 1,
-            "payable_type": "App\\Models\\Treatment",
-            "payment_for": "Treatment",
-            "duration_id": 1,
-            "treatment_id": 1
+
+        // const treatment_plan_id = e.target.value;
+        // console.log("tpid: " + treatment_plan_id);
+        // const amount = e.target.dataset.amount;
+
+        const first_data = {
+            "treatment_plan_id" : treatmentPlanID,
+            "provider_id" : providerProfileID,
+            "patient_id" : patientProfileID,
+            "subscription_id" : subID,
         }
-        const response = await fetch(`${config.baseUrl}/admin/banks`, {
+
+        const response = await fetch(`${config.baseUrl}/calls/treatment`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("access_token"),
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(first_data)
         });
 
-        const jsonData = await response.json()
+        const json_returns = await response.json()
+        console.log(json_returns)
 
-        .then(({error, response}) => {            
-            !error &&
-                toast.success("Treatment plan activated successfully!", {
-                    position: toast.POSITION.TOP_RIGHT
-                });
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1000);
+        .then((error) => {
+            !error && 
 
-            error && 
-            toast.error("Error activating treatment plan!", {
-                position: toast.POSITION.TOP_RIGHT
-            });
+                console.log("You can proceed")
+                // const sec_data = {
+                //     "paid_at": "29-03-2021",
+                //     "profile_id": patientProfileID,
+                //     "channel": "Transfer",
+                //     "description": "Treatment",
+                //     "amount": amount,
+                //     "payable_id": 1,
+                //     "payable_type": "App\\Models\\Treatment",
+                //     "payment_for": "treatment",
+                //     "duration_id": 1,
+                //     "treatment_id": 2
+                // }
+
+                // const response = await fetch(`${config.baseUrl}/admin/banks`, {
+                //     method: "POST",
+                //     headers: {
+                //         "Content-Type": "application/json",
+                //         "Authorization": "Bearer " + localStorage.getItem("access_token"),
+                //     },
+                //     body: JSON.stringify(sec_data)
+                // });
+        
+                // const jsonData = await response.json()
+
+                // .then(({error, response}) => {            
+                //     !error &&
+                //         toast.success("Treatment plan activated successfully!", {
+                //             position: toast.POSITION.TOP_RIGHT
+                //         });
+                //         setTimeout(() => {
+                //             window.location.reload();
+                //         }, 1000);
+
+                //     error && 
+                //     toast.error("Error activating treatment plan!", {
+                //         position: toast.POSITION.TOP_RIGHT
+                //     });
+                // });
+
+            error &&
+                console.log(error)
         });
+
     }
 
     return (
         <AuthLayout>
             <Modal
-                size="sm"
+                size="md"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
                 show={modalShow}
@@ -187,11 +237,18 @@ function Patient() {
                 {/* <Modal.Header closeButton>
                 </Modal.Header> */}
                 <Modal.Body>
-                    <Form className="text-center" onSubmit={handleSubmit}>
+                    <Form className="" onSubmit={handleSubmit}>
                         <div className="form-row">
                             <div className="form-group col-md-12">
-                                <label>Enter Amount</label>
-                                <input type="text" className="form-control" onChange={e => setAmount(e.target.value)}  required/>
+                                <label>Select Treatment Plan</label>
+                                <select className="form-control" value={treatmentPlanID} onChange={handleChange} data-plugin="select2"  data-option="{}" data-minimum-results-for-search="Infinity">  
+                                    { treatmentPlan?.map((treatment, index) => {
+                                        console.log(treatment?.id);
+                                        return (
+                                        <option value={treatment?.id} data-amount={parseInt(treatment?.price)}>{treatment?.name} ({treatment?.class}) - ({formatNumber(treatment?.price)})</option>
+                                        )
+                                    })}                                                        
+                                </select>
                             </div>
                         </div>
                         <Row className="justify-center">
@@ -281,7 +338,7 @@ function Patient() {
                                 <div className="">
                                     <Row>
                                         <Col sm={12}>
-                                            { patient?.treatmentPlans?.total === 0 ?
+                                            { treat?.total === 0 ?
                                                 <div>
                                                     <div className="mb-3">
                                                         <small className="text-muted">You do not have an active treatment plan.</small>
@@ -292,13 +349,15 @@ function Patient() {
                                                 :  
                                                 <div className="page-title m-auto">
                                                     <small className="text-muted">Plans:</small>
-                                                    { patient?.treatmentPlans?.data.map((plan, index) => {
+                                                    { treat?.data?.map((plan, index) => {
                                                         return (
                                                             
-                                                            <li className="text-sm text-highlight">{plan?.treatmentPlan?.name}</li>
+                                                            <span>
+                                                            <li className="text-sm text-highlight">{plan?.treatmentPlan?.name} (N{formatNumber(plan?.treatmentPlan?.price)})</li>
+                                                            {/* <li className="text-sm text-highlight"></li> */}
+                                                            </span>
                                                         )
                                                     }) }
-                                                    {/* <h4 className="text-md text-highlight">{patient?.treatmentPlans?.data[0]?.treatmentPlan?.name}</h4> */}
                                                 </div>   
                                             }
                                         </Col>
@@ -404,8 +463,14 @@ function Patient() {
                                                 </div>
                                                 <div className="form-group col-sm-6">
                                                     <label>Select Country</label>
-                                                    <select className="form-control" data-plugin="select2" data-option="{}" data-minimum-results-for-search="Infinity">
-                                                        <option value="one">{patient?.profile?.country}</option>
+                                                    <select className="form-control" data-plugin="select2" data-option="{}" data-minimum-results-for-search="Infinity">  
+                                                        { countries?.map((country, index) => {
+                                                            if(country?.id === patient?.profile?.country) {
+                                                                let curCountry = country?.name
+                                                                return (<option value={curCountry}>{curCountry}</option>)
+                                                            }
+                                                            }) 
+                                                        }                                                        
                                                     </select>
                                                 </div>
                                             </div>  

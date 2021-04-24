@@ -22,7 +22,7 @@ function Dashboard() {
 
     const dashboardData = async () => {
 
-       Promise.all([
+        Promise.all([
             fetch('http://helloworld.com.ng/medflit-api/api/patients/find', {
                 headers: {
                     "Content-Type": "application/json",

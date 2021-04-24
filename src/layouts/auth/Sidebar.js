@@ -184,6 +184,12 @@ const Sidebar = () => {
                                     <span className="nav-text">Transactions</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="/admin/assignment-log">
+                                    <span className="nav-icon "><FeatherIcon icon="menu" size="18"/></span>
+                                    <span className="nav-text">Assignment Log</span>
+                                </a>
+                            </li>
                             {/* <li>
                                 <Link to="/">
                                     <span className="nav-icon "><FeatherIcon icon="message-square" size="18"/></span>

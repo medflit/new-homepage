@@ -51,6 +51,7 @@ const Transactions = () => {
             let userID;
             userID = transaction.user_id;
             console.log(userID);
+            return userID;
         })
     }
 
@@ -91,9 +92,9 @@ const Transactions = () => {
     //      })
     // };
     
-    const getUsername = (id) => {
-        const url = '/admin/users/find?id=';
-        fetch(`${config.baseUrl}` + url + `${id}`, {
+    const getUsername = () => {
+        const url = '/admin/users/find?id=' + getID();
+        fetch(`${config.baseUrl}` + url, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -102,8 +103,7 @@ const Transactions = () => {
         }).then((res) => {
             return res.json();
         }).then((data) => {
-            console.log(data.data.firstname);
-            return data.data.usertype;
+            setName(data.data)
         })
 
 
@@ -191,17 +191,6 @@ const Transactions = () => {
                                 </thead>
                                 <tbody>
                                     { transactions && transactions.map((transaction, index) => {
-                                        // let name = "Fish";
-
-                                        // transactions[index].name = getUsername(transaction?.user_id);
-                                        // getUsername(transaction?.user_id).then((user) => {
-                                        //     console.log(user);
-                                        //     name = user;
-                                        // });
-                                        // console.log(name);
-
-                                        // console.log(transaction);
-                                        // console.log(transaction);
                                         return (
                                             <tr className="v-middle" >
                                             
@@ -209,10 +198,11 @@ const Transactions = () => {
                                                     <div className="item-title text-color">{index + 1}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">Name: </div>
+                                                    <div className="item-title text-color">{transaction?.profile?.firstname + " " + transaction?.profile?.lastname} </div>
+                                                    
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color"></div>
+                                                    <div className="item-title text-color">{transaction?.profile?.medical_id}</div>
                                                 </td>
                                                 <td>
                                                     <div className="item-title text-color">{transaction?.provider?.channel === "card" ? <span className="badge badge-success badge-sm">Card</span> : <span className="badge badge-warning badge-sm">Transfer</span>}</div>

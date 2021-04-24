@@ -18,6 +18,7 @@ import Providers from '../pages/admin/Providers';
 import Users from '../pages/admin/Users';
 import Consultations from '../pages/admin/Consultations';
 import Transactions from '../pages/admin/Transactions';
+import AssignmentLog from '../pages/admin/AssignmentLog';
 import ConsultationTransaction from '../pages/admin/ConsultationTransaction';
 import Inbox from '../pages/admin/Inbox';
 import InboxShow from '../pages/admin/inbox/ShowInbox';
@@ -35,6 +36,7 @@ import PastStats from '../pages/admin/providers/PastStats'
 import Payments from '../pages/admin/providers/Payment'
 
 import useToken from '../components/app/useToken'
+import EditAssignment from '../pages/admin/EditAssignment';
 
 // function setToken(userToken) {
 //     sessionStorage.setItem('token', JSON.stringify(userToken))
@@ -81,6 +83,8 @@ const Routes = (props) => {
                 <Route path="/admin/users" render={authGuard(Users)}/>
                 <Route path="/admin/consultations" render={authGuard(Consultations)}/>
                 <Route path="/admin/transactions" render={authGuard(Transactions)}/>
+                <Route path="/admin/assignment-log" render={authGuard(AssignmentLog)}/>
+                <Route path="/admin/edit-assignment/:id" render={authGuard(EditAssignment)}/>
                 <Route path="/admin/consultation-transaction" render={authGuard(ConsultationTransaction)}/>
                 <Route exact path="/admin/inbox" render={authGuard(Inbox)}/>
                 <Route path="/admin/inbox/show-inbox" render={authGuard(InboxShow)}/>
