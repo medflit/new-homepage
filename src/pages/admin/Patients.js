@@ -173,7 +173,12 @@ function Patients() {
                                                 {/* onClick={() => viewUser(patient.id)} */}
                                                 
                                                     <Dropdown.Item>
-                                                        <Link to={{pathname: `/admin/profile/patient/${patient.id}`, state: { "id": patient.id}}}>View</Link>
+                                                        <Link to={{pathname: `/admin/profile/patient/${patient.id}`, state: { "patientID": patient?.id, 
+                                                        "providerProfileID": patient?.subscription?.assigned_doctor?.provider?.profile_id,
+                                                                 "patientProfileID": patient?.profile?.id, 
+                                                                 "providerID": patient?.subscription?.assigned_doctor?.id, 
+                                                                 "subID": patient?.subscription?.id
+                                                                 }}}>View</Link>
                                                     </Dropdown.Item>
                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
                                                     <Dropdown.Item href="#" className="text-danger">Delete</Dropdown.Item>

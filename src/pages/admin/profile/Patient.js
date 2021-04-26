@@ -32,13 +32,52 @@ function Patient() {
         getPatientProfile(getID());
         treatmentPlans(getID());
         listOption();
+        getProviderID();
+        getID();
+        getPatientProfileID();
+        getProviderProfileID();
+        getProviderID();
+        getSubID();
     }, []);
+    // const patientID = location.state.patientID;
+    const patientProfileID = location.state.patientProfileID;
+    console.log("PPID",patientProfileID);
+    // const providerID = location.state.providerID;
+    const providerProfileID = location.state.providerProfileID;
+    console.log("PPIID", providerProfileID)
+    const subID = location.state.subID;
+    console.log("subID", subID)
+
 
     const getID = () => {
-        const id = location.state.id;
+        const patientID = location.state.patientID;
 
-        // console.log("My ID - ", id);
-        return id;
+        console.log("patientID - ", patientID);
+        return patientID;
+    }
+
+    const getPatientProfileID = () => {
+        const patientProfileID = location.state.patientProfileID;
+        console.log("patientProfileID: " , patientProfileID)
+        return patientProfileID;
+    }
+
+    const getProviderID = () => {
+        const providerID = location.state.providerID;
+        console.log("providerID: " , providerID)
+        return providerID;
+    }
+
+    const getProviderProfileID = () => {
+        const providerProfileID = location.state.providerProfileID;
+        console.log("providerProfileID: " , providerProfileID)
+        return providerProfileID;
+    }
+
+    const getSubID = () => {
+        const subID = location.state.subID;
+        console.log("subID: " , subID)
+        return subID;
     }
 
     const listOption = () => {
@@ -75,11 +114,11 @@ function Patient() {
         // console.log(jsonData)
     };
 
-    let patientProfileID = patient?.profile?.id;
+    // let patientProfileID = patient?.profile?.id;
 
-    let subID = patient?.subscription?.id;
+    // let subID = patient?.subscription?.id;
 
-    let providerProfileID = patient?.subscription?.assigned_doctor?.provider?.profile_id;
+    // let providerProfileID = patient?.subscription?.assigned_doctor?.provider?.profile_id;
 
     const activateSub = async () => {
         const data = {
@@ -124,7 +163,7 @@ function Patient() {
     }
 
     const handleChange = (e) => {
-        setTreatmentPlanID(e.target.dataset.amount);
+        setTreatmentPlanID(e.target.value);
         console.log("Treatment Plan Selected!! " + treatmentPlanID);
     }
 
@@ -174,12 +213,29 @@ function Patient() {
         });
 
         const json_returns = await response.json()
-        console.log(json_returns)
+        // console.log(json_returns.data)
 
-        .then((error) => {
-            !error && 
+        .then(({error, response}) => {  
+            if (error) {
+                console.log(error);
+                toast.error("No doctor assigned to this patient yet!", {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else {
+                // console.log("You can proceed")
+                toast.success("Treatment plan activated successfully!", {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            }
+            
 
-                console.log("You can proceed")
+                
                 // const sec_data = {
                 //     "paid_at": "29-03-2021",
                 //     "profile_id": patientProfileID,
@@ -218,9 +274,6 @@ function Patient() {
                 //         position: toast.POSITION.TOP_RIGHT
                 //     });
                 // });
-
-            error &&
-                console.log(error)
         });
 
     }
@@ -241,9 +294,9 @@ function Patient() {
                         <div className="form-row">
                             <div className="form-group col-md-12">
                                 <label>Select Treatment Plan</label>
-                                <select className="form-control" value={treatmentPlanID} onChange={handleChange} data-plugin="select2"  data-option="{}" data-minimum-results-for-search="Infinity">  
+                                <select className="form-control" name="treatmentPlanID" value={treatmentPlanID} onChange={handleChange} data-plugin="select2"  data-option="{}" data-minimum-results-for-search="Infinity">  
                                     { treatmentPlan?.map((treatment, index) => {
-                                        console.log(treatment?.id);
+                                        // console.log(treatment?.id);
                                         return (
                                         <option value={treatment?.id} data-amount={parseInt(treatment?.price)}>{treatment?.name} ({treatment?.class}) - ({formatNumber(treatment?.price)})</option>
                                         )
@@ -330,6 +383,7 @@ function Patient() {
                                 </div>
                             </Card.Body>
                         </Card>
+                        { patient?.subscription?.active !== false ?
                         <Card>
                             <Card.Header>
                                 Treatment Plans
@@ -364,10 +418,18 @@ function Patient() {
                                     </Row>
                                 </div>
                             </Card.Body>
-                            <Card.Footer>
-                                <Button variant="primary" size="xs" onClick={() => setModalShow(true)}>Activate Treatment</Button>
-                            </Card.Footer>
+                            { treat?.total > 0 ? 
+
+                                <div></div> :
+                                <Card.Footer>
+                                    <Button variant="primary" size="xs" onClick={() => setModalShow(true)}>Activate Treatment</Button>
+                                </Card.Footer>
+                            }
+                            
                         </Card>
+
+                        : <div></div>
+                        }
                     </Col>
                     <Col md={8} className="order-md-1">
                         <Card>

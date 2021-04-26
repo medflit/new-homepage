@@ -206,10 +206,12 @@ const AssignmentLog = () => {
                                     <Table className="table table-theme table-row v-middle">
                                         <thead>
                                             <tr>
-                                                <th className="text-muted">#</th>
-                                                <th className="text-muted">Patient</th>
-                                                <th className="text-muted">ID No</th>
+                                                <th className="text-muted">Patient #</th>
+                                                <th className="text-muted">Patient Name</th>
+                                                <th className="text-muted">Doctor #</th>
                                                 <th className="text-muted">Assigned Doctor</th>
+                                                <th className="text-muted">Sub Type</th>
+                                                <th className="text-muted">Expiry Date</th>
                                                 <th className="text-muted">Action</th>
                                             </tr>
                                         </thead>
@@ -220,16 +222,23 @@ const AssignmentLog = () => {
                                                     return (
                                                         <tr className="v-middle" key={patient?.id}>
                                                             <td>
-                                                                <div className="item-title text-color">{index + 1}</div>
+                                                                <div className="item-title text-color">{patient?.profile?.medical_id}</div>
                                                             </td>
                                                             <td>
                                                                 <div className="item-title text-color">{patient?.profile?.firstname + " " + patient?.profile?.lastname}</div>
                                                             </td>
+                                                            
                                                             <td>
-                                                                <div className="item-title text-color">{patient?.profile?.medical_id}</div>
+                                                                <div className="item-title text-color">{patient?.subscription?.assigned_doctor?.biodata?.medical_id }</div>
                                                             </td>
                                                             <td>
                                                                 <div className="item-title text-color">{patient?.subscription?.assigned_doctor?.biodata?.firstname + " " + patient?.subscription?.assigned_doctor?.biodata?.lastname}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div className="item-title text-color">{patient?.subscription?.plan?.name}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div className="item-title text-color">{patient?.subscription?.expires_at}</div>
                                                             </td>
                                                             <td>
                                                                 <Dropdown>
