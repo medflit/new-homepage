@@ -342,53 +342,7 @@ function Patient() {
                                 </div>
                             </Card.Body>
                         </Card>
-                        { patient?.subscription?.active !== false ?
-                        <Card>
-                            <Card.Header>
-                                Treatment Plans
-                            </Card.Header>
-                            <Card.Body>
-                                <div className="">
-                                    <Row>
-                                        <Col sm={12}>
-                                            { treat?.total === 0 ?
-                                                <div>
-                                                    <div className="mb-3">
-                                                        <small className="text-muted">You do not have an active treatment plan.</small>
-                                                    </div>
-                                                    
-                                                </div>
-                                                
-                                                :  
-                                                <div className="page-title m-auto">
-                                                    <small className="text-muted">Plans:</small>
-                                                    { treat?.data?.map((plan, index) => {
-                                                        return (
-                                                            
-                                                            <span>
-                                                            <li className="text-sm text-highlight">{plan?.treatmentPlan?.name} (N{formatNumber(plan?.treatmentPlan?.price)})</li>
-                                                            {/* <li className="text-sm text-highlight"></li> */}
-                                                            </span>
-                                                        )
-                                                    }) }
-                                                </div>   
-                                            }
-                                        </Col>
-                                    </Row>
-                                </div>
-                            </Card.Body>
-                            { treat?.total > 0 ? 
-
-                                <div></div> :
-                                <Card.Footer>
-                                    <Button variant="primary" size="xs" onClick={() => setModalShow(true)}>Activate Treatment</Button>
-                                </Card.Footer>
-                            }
-                            
-                        </Card>
-
-                        : <div></div>
-                        }
+                        {/* Treatment Code here */}
                     </Col>
                     <Col md={8} className="order-md-1">
                         <Card>
