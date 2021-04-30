@@ -5,6 +5,11 @@ import AuthLayout from '../../layouts/auth'
 import config from '../../api/index'
 import FeatherIcon from 'feather-icons-react'
 
+import {Spinner} from 'react-bootstrap'
+import { ToastContainer, toast } from 'react-toastify';
+
+import { useHistory } from "react-router-dom";
+
 
 const AssignmentLog = () => {
     const [modalShow, setModalShow] = useState(false);
@@ -13,15 +18,16 @@ const AssignmentLog = () => {
     const [perPage, setPerPage] = useState();
     const [currentPage, setCurrentPage] = useState();
 
-    const [doctorID, setDoctorID] = useState();
-    const [patientID, setPatientID] = useState();
+    const [doctorUID, setDoctorUID] = useState();
+    const [patientUID, setPatientUID] = useState();
 
-    const [patient, getPatients] = useState();
-    const [patientName, setPatientName] = useState();
+    const [patient, setPatient] = useState();
+    const [provider, setProvider] = useState();
 
-    const [provider, getProviders] = useState();
-    const [providerName, setProviderName] = useState();
+    const [loading, setLoading] = useState(false);
+    const [searchText, setSearchText] = useState("Search");
 
+    const history = useHistory();
 
     useEffect(() => {
         getAllAssignedPatients(1);
@@ -46,18 +52,21 @@ const AssignmentLog = () => {
         setCurrentPage(jsonData.paginator.current_page);
     }
 
-    const handleChange = (e) => {
-        setDoctorID(e.target.value)
-        setPatientID(e.target.value)
+    const handleClick = () => {
+        setLoading(true);
+        setSearchText("Searching...");
+    }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
         Promise.all([
-            fetch('http://helloworld.com.ng/medflit-api/api/patients/find', {
+            fetch('http://helloworld.com.ng/medflit-api/api/patients/search?q=' + `${patientUID}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
                 }
             }),
-            fetch('http://helloworld.com.ng/medflit-api/api/providers/find', {
+            fetch('http://helloworld.com.ng/medflit-api/api/patients/search?q=' + `${doctorUID}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
@@ -70,29 +79,42 @@ const AssignmentLog = () => {
                 return response.json();
             }));
         }).then((data) => {
-            getPatients(data[0].data);
-            getProviders(data[1].data);
+            if(data[0].data.length === 0) {
+                toast.error("Patient does not exist", {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            } if(data[1].data.length === 0) {
+                toast.error("Doctor does not exist", {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            } 
+            else {
+                setPatient(data[0].data);
+                setProvider(data[1].data);
+                setTimeout(() => {
+                    history.push(
+                        {
+                            pathname: "/admin/assign-doctor",
+                            state: {
+                                patientDetail: data[0].data[0],
+                                doctorDetail: data[1].data[0]
+                            }
+                    });
+                    // setAlert(false);
+                }, 3000);
 
-            data[0].data.map((patient,index) => {
-                if(patient?.biodata?.medical_id === patientID) {
-                    setPatientName(patient?.biodata?.firstname + " " + patient?.biodata?.lastname)
-                }
-            })
-
-            data[1].data.map((provider,index) => {
-                if(provider?.biodata?.medical_id === doctorID) {
-                    setProviderName(provider?.biodata?.firstname + " " + provider?.biodata?.lastname)
-                }
-            })
+                console.log(data[0].data)
+                console.log(data[1].data)
+            }
         }).catch((error) => {
             console.log(error);
         })
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-
     }
 
     const pageNumbers = [];
@@ -129,37 +151,35 @@ const AssignmentLog = () => {
                     <Form className="" onSubmit={handleSubmit}>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Patient Unique ID</Form.Label>
-                            <span className="pull-right" style={{float: "right"}}>{patientName}</span>
-
                             <Form.Control type="text" 
                                 // id="username" 
-                                name="patientID" 
-                                placeholder="Unique ID"
-                                onChange={handleChange} 
+                                name="patientUID" 
+                                placeholder="MF0000"
+                                value={patientUID}
+                                onChange={e => setPatientUID(e.target.value)} 
                                 />
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Doctor's Unique ID</Form.Label>
-                            <span className="pull-right" style={{float: "right"}}>{providerName}</span>
-
                             <Form.Control type="text" 
                                 // id="username" 
-                                name="doctorID" 
-                                placeholder="Unique ID" 
-                                onChange={handleChange}
+                                name="doctorUID" 
+                                placeholder="MF0909" 
+                                value={doctorUID}
+                                onChange={e => setDoctorUID(e.target.value)} 
                                 />
                         </Form.Group>
                         <Row className="justify-center">
-                            <div className="mr-2">
-                                <Button size="sm" variant="outline-primary" onClick={() => setModalShow(false)}>Cancel</Button>
-                            </div>
                             <div>
-                                <Button size="sm" type="submit" variant="primary">Assign</Button>
+                                <Button size="sm" type="submit" onClick={handleClick} variant="primary"> {loading && <Spinner animation="border" size="16" role="status">
+                                </Spinner>}
+                                &nbsp;{searchText}</Button>
                             </div>
                         </Row>
                     </Form>
                 </Modal.Body>
             </Modal>
+            <ToastContainer />
             <div className="page-hero page-container " id="page-hero">
                 <div className="padding d-flex">
                     <div className="page-title">
@@ -248,7 +268,7 @@ const AssignmentLog = () => {
     
                                                                     <Dropdown.Menu>
                                                                         <Dropdown.Item ><Link to={{pathname: `/admin/edit-assignment/${patient?.id}`, state: { 
-                                                                            "patientID": patient?.id, "providerID": patient?.subscription?.assigned_doctor?.id, "providerUID": patient?.subscription?.assigned_doctor?.biodata?.medical_id}}}>Edit</Link></Dropdown.Item>
+                                                                            "patientID": patient?.id, "patientPID": patient?.profile?.id, "subID": patient?.subscription?.id, "providerPID": patient?.subscription?.assigned_doctor?.biodata?.id, "providerUID": patient?.subscription?.assigned_doctor?.biodata?.medical_id}}}>Edit</Link></Dropdown.Item>
                                                                         <Dropdown.Item className="text-danger">Delete</Dropdown.Item>
                                                                     </Dropdown.Menu>
                                                                 </Dropdown>

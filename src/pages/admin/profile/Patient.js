@@ -233,47 +233,6 @@ function Patient() {
                     window.location.reload();
                 }, 1000);
             }
-            
-
-                
-                // const sec_data = {
-                //     "paid_at": "29-03-2021",
-                //     "profile_id": patientProfileID,
-                //     "channel": "Transfer",
-                //     "description": "Treatment",
-                //     "amount": amount,
-                //     "payable_id": 1,
-                //     "payable_type": "App\\Models\\Treatment",
-                //     "payment_for": "treatment",
-                //     "duration_id": 1,
-                //     "treatment_id": 2
-                // }
-
-                // const response = await fetch(`${config.baseUrl}/admin/banks`, {
-                //     method: "POST",
-                //     headers: {
-                //         "Content-Type": "application/json",
-                //         "Authorization": "Bearer " + localStorage.getItem("access_token"),
-                //     },
-                //     body: JSON.stringify(sec_data)
-                // });
-        
-                // const jsonData = await response.json()
-
-                // .then(({error, response}) => {            
-                //     !error &&
-                //         toast.success("Treatment plan activated successfully!", {
-                //             position: toast.POSITION.TOP_RIGHT
-                //         });
-                //         setTimeout(() => {
-                //             window.location.reload();
-                //         }, 1000);
-
-                //     error && 
-                //     toast.error("Error activating treatment plan!", {
-                //         position: toast.POSITION.TOP_RIGHT
-                //     });
-                // });
         });
 
     }
