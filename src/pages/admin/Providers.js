@@ -174,6 +174,7 @@ function Providers() {
                                                     </label>
                                                 </th>
                                                 <th className="text-muted">Full Name</th>
+                                                <th className="text-muted">Unique ID</th>
                                                 <th className="text-muted">Prof. Class</th>
                                                 <th className="text-muted">Medical Org.</th>
                                                 <th className="text-muted">Org. Tel</th>
@@ -201,7 +202,7 @@ function Providers() {
                                                             <div className="item-title text-color ">{provider.profile === null ? "-" : capitalize(provider?.profile?.firstname + " " + provider?.profile?.lastname) }</div>                                            
                                                         </td>
                                                         <td className="flex">
-                                                            <div className="item-title text-color ">{provider.profile === null ? "-" : provider?.provider?.profession_label}</div>
+                                                            <div className="item-title text-color ">{provider?.biodata?.medical_id}</div>
                                                         </td>
                                                         <td className="flex">
                                                             <div className="item-title text-color ">{provider.profile === null ? "-" : provider?.provider?.hospital_name}</div>

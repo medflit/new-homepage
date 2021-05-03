@@ -47,12 +47,12 @@ const ConsultationDetails = () => {
 
         const jsonData = await response.json();
 
-        console.log(jsonData.data)
+        // console.log(jsonData.data)
         setConsultation(jsonData.data.consultations.data);
         setPrescription(jsonData.data.prescriptions.data);
-        console.log(jsonData.data.prescriptions.data);
+        // console.log(jsonData.data.prescriptions.data);
         setLabTest(jsonData.data.labTests.data);
-        console.log(jsonData.data.labTests.data)
+        // console.log(jsonData.data.labTests.data)
     };
     return (
         <AuthLayout>
@@ -202,6 +202,7 @@ const ConsultationDetails = () => {
                                                                         </th>
                                                                         <th className="text-muted">Test</th>
                                                                         <th className="text-muted">Instruction</th>
+                                                                        <th className="text-muted">Price</th>
                                                                         <th style={{width: "50px"}}></th>
                                                                     </tr>
                                                                 </thead>
@@ -216,12 +217,18 @@ const ConsultationDetails = () => {
                                                                                 </td>
                                                                                 <td>
                                                                                     <div className="item-title text-color ">
-                                                                                        <input type="text" className="form-control" value={test?.test_name} placeholder=""/>
+                                                                                        <input type="text" className="form-control" value={test?.lab_test?.name} placeholder=""/>
                                                                                     </div>                                            
                                                                                 </td>
                                                                                 <td className="flex">
-                                                                                    <div className=" "><input type="text" className="form-control" value={test.instruction} placeholder=""/></div>
+                                                                                    <div className=" "><input type="text" className="form-control" value={test?.instruction} placeholder=""/></div>
                                                                                 </td>
+                                                                                <td>
+                                                                                    <div className="item-title text-color ">
+                                                                                        <input type="text" className="form-control" value={test?.lab_test?.price} placeholder=""/>
+                                                                                    </div>                                            
+                                                                                </td>
+                                                                                
                                                                                 <td>
                                                                                     
                                                                                 </td>
