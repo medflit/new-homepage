@@ -154,7 +154,7 @@ function Providers() {
                                     </div>
                                     <form className="flex">
                                         <div className="input-group">
-                                            <input type="text" className="form-control form-control-theme form-control-sm search" placeholder="Search" required/>
+                                            <input type="text" className="form-control form-control-theme form-control-sm search" placeholder="Search" />
                                             <span className="input-group-append">
                                                 <button className="btn btn-white no-border btn-sm" type="button">
                                                 <span className="d-flex text-muted"><FeatherIcon icon="search" size="16"/></span>

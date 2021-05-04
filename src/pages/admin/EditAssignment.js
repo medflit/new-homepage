@@ -201,7 +201,7 @@ const EditAssignment = () => {
 
         .then((data) => {  
             if (data.error) {
-                console.log(data);
+                // console.log(data);
                 toast.error(data.message, {
                     position: toast.POSITION.TOP_RIGHT
                 });
@@ -210,7 +210,7 @@ const EditAssignment = () => {
                 }, 2000);
                 
             } else {
-                console.log(data)
+                // console.log(data)
                 toast.success("Doctor assigned successfully!", {
                     position: toast.POSITION.TOP_RIGHT
                 });
@@ -218,7 +218,7 @@ const EditAssignment = () => {
                     window.location.reload();
                     // history.push("/admin/dashboard");
                 }, 2000);
-                console.log(newDoctorUID);
+                // console.log(newDoctorUID);
                 // setProviderUID(newDoctorUID)
                 let pUID = newDoctorUID;
             }

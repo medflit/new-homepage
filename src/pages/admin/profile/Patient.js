@@ -8,76 +8,37 @@ import { ToastContainer, toast } from 'react-toastify';
 import FeatherIcon from 'feather-icons-react'
 import ProfileImage from '../../../assets/images/customer.png'
 
+import {formatNumber}  from '../../../helpers/functions'
+
 import AuthLayout from '../../../layouts/auth'
 
-import {formatNumber} from '../../../helpers/functions'
-
-// import getList from '../../../helpers/functions' 
+import {Spinner} from 'react-bootstrap'
 
 function Patient() {
-    const [modalShow, setModalShow] = useState(false);
     const [patient, setPatientProfile] = useState();
     const [treat, setTreatment] = useState();
-    // const [subscription, setSubscription] = useState();
-    const [amount, setAmount] = useState();
     const [countries, setCountry] = useState();
-    const [treatmentPlan, setTreatmentPlan] = useState();
-    const [treatmentPlanID, setTreatmentPlanID] = useState(1);
+    const [treatmentPlanID, setTreatmentPlanID] = useState(null);
+
+    const [loading, setLoading] = useState(false);
+    const [activateText, setActivateText] = useState("Activate")
 
     const location = useLocation();
-
-    // console.log("Location: ", location);
 
     useEffect(() => {
         getPatientProfile(getID());
         treatmentPlans(getID());
         listOption();
-        getProviderID();
         getID();
-        getPatientProfileID();
-        getProviderProfileID();
-        getProviderID();
-        getSubID();
     }, []);
-    // const patientID = location.state.patientID;
-    const patientProfileID = location.state.patientProfileID;
-    console.log("PPID",patientProfileID);
-    // const providerID = location.state.providerID;
-    const providerProfileID = location.state.providerProfileID;
-    console.log("PPIID", providerProfileID)
-    const subID = location.state.subID;
-    console.log("subID", subID)
 
+    const patientProfileID = location.state.patientProfileID;
+    const providerProfileID = location.state.providerProfileID;
+    const subID = location.state.subID;
 
     const getID = () => {
         const patientID = location.state.patientID;
-
-        console.log("patientID - ", patientID);
         return patientID;
-    }
-
-    const getPatientProfileID = () => {
-        const patientProfileID = location.state.patientProfileID;
-        console.log("patientProfileID: " , patientProfileID)
-        return patientProfileID;
-    }
-
-    const getProviderID = () => {
-        const providerID = location.state.providerID;
-        console.log("providerID: " , providerID)
-        return providerID;
-    }
-
-    const getProviderProfileID = () => {
-        const providerProfileID = location.state.providerProfileID;
-        console.log("providerProfileID: " , providerProfileID)
-        return providerProfileID;
-    }
-
-    const getSubID = () => {
-        const subID = location.state.subID;
-        console.log("subID: " , subID)
-        return subID;
     }
 
     const listOption = () => {
@@ -92,12 +53,9 @@ function Patient() {
             return res.json();
         }).then((data) => {
             setCountry(data.data.countries);
-            // console.log(data.data.treatmentPlans);
-            setTreatmentPlan(data.data.treatmentPlans);
         })        
     }
     
-    // const id = getID();
     const getPatientProfile = async (id) => {
         const url = '/admin/users/find?id=';
         const response = await fetch(`${config.baseUrl}` + url + `${id}`, {
@@ -109,18 +67,12 @@ function Patient() {
         });
 
         const jsonData = await response.json();
-
         setPatientProfile(jsonData.data);
-        // console.log(jsonData)
     };
 
-    // let patientProfileID = patient?.profile?.id;
-
-    // let subID = patient?.subscription?.id;
-
-    // let providerProfileID = patient?.subscription?.assigned_doctor?.provider?.profile_id;
-
     const activateSub = async () => {
+        setLoading(true);
+        setActivateText("Activating...");
         const data = {
             "paid_at": "29-03-2021",
             "profile_id": patientProfileID,
@@ -143,8 +95,6 @@ function Patient() {
         });
 
         const jsonData = await response.json()
-        // console.log(jsonData);
-        // setSubscription(jsonData)
 
         .then(({error, response}) => {            
             !error &&
@@ -162,10 +112,9 @@ function Patient() {
         });
     }
 
-    const handleChange = (e) => {
-        setTreatmentPlanID(e.target.value);
-        console.log("Treatment Plan Selected!! " + treatmentPlanID);
-    }
+    // const handleChange = (e) => {
+    //     setTreatmentPlanID(e.target.value);
+    // }
 
     const treatmentPlans = async (id) => {
         const url = '/calls/treatment/get?user_id=';
@@ -180,23 +129,15 @@ function Patient() {
         const jsonData = await response.json();
 
         setTreatment(jsonData.data);
-        console.log(jsonData.data)
+        setTreatmentPlanID(jsonData.data?.data[0]?.treatment_plan_id ? jsonData.data?.data[0]?.treatment_plan_id : 1 )
     }
 
-    // const treatmentAmount = e => {
-    //     const amount = e.target.dataset.amount;
+    const activateTreatment = async () => {
 
-    //     return amount;
-    // }
+        setLoading(true);
+        setActivateText("Activating...");
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        // const treatment_plan_id = e.target.value;
-        // console.log("tpid: " + treatment_plan_id);
-        // const amount = e.target.dataset.amount;
-
-        const first_data = {
+        const data = {
             "treatment_plan_id" : treatmentPlanID,
             "provider_id" : providerProfileID,
             "patient_id" : patientProfileID,
@@ -209,16 +150,19 @@ function Patient() {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("access_token"),
             },
-            body: JSON.stringify(first_data)
+            body: JSON.stringify(data)
         });
 
         const json_returns = await response.json()
-        // console.log(json_returns.data)
+        // console.log(json_returns)
 
-        .then(({error, response}) => {  
-            if (error) {
-                console.log(error);
-                toast.error("No doctor assigned to this patient yet!", {
+        // const treatment_id = json_returns.data.id
+        // // console.log("tID: ",treatment_id);
+        // const amount = json_returns.data.treatmentPlan.price
+
+        .then((data) => {  
+            if (data.error) {
+                toast.error(data.message, {
                     position: toast.POSITION.TOP_RIGHT
                 });
                 setTimeout(() => {
@@ -226,12 +170,51 @@ function Patient() {
                 }, 1000);
             } else {
                 // console.log("You can proceed")
-                toast.success("Treatment plan activated successfully!", {
-                    position: toast.POSITION.TOP_RIGHT
-                });
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1000);
+                console.log(data)
+                const treatment_id = data.data.id
+                console.log("treatment_id:",treatment_id)
+                const amount = data.data.treatmentPlan.price
+                console.log(data)
+
+                const data2 = {
+                    "paid_at": "29-03-2021",
+                    "profile_id": patientProfileID,
+                    "channel": "Transfer",
+                    "description": "Treatment",
+                    "amount": amount,
+                    "payable_id": 1,
+                    "payable_type": "App\\Models\\Treatment",
+                    "payment_for": "treatment",
+                    "duration_id": 1,
+                    "treatment_id": treatment_id
+                }
+
+                fetch(`${config.baseUrl}/admin/banks`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + localStorage.getItem("access_token"),
+                    },
+                    body: JSON.stringify(data2)
+                }).then((res) => {
+                    return res.json()
+                }).then((data) => {
+                    if(data.error) {
+                        toast.error(data.message, {
+                            position: toast.POSITION.TOP_RIGHT
+                        });
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
+                    } else {
+                        toast.success("Treatment plan activated successfully!", {
+                            position: toast.POSITION.TOP_RIGHT
+                        });
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
+                    }
+                })
             }
         });
 
@@ -239,42 +222,7 @@ function Patient() {
 
     return (
         <AuthLayout>
-            <Modal
-                size="md"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-                >
-                {/* <Modal.Header closeButton>
-                </Modal.Header> */}
-                <Modal.Body>
-                    <Form className="" onSubmit={handleSubmit}>
-                        <div className="form-row">
-                            <div className="form-group col-md-12">
-                                <label>Select Treatment Plan</label>
-                                <select className="form-control" name="treatmentPlanID" value={treatmentPlanID} onChange={handleChange} data-plugin="select2"  data-option="{}" data-minimum-results-for-search="Infinity">  
-                                    { treatmentPlan?.map((treatment, index) => {
-                                        // console.log(treatment?.id);
-                                        return (
-                                        <option value={treatment?.id} data-amount={parseInt(treatment?.price)}>{treatment?.name} ({treatment?.class}) - ({formatNumber(treatment?.price)})</option>
-                                        )
-                                    })}                                                        
-                                </select>
-                            </div>
-                        </div>
-                        <Row className="justify-center">
-                            <div className="mr-2">
-                                <Button size="xs" variant="outline-primary" onClick={() => setModalShow(false)}>Cancel</Button>
-                            </div>
-                            <div>
-                                <Button size="xs" type="submit" variant="primary">Activate</Button>
-                            </div>
-                        </Row>
-                    </Form>
-                </Modal.Body>
-            </Modal>
-
+            
             <ToastContainer />
             <div className="page-hero page-container " id="page-hero">
                 <div className="padding d-flex">
@@ -329,12 +277,12 @@ function Patient() {
                                                     <div className="mb-3">
                                                         <small className="text-muted">You have not subscribed yet. Subscribe now to make unlimited calls to doctors.</small>
                                                     </div>
-                                                    <Button variant="primary" size="xs"  onClick={()=> activateSub()}>Activate</Button>
+                                                    <Button variant="primary" size="xs"  onClick={()=> activateSub()}>{activateText}</Button>
                                                 </div>
                                                 
                                                  :  <div className="page-title m-auto">
                                                         <small className="text-muted">Plan:</small>
-                                                        <h2 className="text-md text-highlight">{patient?.subscription?.plan?.name}</h2>
+                                                        <h2 className="text-md text-highlight">{patient?.subscription?.plan?.name} <FeatherIcon icon="check" color="green"/></h2>
                                                     </div>   
                                             }
                                         </Col>
@@ -364,30 +312,22 @@ function Patient() {
                                                 
                                                 :  
                                                 <div className="page-title m-auto">
-                                                    {/* <small className="text-muted">Plan:</small> */}
-                                                    { treat?.data?.map((plan, index) => {
-                                                        return (
-                                                            
-                                                            <span>
-                                                            <li className="text-sm text-highlight">{plan?.treatmentPlan?.name} (N{formatNumber(plan?.treatmentPlan?.price)}) <FeatherIcon icon="check" color="green"/></li>
-                                                            {/* <li classNa me="text-sm text-highlight"></li> */} 
-                                                            </span> 
-                                                        )
-                                                    }) }
+                                                    <small className="text-muted">Plan:</small>
+                                                    {treat?.data[0]?.payment === null ?
+                                                        <div><h2 className="text-md text-highlight">{treat?.data[0]?.treatmentPlan?.name + " - N" + formatNumber(treat?.data[0]?.treatmentPlan?.price)}</h2>
+                                                        <Button variant="primary" size="xs" onClick={activateTreatment} variant="primary"> {loading && <Spinner animation="border" size="16" role="status">
+                                                            </Spinner>}
+                                                            &nbsp;{activateText}
+                                                        </Button></div>
+
+                                                        : <h2 className="text-md text-highlight">{treat?.data[0]?.treatmentPlan?.name} <FeatherIcon icon="check" color="green"/></h2>
+                                                    }
                                                 </div>   
                                             }
                                         </Col>
                                     </Row>
                                 </div>
-                            </Card.Body>
-                            {/* { treat?.total > 0 ? 
-
-                                <div></div> : */}
-                                <Card.Footer>
-                                    <Button variant="primary" size="xs" onClick={() => setModalShow(true)}>Activate Treatment</Button>
-                                </Card.Footer>
-                            {/* } */}
-                            
+                            </Card.Body>                            
                         </Card>
 
                         : <div></div>

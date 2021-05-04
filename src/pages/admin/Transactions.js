@@ -55,63 +55,6 @@ const Transactions = () => {
         })
     }
 
-
-    // const ggg = async (pageNumber) => {
-    //     const url1 = '/payment/all';
-    //     const url2 = '/admin/users/find?id=';
-    //     Promise.all([
-    //         fetch(`${config.baseUrl}` + url1 + `?page=${pageNumber}`, {
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 "Authorization": "Bearer " + localStorage.getItem("access_token"),
-    //             }
-    //          }),
-    //          fetch(`${config.baseUrl}/admin/users/find?id=` + `${id}`, {
-    //              headers: {
-    //                  "Content-Type": "application/json",
-    //                  "Authorization": "Bearer " + localStorage.getItem("access_token"),
-    //              }
-    //          }),
-    //      ]).then((responses) => {
-    //          // Get a JSON object from each of the responses
-    //          return Promise.all(responses.map(function (response) {
-    //              return response.json();
-    //          }));
-    //      }).then((res) => {
-    //         setTransaction(res[0].data.data);
-    //         setTotal(res[0].data.total);
-    //         setPerPage(res[0].data.per_page);
-    //         setCurrentPage(res[0].data.current_page);
-
-    //         // const id = getIDS();
-
-    //         setName(res[1].data);
-    //         console.log(res[1].data)
-    //      }).catch((error) => {
-    //          console.log(error);
-    //      })
-    // };
-    
-    const getUsername = () => {
-        const url = '/admin/users/find?id=' + getID();
-        fetch(`${config.baseUrl}` + url, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("access_token"),
-            },
-        }).then((res) => {
-            return res.json();
-        }).then((data) => {
-            setName(data.data)
-        })
-
-
-        // console.log(jsonData.data.profile?.);
-        
-        // return jsonData.data.profile?.firstname;
-    }
-
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(total / perPage); i++) {
         pageNumbers.push(i);
@@ -215,7 +158,7 @@ const Transactions = () => {
                                                 </td>
                                                 <td>
                                                     <div className="item-title text-color">
-                                                        {transaction.status ? <span className="badge badge-success badge-sm">Completed</span> : <span className="badge badge-warning badge-sm">Pending</span>}
+                                                        {transaction.status ? <span className="badge badge-success badge-sm">Completed</span> : <span className="badge badge-success badge-sm">Completed</span>}
                                                     </div>
                                                 </td>
                                                 <td>
