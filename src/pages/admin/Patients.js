@@ -8,9 +8,11 @@ import {dateFormatting} from '../../helpers/functions'
 import FeatherIcon from 'feather-icons-react'
 
 import AuthLayout from '../../layouts/auth'
+import { ToastContainer, toast } from 'react-toastify';
 
 function Patients() {
     const [patients, setPatient] = useState([]);
+    const [search, setSearch] = useState([]);
     const [total, setTotal] = useState();
     const [perPage, setPerPage] = useState();
     const [currentPage, setCurrentPage] = useState();
@@ -39,6 +41,61 @@ function Patients() {
         setCurrentPage(jsonData.paginator.current_page);
     };
 
+    const handleSearch = (e) => {
+        // e.preventDefault();
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            fetch('http://helloworld.com.ng/medflit-api/api/patients/search?q=' + `${e.target.value}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("access_token"),
+                }
+            }).then((res) => {
+                return res.json();
+            }).then((data) => {
+                if (data.data.length === 0) {
+                    toast.error("Patient does not exist", {
+                        position: toast.POSITION.TOP_RIGHT
+                    });
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
+                } else {
+                    // setSearch(data.data);
+                    const userID = data.data[0].user_id;
+                    const url = '/admin/users/find?id=';
+                    fetch(`${config.baseUrl}` + url + `${userID}`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + localStorage.getItem("access_token"),
+                        },
+                    }).then((response) =>{
+                        return response.json();
+                    }).then((data2) => {
+                        if(data2.error) {
+                            console.log(data2.message)
+                        } else {
+                            setTimeout(() => {
+                                history.push(
+                                    {
+                                        pathname: `/admin/search-patient/${e.target.value}`,
+                                        state: {
+                                            patientDetail: data2.data,
+                                        }
+                                });
+                                // setAlert(false);
+                            }, 3000);
+                        }
+                    })
+
+                }
+            }).catch((error) => {
+                console.log(error);
+            })
+        }
+    }
+
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(total / perPage); i++) {
         pageNumbers.push(i);
@@ -61,6 +118,7 @@ function Patients() {
 
     return (
         <AuthLayout>
+            <ToastContainer />
             <div className="page-hero page-container " id="page-hero">
                 <div className="padding d-flex">
                     <div className="page-title">
@@ -85,7 +143,7 @@ function Patients() {
                     <div className="mb-5">
                         <div className="toolbar ">
                             <div className="btn-group">
-                                <button className="btn btn-sm btn-icon btn-white" dataToggle="tooltip" title="Trash" id="btn-trash">
+                                <button className="btn btn-sm btn-icon btn-white" dataToggle="tooltip" title="Trash" id="btn-trash"> 
                                     <FeatherIcon icon="trash" className="text-muted"/>
                                 </button>
                                 <button className="btn btn-sm btn-icon btn-white sort " data-sort="item-title" data-toggle="tooltip" title="Sort">
@@ -94,11 +152,11 @@ function Patients() {
                             </div>
                             <form className="flex">
                                 <div className="input-group">
-                                    <input type="text" className="form-control form-control-theme form-control-sm search" placeholder="Search" required/>
+                                    <input type="text" className="form-control form-control-theme form-control-sm search" placeholder="Search" onKeyDown={handleSearch}/>
                                     <span className="input-group-append">
                                         <button className="btn btn-white no-border btn-sm" type="button">
-                                        <span className="d-flex text-muted"><FeatherIcon icon="search" size="16"/></span>
-                                    </button>
+                                            <span className="d-flex text-muted"><FeatherIcon icon="search" size="16"/></span>
+                                        </button>
                                     </span>
                                 </div>
                             </form>
@@ -107,12 +165,6 @@ function Patients() {
                             <Table className="table table-theme table-row v-middle">
                                 <thead>
                                     <tr>
-                                        {/* <th style={{width: "20px"}}>
-                                            <label className="ui-check m-0">
-                                                <input type="checkbox"/>
-                                                <i></i>
-                                            </label>
-                                        </th> */}
                                         <th className="text-muted">S/N</th>
                                         <th className="text-muted">Email</th>
                                         <th className="text-muted">First Name</th>

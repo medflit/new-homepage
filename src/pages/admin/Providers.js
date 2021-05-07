@@ -99,6 +99,62 @@ function Providers() {
         setCurrentPage(jsonData.paginator.current_page);
     };
 
+    const handleSearch = (e) => {
+        // e.preventDefault();
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            fetch('http://helloworld.com.ng/medflit-api/api/patients/search?q=' + `${e.target.value}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("access_token"),
+                }
+            }).then((res) => {
+                return res.json();
+            }).then((data) => {
+                if (data.data.length === 0) {
+                    toast.error("Doctor does not exist", {
+                        position: toast.POSITION.TOP_RIGHT
+                    });
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
+                } else {
+                    // setSearch(data.data);
+                    const userID = data.data[0].user_id;
+                    const url = '/admin/users/find?id=';
+                    fetch(`${config.baseUrl}` + url + `${userID}`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + localStorage.getItem("access_token"),
+                        },
+                    }).then((response) =>{
+                        return response.json();
+                    }).then((data2) => {
+                        if(data2.error) {
+                            console.log(data2.message)
+                        } else {
+                            setTimeout(() => {
+                                history.push(
+                                    {
+                                        pathname: `/admin/search-doctor/${e.target.value}`,
+                                        state: {
+                                            doctorDetail: data2.data,
+                                        }
+                                });
+                                // setAlert(false);
+                            }, 3000);
+                        }
+                    })
+
+                }
+            }).catch((error) => {
+                console.log(error);
+            })
+        }
+    }
+
+
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(total / perPage); i++) {
         pageNumbers.push(i);
@@ -154,7 +210,7 @@ function Providers() {
                                     </div>
                                     <form className="flex">
                                         <div className="input-group">
-                                            <input type="text" className="form-control form-control-theme form-control-sm search" placeholder="Search" />
+                                            <input type="text" className="form-control form-control-theme form-control-sm search" placeholder="Search"  onKeyDown={handleSearch} />
                                             <span className="input-group-append">
                                                 <button className="btn btn-white no-border btn-sm" type="button">
                                                 <span className="d-flex text-muted"><FeatherIcon icon="search" size="16"/></span>
@@ -199,21 +255,21 @@ function Providers() {
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <div className="item-title text-color ">{provider.profile === null ? "-" : capitalize(provider?.profile?.firstname + " " + provider?.profile?.lastname) }</div>                                            
+                                                            <div className="item-title text-color ">{provider?.profile === null ? "-" : capitalize(provider?.profile?.firstname + " " + provider?.profile?.lastname) }</div>                                            
                                                         </td>
                                                         <td className="flex">
                                                             <div className="item-title text-color ">{provider?.biodata?.medical_id}</div>
                                                         </td>
                                                         <td className="flex">
-                                                            <div className="item-title text-color ">{provider.profile === null ? "-" : provider?.provider?.hospital_name}</div>
+                                                            <div className="item-title text-color ">{provider?.profile === null ? "-" : provider?.provider?.hospital_name}</div>
                                                         </td>
                                                         <td>
                                                             <div className="item-title text-color">
-                                                            {provider.profile === null ? "-" : provider?.phone}
+                                                            {provider?.profile === null ? "-" : provider?.phone}
                                                             </div>
                                                         </td>
                                                         <td className="flex">
-                                                            <div className="item-title text-color ">{provider.profile === null ? "-" : provider?.provider?.licenses?.id_number}</div>
+                                                            <div className="item-title text-color ">{provider?.profile === null ? "-" : provider?.provider?.licenses?.id_number}</div>
                                                         </td>
                                                         
                                                         <td className="flex">
@@ -222,13 +278,13 @@ function Providers() {
                                                             </div>
                                                         </td>
                                                         <td className="flex">
-                                                            <div className=" item-title text-color ">{provider.profile === null ? "-" : <a href={checkMedicalLicense(provider?.provider?.uploaded_documents).url}>View</a>}</div>
+                                                            <div className=" item-title text-color ">{provider?.profile === null ? "-" : <a href={checkMedicalLicense(provider?.provider?.uploaded_documents).url}>View</a>}</div>
                                                         </td>
                                                         <td className="flex">
-                                                            <div className=" item-title text-color ">{provider.profile === null ? "-" : <a href={checkUniCert(provider?.provider?.uploaded_documents).url}>View</a>}</div>
+                                                            <div className=" item-title text-color ">{provider?.profile === null ? "-" : <a href={checkUniCert(provider?.provider?.uploaded_documents).url}>View</a>}</div>
                                                         </td>
                                                         <td>
-                                                            {provider.publish ? <span className="badge badge-success">
+                                                            {provider?.publish ? <span className="badge badge-success">
                                                                 Verified
                                                             </span> : <span className=" badge badge-secondary">
                                                                 Not verified
@@ -242,8 +298,8 @@ function Providers() {
                                                                 </Dropdown.Toggle>
 
                                                                 <Dropdown.Menu>
-                                                                    <Dropdown.Item><Link to={{pathname: `/admin/profile/provider/${provider.id}`, state: { "id": provider.id}}}>View</Link></Dropdown.Item>
-                                                                    {provider.publish ? <Dropdown.Item>Unverify</Dropdown.Item> : <Dropdown.Item onClick={() => verify(provider.email)} >Verify</Dropdown.Item> }
+                                                                    <Dropdown.Item><Link to={{pathname: `/admin/profile/provider/${provider?.id}`, state: { "id": provider?.id}}}>View</Link></Dropdown.Item>
+                                                                    {provider?.publish ? <Dropdown.Item>Unverify</Dropdown.Item> : <Dropdown.Item onClick={() => verify(provider?.email)} >Verify</Dropdown.Item> }
                                                                     
                                                                     <Dropdown.Item className="text-danger">Delete</Dropdown.Item>
                                                                     <Dropdown.Item>Add to free plan</Dropdown.Item>

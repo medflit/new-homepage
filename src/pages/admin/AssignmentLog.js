@@ -109,8 +109,8 @@ const AssignmentLog = () => {
                     // setAlert(false);
                 }, 3000);
 
-                console.log(data[0].data)
-                console.log(data[1].data)
+                // console.log(data[0].data)
+                // console.log(data[1].data)
             }
         }).catch((error) => {
             console.log(error);

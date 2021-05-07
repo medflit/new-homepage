@@ -38,6 +38,8 @@ import Payments from '../pages/admin/providers/Payment'
 
 import useToken from '../components/app/useToken'
 import EditAssignment from '../pages/admin/EditAssignment';
+import SearchPatient from '../pages/admin/SearchPatient';
+import SearchDoctor from '../pages/admin/SearchDoctor';
 
 // function setToken(userToken) {
 //     sessionStorage.setItem('token', JSON.stringify(userToken))
@@ -87,6 +89,8 @@ const Routes = (props) => {
                 <Route path="/admin/assignment-log" render={authGuard(AssignmentLog)}/>
                 <Route path="/admin/assign-doctor" render={authGuard(AssignDoctor)}/>
                 <Route path="/admin/edit-assignment/:id" render={authGuard(EditAssignment)}/>
+                <Route path="/admin/search-patient/:id" render={authGuard(SearchPatient)}/>
+                <Route path="/admin/search-doctor/:id" render={authGuard(SearchDoctor)}/>
                 <Route path="/admin/consultation-transaction" render={authGuard(ConsultationTransaction)}/>
                 <Route exact path="/admin/inbox" render={authGuard(Inbox)}/>
                 <Route path="/admin/inbox/show-inbox" render={authGuard(InboxShow)}/>
