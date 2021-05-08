@@ -143,7 +143,7 @@ function Providers() {
                                         }
                                 });
                                 // setAlert(false);
-                            }, 3000);
+                            }, 1000);
                         }
                     })
 

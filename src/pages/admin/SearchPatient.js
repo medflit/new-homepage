@@ -12,6 +12,8 @@ const SearchPatient = () => {
     const location = useLocation()
     const patientDetail = location.state.patientDetail;
 
+    console.log(patientDetail)
+
     return (
         <AuthLayout>
             <Container>
