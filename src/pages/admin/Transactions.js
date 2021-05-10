@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {Table, Col, Row, Container, Card, Dropdown} from 'react-bootstrap'
-import { Link, useLocation } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import config from '../../api/index'
 
 import {formatNumber, getPaymentType} from '../../helpers/functions'
@@ -8,6 +8,7 @@ import {formatNumber, getPaymentType} from '../../helpers/functions'
 import FeatherIcon from 'feather-icons-react'
 
 import AuthLayout from '../../layouts/auth'
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const Transactions = () => {
@@ -16,6 +17,7 @@ const Transactions = () => {
     const [perPage, setPerPage] = useState();
     const [currentPage, setCurrentPage] = useState();
     const [name, setName] = useState();
+    const [searchValue, setSearchValue] = useState([]);
     // const [id, getID] = useState();
 
     useEffect(() => {
@@ -24,6 +26,8 @@ const Transactions = () => {
         // getIDS();
         // ggg();
     }, []);
+
+    const history = useHistory();
 
     const getAllTransactions = async (pageNumber) => {
         const url = '/payment/all';
@@ -55,6 +59,71 @@ const Transactions = () => {
         })
     }
 
+    const handleSearch = (e) => {
+        e.preventDefault();
+
+        fetch('http://helloworld.com.ng/medflit-api/api/patients/search?q=' + `${searchValue}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("access_token"),
+            }
+        }).then((res) => {
+            return res.json();
+        }).then((data) => {
+            if (data.data.length === 0) {
+                toast.error("Patient does not exist", {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            } else {
+                // setSearch(data.data);
+                const userID = data.data[0].user_id;
+                const userType = data.data[0].usertype;
+
+                if (userType === 2) {                    
+                    const url = '/admin/users/find?id=';
+                    fetch(`${config.baseUrl}` + url + `${userID}`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + localStorage.getItem("access_token"),
+                        },
+                    }).then((response) =>{
+                        return response.json();
+                    }).then((data2) => {
+                        if(data2.error) {
+                            console.log(data2.message)
+                        } else {
+                            setTimeout(() => {
+                                history.push(
+                                    {
+                                        pathname: `/admin/search-transaction/${searchValue}`,
+                                        state: {
+                                            patientTransactions: data2.data.treatmentPlans.data,
+                                        }
+                                });
+                                // setAlert(false);
+                            }, 1000);
+                        }
+                    })
+                } else {
+                    toast.error("Not a valid patient information", {
+                        position: toast.POSITION.TOP_RIGHT
+                    });
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
+                }
+
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+    // }
+    }
+
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(total / perPage); i++) {
         pageNumbers.push(i);
@@ -76,6 +145,7 @@ const Transactions = () => {
 
     return (
         <AuthLayout>
+            <ToastContainer />
             <div className="page-hero page-container " id="page-hero">
                 <div className="padding d-flex">
                     <div className="page-title">
@@ -107,11 +177,11 @@ const Transactions = () => {
                                     <i className="sorting"></i>
                                 </button>
                             </div>
-                            <form className="flex">
+                            <form className="flex" onSubmit={handleSearch}>
                                 <div className="input-group">
-                                    <input type="text" className="form-control form-control-theme form-control-sm search" placeholder="Search" required/>
+                                    <input type="text" className="form-control form-control-theme form-control-sm search" placeholder="Search" onChange={e => setSearchValue(e.target.value)}/>
                                     <span className="input-group-append">
-                                        <button className="btn btn-white no-border btn-sm" type="button">
+                                        <button className="btn btn-white no-border btn-sm" type="submit">
                                         <span className="d-flex text-muted"><FeatherIcon icon="search" size="16"/></span>
                                     </button>
                                     </span>

@@ -15,6 +15,7 @@ import AuthLayout from '../../layouts/auth'
 function Providers() {
     const [providers, setProvider] = useState([]);
     const [user, setUser] = useState([]);
+    const [searchValue, setSearchValue] = useState([]);
     const [total, setTotal] = useState();
     const [perPage, setPerPage] = useState();
     const [currentPage, setCurrentPage] = useState();
@@ -101,9 +102,9 @@ function Providers() {
 
     const handleSearch = (e) => {
         // e.preventDefault();
-        if (e.key === 'Enter') {
+        // if (e.key === 'Enter') {
             e.preventDefault();
-            fetch('http://helloworld.com.ng/medflit-api/api/patients/search?q=' + `${e.target.value}`, {
+            fetch('http://helloworld.com.ng/medflit-api/api/patients/search?q=' + `${searchValue}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
@@ -121,37 +122,48 @@ function Providers() {
                 } else {
                     // setSearch(data.data);
                     const userID = data.data[0].user_id;
-                    const url = '/admin/users/find?id=';
-                    fetch(`${config.baseUrl}` + url + `${userID}`, {
-                        method: "GET",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": "Bearer " + localStorage.getItem("access_token"),
-                        },
-                    }).then((response) =>{
-                        return response.json();
-                    }).then((data2) => {
-                        if(data2.error) {
-                            console.log(data2.message)
-                        } else {
-                            setTimeout(() => {
-                                history.push(
-                                    {
-                                        pathname: `/admin/search-doctor/${e.target.value}`,
-                                        state: {
-                                            doctorDetail: data2.data,
-                                        }
-                                });
-                                // setAlert(false);
-                            }, 1000);
-                        }
-                    })
+                    const userType = data.data[0].usertype;
+
+                    if (userType === 3) {
+                        const url = '/admin/users/find?id=';
+                        fetch(`${config.baseUrl}` + url + `${userID}`, {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": "Bearer " + localStorage.getItem("access_token"),
+                            },
+                        }).then((response) =>{
+                            return response.json();
+                        }).then((data2) => {
+                            if(data2.error) {
+                                console.log(data2.message)
+                            } else {
+                                setTimeout(() => {
+                                    history.push(
+                                        {
+                                            pathname: `/admin/search-doctor/${searchValue}`,
+                                            state: {
+                                                doctorDetail: data2.data,
+                                            }
+                                    });
+                                    // setAlert(false);
+                                }, 1000);
+                            }
+                        })
+                    } else {
+                        toast.error("Not a valid provider information", {
+                            position: toast.POSITION.TOP_RIGHT
+                        });
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
+                    }
 
                 }
             }).catch((error) => {
                 console.log(error);
             })
-        }
+        // }
     }
 
 
@@ -208,11 +220,11 @@ function Providers() {
                                             <i className="sorting"></i>
                                         </button>
                                     </div>
-                                    <form className="flex">
+                                    <form className="flex" onSubmit={handleSearch}>
                                         <div className="input-group">
-                                            <input type="text" className="form-control form-control-theme form-control-sm search" placeholder="Search"  onKeyDown={handleSearch} />
+                                            <input type="text" className="form-control form-control-theme form-control-sm search" placeholder="Search" onChange={e => setSearchValue(e.target.value)}/>
                                             <span className="input-group-append">
-                                                <button className="btn btn-white no-border btn-sm" type="button">
+                                                <button className="btn btn-white no-border btn-sm" type="submit">
                                                 <span className="d-flex text-muted"><FeatherIcon icon="search" size="16"/></span>
                                             </button>
                                             </span>

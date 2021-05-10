@@ -12,7 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 function Patients() {
     const [patients, setPatient] = useState([]);
-    const [search, setSearch] = useState([]);
+    const [searchValue, setSearchValue] = useState([]);
     const [total, setTotal] = useState();
     const [perPage, setPerPage] = useState();
     const [currentPage, setCurrentPage] = useState();
@@ -42,10 +42,9 @@ function Patients() {
     };
 
     const handleSearch = (e) => {
-        // e.preventDefault();
-        if (e.key === 'Enter') {
             e.preventDefault();
-            fetch('http://helloworld.com.ng/medflit-api/api/patients/search?q=' + `${e.target.value}`, {
+
+            fetch('http://helloworld.com.ng/medflit-api/api/patients/search?q=' + `${searchValue}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
@@ -63,37 +62,48 @@ function Patients() {
                 } else {
                     // setSearch(data.data);
                     const userID = data.data[0].user_id;
-                    const url = '/admin/users/find?id=';
-                    fetch(`${config.baseUrl}` + url + `${userID}`, {
-                        method: "GET",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": "Bearer " + localStorage.getItem("access_token"),
-                        },
-                    }).then((response) =>{
-                        return response.json();
-                    }).then((data2) => {
-                        if(data2.error) {
-                            console.log(data2.message)
-                        } else {
-                            setTimeout(() => {
-                                history.push(
-                                    {
-                                        pathname: `/admin/search-patient/${e.target.value}`,
-                                        state: {
-                                            patientDetail: data2.data,
-                                        }
-                                });
-                                // setAlert(false);
-                            }, 1000);
-                        }
-                    })
+                    const userType = data.data[0].usertype;
+
+                    if (userType === 2) {                    
+                        const url = '/admin/users/find?id=';
+                        fetch(`${config.baseUrl}` + url + `${userID}`, {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": "Bearer " + localStorage.getItem("access_token"),
+                            },
+                        }).then((response) =>{
+                            return response.json();
+                        }).then((data2) => {
+                            if(data2.error) {
+                                console.log(data2.message)
+                            } else {
+                                setTimeout(() => {
+                                    history.push(
+                                        {
+                                            pathname: `/admin/search-patient/${searchValue}`,
+                                            state: {
+                                                patientDetail: data2.data,
+                                            }
+                                    });
+                                    // setAlert(false);
+                                }, 1000);
+                            }
+                        })
+                    } else {
+                        toast.error("Not a valid patient information", {
+                            position: toast.POSITION.TOP_RIGHT
+                        });
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
+                    }
 
                 }
             }).catch((error) => {
                 console.log(error);
             })
-        }
+        // }
     }
 
     const pageNumbers = [];
@@ -150,11 +160,11 @@ function Patients() {
                                     <i className="sorting"></i>
                                 </button>
                             </div>
-                            <form className="flex">
+                            <form className="flex" onSubmit={handleSearch}>
                                 <div className="input-group">
-                                    <input type="text" className="form-control form-control-theme form-control-sm search" placeholder="Search" onKeyDown={handleSearch}/>
+                                    <input type="text" className="form-control form-control-theme form-control-sm search" placeholder="Search" onChange={e => setSearchValue(e.target.value)} />
                                     <span className="input-group-append">
-                                        <button className="btn btn-white no-border btn-sm" type="button">
+                                        <button className="btn btn-white no-border btn-sm" type="submit">
                                             <span className="d-flex text-muted"><FeatherIcon icon="search" size="16"/></span>
                                         </button>
                                     </span>
@@ -225,7 +235,7 @@ function Patients() {
                                                 {/* onClick={() => viewUser(patient.id)} */}
                                                 
                                                     <Dropdown.Item>
-                                                        <Link to={{pathname: `/admin/profile/patient/${patient.id}`, state: { "patientID": patient?.id, 
+                                                        <Link to={{pathname: `/admin/profile/patient/${patient.id}`, state: { "id": patient?.id, 
                                                         "providerProfileID": patient?.subscription?.assigned_doctor?.provider?.profile_id,
                                                                  "patientProfileID": patient?.profile?.id, 
                                                                  "providerID": patient?.subscription?.assigned_doctor?.id, 

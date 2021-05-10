@@ -106,7 +106,7 @@ const ConsultationLog = () => {
                             </thead>
                             <tbody>
                                 {consultations.map((consultation, index) => {
-                                    console.log(consultation);
+                                    // console.log(consultation);
 
                                     return (
                                     <tr className=" v-middle" key={consultation.id}>

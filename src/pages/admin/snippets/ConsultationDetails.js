@@ -14,7 +14,7 @@ const ConsultationDetails = () => {
 
     const location = useLocation();
 
-    console.log("Location: ", location.state.patient_id);
+    // console.log("Location: ", location.state.patient_id);
 
     // const url = '/patients/find/';
     // const { match: { params } } = props;

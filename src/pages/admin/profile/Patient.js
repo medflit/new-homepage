@@ -37,8 +37,8 @@ function Patient() {
     const subID = location.state.subID;
 
     const getID = () => {
-        const patientID = location.state.patientID;
-        return patientID;
+        const id = location.state.id;
+        return id;
     }
 
     const listOption = () => {
@@ -282,7 +282,7 @@ function Patient() {
                                                 
                                                  :  <div className="page-title m-auto">
                                                         <small className="text-muted">Plan:</small>
-                                                        <h2 className="text-md text-highlight">{patient?.subscription?.plan?.name} <FeatherIcon icon="check" color="green"/></h2>
+                                                        <h2 className="text-md text-highlight">{patient?.subscription?.plan?.name} (Paid)</h2>
                                                     </div>   
                                             }
                                         </Col>
@@ -291,7 +291,6 @@ function Patient() {
                             </Card.Body>
                         </Card>
                         {/* Treatment Code here */}
-
 
                         { patient?.subscription?.active !== false ?
                         <Card>
@@ -314,13 +313,13 @@ function Patient() {
                                                 <div className="page-title m-auto">
                                                     <small className="text-muted">Plan:</small>
                                                     {treat?.data[0]?.payment === null ?
-                                                        <div><h2 className="text-md text-highlight">{treat?.data[0]?.treatmentPlan?.name + " - N" + formatNumber(treat?.data[0]?.treatmentPlan?.price)}</h2>
+                                                        <div><h2 className="text-md text-highlight">{treat?.data[0]?.treatmentPlan?.name + " - N" + formatNumber(treat?.data[0]?.treatmentPlan?.price)} (Not paid)</h2>
                                                         <Button variant="primary" size="xs" onClick={activateTreatment} variant="primary"> {loading && <Spinner animation="border" size="16" role="status">
                                                             </Spinner>}
                                                             &nbsp;{activateText}
                                                         </Button></div>
 
-                                                        : <h2 className="text-md text-highlight">{treat?.data[0]?.treatmentPlan?.name} <FeatherIcon icon="check" color="green"/></h2>
+                                                        : <h2 className="text-md text-highlight">{treat?.data[0]?.treatmentPlan?.name} (Paid)</h2>
                                                     }
                                                 </div>   
                                             }

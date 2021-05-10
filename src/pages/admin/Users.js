@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Container, Table, Dropdown, Card } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import config from '../../api/index'
 
 import FeatherIcon from 'feather-icons-react'
 
 import AuthLayout from '../../layouts/auth'
+import { ToastContainer, toast } from 'react-toastify';
 
 function Users() {
     const [users, setUsers] = useState([]);
     const [total, setTotal] = useState();
     const [perPage, setPerPage] = useState();
     const [currentPage, setCurrentPage] = useState();
+    const [searchValue, setSearchValue] = useState([]);
 
     useEffect(() => {
         getAllUsers(1);
     }, [])
 
+    const history = useHistory();
 
     const url = '/admin/users';
 
@@ -36,6 +39,61 @@ function Users() {
         setPerPage(jsonData.data.per_page);
         setCurrentPage(jsonData.data.current_page);
     };
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+
+        fetch('http://helloworld.com.ng/medflit-api/api/patients/search?q=' + `${searchValue}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("access_token"),
+            }
+        }).then((res) => {
+            return res.json();
+        }).then((data) => {
+            if (data.data.length === 0) {
+                toast.error("User does not exist", {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            } else {
+                // setSearch(data.data);
+                const userID = data.data[0].user_id;
+                 
+                const url = '/admin/users/find?id=';
+                fetch(`${config.baseUrl}` + url + `${userID}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + localStorage.getItem("access_token"),
+                    },
+                }).then((response) =>{
+                    return response.json();
+                }).then((data2) => {
+                    if(data2.error) {
+                        console.log(data2.message)
+                    } else {
+                        setTimeout(() => {
+                            history.push(
+                                {
+                                    pathname: `/admin/search-user/${searchValue}`,
+                                    state: {
+                                        userDetails: data2.data,
+                                    }
+                            });
+                            // setAlert(false);
+                        }, 1000);
+                    }
+                })
+
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+    // }
+    }
 
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(total / perPage); i++) {
@@ -59,6 +117,7 @@ function Users() {
 
     return (
         <AuthLayout>
+            <ToastContainer/>
             <div className="page-hero page-container " id="page-hero">
                 <div className="padding d-flex">
                     <div className="page-title">
@@ -91,11 +150,11 @@ function Users() {
                                             <i className="sorting"></i>
                                         </button>
                                     </div>
-                                    <form className="flex">
+                                    <form className="flex" onSubmit={handleSearch}>
                                         <div className="input-group">
-                                            <input type="text" className="form-control form-control-theme form-control-sm search" placeholder="Search" required/>
+                                            <input type="text" className="form-control form-control-theme form-control-sm search" placeholder="Search" onChange={e => setSearchValue(e.target.value)}/>
                                             <span className="input-group-append">
-                                                <button className="btn btn-white no-border btn-sm" type="button">
+                                                <button className="btn btn-white no-border btn-sm" type="submit">
                                                 <span className="d-flex text-muted"><FeatherIcon icon="search" size="16"/></span>
                                             </button>
                                             </span>
