@@ -51,13 +51,13 @@ const SearchPatient = () => {
                                             <div className="item-title text-color">{patientDetail?.email}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{patientDetail?.profile?.firstname}</div>
+                                            <div className="item-title text-color">{patientDetail?.biodata?.firstname}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{patientDetail?.profile?.lastname}</div>
+                                            <div className="item-title text-color">{patientDetail?.biodata?.lastname}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{patientDetail?.profile?.medical_id}</div>
+                                            <div className="item-title text-color">{patientDetail?.biodata?.medical_id}</div>
                                         </td>
                                         <td>
                                             <div className="item-title text-color">{patientDetail?.subscription?.active ? <span class='badge badge-success'>Subscribed</span> : <span class='badge badge-secondary'>Not subscribed</span>}</div>
@@ -66,7 +66,7 @@ const SearchPatient = () => {
                                             <div className="item-title text-color">{patientDetail?.subscription?.expires_at ? patientDetail.subscription.expires_at : "Not Subscribed"}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{dateFormatting(patientDetail?.profile?.created_at)}</div>
+                                            <div className="item-title text-color">{dateFormatting(patientDetail?.created_at)}</div>
                                         </td>
                                         <td>
                                             <div className="item-title text-color">{patientDetail?.subscription?.active ? <span class='badge badge-success'>Active</span> : <span class='badge badge-secondary'>Not Active</span> }</div> 
@@ -83,7 +83,7 @@ const SearchPatient = () => {
                                                     <Dropdown.Item>
                                                         <Link to={{pathname: `/admin/profile/patient/${patientDetail.id}`, state: { "patientID": patientDetail?.id, 
                                                         "providerProfileID": patientDetail?.subscription?.assigned_doctor?.provider?.profile_id,
-                                                                 "patientProfileID": patientDetail?.profile?.id, 
+                                                                 "patientProfileID": patientDetail?.biodata?.id, 
                                                                  "providerID": patientDetail?.subscription?.assigned_doctor?.id, 
                                                                  "subID": patientDetail?.subscription?.id
                                                                  }}}>View</Link>

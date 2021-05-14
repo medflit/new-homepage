@@ -83,25 +83,27 @@ const Transactions = () => {
                 const userType = data.data[0].usertype;
 
                 if (userType === 2) {                    
-                    const url = '/admin/users/find?id=';
+                    const url = '/reports/payments?user_id=';
                     fetch(`${config.baseUrl}` + url + `${userID}`, {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
                             "Authorization": "Bearer " + localStorage.getItem("access_token"),
                         },
-                    }).then((response) =>{
+                    }).then((response) => {
                         return response.json();
                     }).then((data2) => {
                         if(data2.error) {
-                            console.log(data2.message)
+                            toast.error(data2.message, {
+                                position: toast.POSITION.TOP_RIGHT
+                            });
                         } else {
                             setTimeout(() => {
                                 history.push(
                                     {
                                         pathname: `/admin/search-transaction/${searchValue}`,
                                         state: {
-                                            patientTransactions: data2.data.treatmentPlans.data,
+                                            patientTransactions: data2.data.data,
                                         }
                                 });
                                 // setAlert(false);

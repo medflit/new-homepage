@@ -33,6 +33,7 @@ function Patient() {
     }, []);
 
     const patientProfileID = location.state.patientProfileID;
+    console.log("patientProfileID: ", patientProfileID)
     const providerProfileID = location.state.providerProfileID;
     const subID = location.state.subID;
 
@@ -113,7 +114,7 @@ function Patient() {
     }
 
     // const handleChange = (e) => {
-    //     setTreatmentPlanID(e.target.value);
+    //     setTreatmentPlanID(e.target.defaultValue);
     // }
 
     const treatmentPlans = async (id) => {
@@ -154,20 +155,15 @@ function Patient() {
         });
 
         const json_returns = await response.json()
-        // console.log(json_returns)
-
-        // const treatment_id = json_returns.data.id
-        // // console.log("tID: ",treatment_id);
-        // const amount = json_returns.data.treatmentPlan.price
 
         .then((data) => {  
             if (data.error) {
                 toast.error(data.message, {
                     position: toast.POSITION.TOP_RIGHT
                 });
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1000);
+                // setTimeout(() => {
+                //     window.location.reload();
+                // }, 1000);
             } else {
                 // console.log("You can proceed")
                 console.log(data)
@@ -250,8 +246,8 @@ function Patient() {
                                         </Col>
                                         <Col sm={8}>
                                             <div className="page-title m-auto">
-                                                <small className="text-muted">{patient?.profile?.medical_id}</small>
-                                                <h2 className="text-md text-highlight">{patient?.profile?.firstname + " " + patient?.profile?.lastname}</h2>
+                                                <small className="text-muted">{patient?.biodata?.medical_id}</small>
+                                                <h2 className="text-md text-highlight">{patient?.biodata?.firstname + " " + patient?.biodata?.lastname}</h2>
                                             </div>
                                             <hr/>
                                             <div className="page-title m-auto">
@@ -312,7 +308,7 @@ function Patient() {
                                                 :  
                                                 <div className="page-title m-auto">
                                                     <small className="text-muted">Plan:</small>
-                                                    {treat?.data[0]?.payment === null ?
+                                                    { treat?.data[0]?.payment === null ?
                                                         <div><h2 className="text-md text-highlight">{treat?.data[0]?.treatmentPlan?.name + " - N" + formatNumber(treat?.data[0]?.treatmentPlan?.price)} (Not paid)</h2>
                                                         <Button variant="primary" size="xs" onClick={activateTreatment} variant="primary"> {loading && <Spinner animation="border" size="16" role="status">
                                                             </Spinner>}
@@ -365,73 +361,73 @@ function Patient() {
                                             <div className="form-row">
                                                 <div className="form-group col-sm-6">
                                                     <label>Firstname</label>
-                                                    <input type="text" className="form-control" value={patient?.profile?.firstname} required/>
+                                                    <input type="text" className="form-control" defaultValue={patient?.biodata?.firstname} readOnly/>
                                                 </div>
                                                 <div className="form-group col-sm-6">
                                                     <label>Lastname</label>
-                                                    <input type="text" className="form-control" value={patient?.profile?.lastname} required/>
+                                                    <input type="text" className="form-control" defaultValue={patient?.biodata?.lastname} readOnly/>
                                                 </div>
                                             </div>                                            
                                             <div className="form-row">
                                                 <div className="form-group col-sm-6">
                                                     <label>Email Address</label>
-                                                    <input type="email" className="form-control" value={patient?.email} required />
+                                                    <input type="email" className="form-control" defaultValue={patient?.email} readOnly />
                                                 </div>
                                                 <div className="form-group col-sm-6">
                                                     <label>Username</label>
-                                                    <input type="text" className="form-control" value={patient?.username} required/>
+                                                    <input type="text" className="form-control" defaultValue={patient?.username} readOnly/>
                                                 </div>
                                             </div>
                                             <div className="form-row">
                                                 <div className="form-group col-sm-6">
                                                     <label>Marital Status</label>
                                                     <select className="form-control" data-plugin="select2" data-option="{}" data-minimum-results-for-search="Infinity">
-                                                        <option value={patient?.marital_status}>{patient?.marital_status}</option>
+                                                        <option defaultValue={patient?.marital_status}>{patient?.marital_status}</option>
                                                     </select>
                                                 </div>
                                                 <div className="form-group col-sm-6">
                                                     <label>Gender</label>
                                                     <select className="form-control" data-plugin="select2" data-option="{}" data-minimum-results-for-search="Infinity">
-                                                        <option value={patient?.profile?.gender}>{patient?.profile?.gender}</option>
+                                                        <option defaultValue={patient?.biodata?.gender}>{patient?.biodata?.gender}</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div className="form-row">
                                                 <div className="form-group col-sm-6">
                                                     <label>Occupation</label>
-                                                    <input type="text" className="form-control" value={patient?.occupation} required/>
+                                                    <input type="text" className="form-control" defaultValue={patient?.occupation} readOnly/>
                                                 </div>
                                                 <div className="form-group col-sm-6">
                                                     <label>Date of Birth</label>
-                                                    <input type="text" className="form-control" value={patient?.profile?.dob} required/>
+                                                    <input type="text" className="form-control" defaultValue={patient?.biodata?.dob} readOnly/>
                                                 </div>
                                             </div>  
                                             <div className="form-row">
                                                 <div className="form-group col-sm-6">
                                                     <label>Genotype</label>
                                                     <select className="form-control" data-plugin="select2" data-option="{}" data-minimum-results-for-search="Infinity">
-                                                        <option value={patient?.profile?.patient?.genotype}>{patient?.profile?.patient?.genotype}</option>
+                                                        <option defaultValue={patient?.biodata?.patient?.genotype}>{patient?.biodata?.patient?.genotype}</option>
                                                     </select>
                                                 </div>
                                                 <div className="form-group col-sm-6">
                                                     <label>Blood group</label>
                                                     <select className="form-control" data-plugin="select2" data-option="{}" data-minimum-results-for-search="Infinity">
-                                                        <option value={patient?.profile?.patient?.blood_group}>{patient?.profile?.patient?.blood_group}</option>
+                                                        <option defaultValue={patient?.biodata?.patient?.blood_group}>{patient?.biodata?.patient?.blood_group}</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div className="form-row">
                                                 <div className="form-group col-sm-6">
                                                     <label>Telephone</label>
-                                                    <input type="text" className="form-control" value={patient?.phone} required/>
+                                                    <input type="text" className="form-control" defaultValue={patient?.phone} readOnly/>
                                                 </div>
                                                 <div className="form-group col-sm-6">
                                                     <label>Select Country</label>
                                                     <select className="form-control" data-plugin="select2" data-option="{}" data-minimum-results-for-search="Infinity">  
                                                         { countries?.map((country, index) => {
-                                                            if(country?.id === patient?.profile?.country) {
+                                                            if(country?.id === patient?.biodata?.country) {
                                                                 let curCountry = country?.name
-                                                                return (<option value={curCountry}>{curCountry}</option>)
+                                                                return (<option defaultValue={curCountry}>{curCountry}</option>)
                                                             }
                                                             }) 
                                                         }                                                        
@@ -440,7 +436,7 @@ function Patient() {
                                             </div>  
                                             <div className="form-group">
                                                 <label>Address</label>
-                                                <textarea className="form-control" rows="6" data-minwords="6" required placeholder="Type your message" value={patient?.addresses[0]?.street + ", " + patient?.profile?.city}>{patient?.addresses[0]?.street + ", " + patient?.profile?.city}</textarea>
+                                                <textarea className="form-control" rows="6" data-minwords="6" readOnly placeholder="Type your message" value={patient?.addresses[0]?.street + ", " + patient?.biodata?.city}>{patient?.addresses[0]?.street + ", " + patient?.biodata?.city}</textarea>
                                             </div>
 
                                             

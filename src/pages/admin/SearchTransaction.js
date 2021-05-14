@@ -15,7 +15,7 @@ const SearchTransaction = () => {
                 <Row>
                     <Card>
                         <Card.Header>
-                            Transactions
+                            Transactions for {patientTransactions[0]?.profile?.firstname + " " + patientTransactions[0]?.profile?.lastname}
                         </Card.Header>
                     <Card.Body>
                     <div className="mb-5">
@@ -40,17 +40,17 @@ const SearchTransaction = () => {
                                                     <div className="item-title text-color">{index + 1}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{transaction?.payment?.provider?.channel === "card" ? <span className="badge badge-success badge-sm">Card</span> : <span className="badge badge-warning badge-sm">Transfer</span>}</div>
+                                                    <div className="item-title text-color">{transaction?.provider?.channel === "card" ? <span className="badge badge-success badge-sm">Card</span> : <span className="badge badge-warning badge-sm">Transfer</span>}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{ transaction?.payment?.provider?.amount ? formatNumber(transaction?.payment?.provider?.amount) : "Null"}</div>
+                                                    <div className="item-title text-color">{ transaction?.provider?.amount ? formatNumber(transaction?.provider?.amount) : "Null"}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{ transaction?.payment?.payable_type ? getPaymentType(transaction?.payment?.payable_type) : "Null"}</div>
+                                                    <div className="item-title text-color">{ transaction?.payable_type ? getPaymentType(transaction?.payable_type) : "Null"}</div>
                                                 </td>
                                                 <td>
                                                     <div className="item-title text-color">
-                                                        {transaction?.payment?.status ? <span className="badge badge-success badge-sm">Completed</span> : <span className="badge badge-success badge-sm">Completed</span>}
+                                                        {transaction?.status ? <span className="badge badge-success badge-sm">Completed</span> : <span className="badge badge-success badge-sm">Completed</span>}
                                                     </div>
                                                 </td>
                                                 <td>

@@ -153,7 +153,7 @@ function Patients() {
                     <div className="mb-5">
                         <div className="toolbar ">
                             <div className="btn-group">
-                                <button className="btn btn-sm btn-icon btn-white" dataToggle="tooltip" title="Trash" id="btn-trash"> 
+                                <button className="btn btn-sm btn-icon btn-white" data-toggle="tooltip" title="Trash" id="btn-trash"> 
                                     <FeatherIcon icon="trash" className="text-muted"/>
                                 </button>
                                 <button className="btn btn-sm btn-icon btn-white sort " data-sort="item-title" data-toggle="tooltip" title="Sort">
@@ -205,13 +205,13 @@ function Patients() {
                                             <div className="item-title text-color">{patient?.email}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{patient?.profile?.firstname}</div>
+                                            <div className="item-title text-color">{patient?.biodata?.firstname}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{patient?.profile?.lastname}</div>
+                                            <div className="item-title text-color">{patient?.biodata?.lastname}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{patient?.profile?.medical_id}</div>
+                                            <div className="item-title text-color">{patient?.biodata?.medical_id}</div>
                                         </td>
                                         <td>
                                             <div className="item-title text-color">{patient?.subscription?.active ? <span class='badge badge-success'>Subscribed</span> : <span class='badge badge-secondary'>Not subscribed</span>}</div>
@@ -220,7 +220,7 @@ function Patients() {
                                             <div className="item-title text-color">{patient?.subscription?.expires_at ? patient.subscription.expires_at : "Not Subscribed"}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{dateFormatting(patient?.profile?.created_at)}</div>
+                                            <div className="item-title text-color">{dateFormatting(patient?.created_at)}</div>
                                         </td>
                                         <td>
                                             <div className="item-title text-color">{patient?.subscription?.active ? <span class='badge badge-success'>Active</span> : <span class='badge badge-secondary'>Not Active</span> }</div> 
@@ -237,7 +237,7 @@ function Patients() {
                                                     <Dropdown.Item>
                                                         <Link to={{pathname: `/admin/profile/patient/${patient.id}`, state: { "id": patient?.id, 
                                                         "providerProfileID": patient?.subscription?.assigned_doctor?.provider?.profile_id,
-                                                                 "patientProfileID": patient?.profile?.id, 
+                                                                 "patientProfileID": patient?.biodata?.profile_id, 
                                                                  "providerID": patient?.subscription?.assigned_doctor?.id, 
                                                                  "subID": patient?.subscription?.id
                                                                  }}}>View</Link>

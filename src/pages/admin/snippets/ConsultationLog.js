@@ -97,7 +97,6 @@ const ConsultationLog = () => {
                                     {/* <th className="text-muted">Consult. ID</th> */}
                                     <th className="text-muted">Patient</th>
                                     <th className="text-muted">Unique ID.</th>
-                                    <th className="text-muted">Email</th>
                                     <th className="text-muted">Doctor</th>
                                     <th className="text-muted">Diagnosis</th>
                                     <th className="text-muted"><span>Date</span></th>
@@ -121,9 +120,6 @@ const ConsultationLog = () => {
                                     </td>
                                     <td>
                                         <div className="item-title text-color ">{consultation?.patient?.medical_id}</div>                                            
-                                    </td>
-                                    <td>
-                                        <div className="item-title text-color ">{consultation?.patient?.email}</div>                                            
                                     </td>
                                     <td>
                                         <div className="item-title text-color ">{consultation?.provider?.firstname + " " + consultation?.provider?.lastname}</div>
