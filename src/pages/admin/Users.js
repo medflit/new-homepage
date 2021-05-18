@@ -165,12 +165,7 @@ function Users() {
                                     <Table className="table table-theme table-row v-middle">
                                         <thead>
                                             <tr>
-                                                <th style={{width: "20px"}}>
-                                                    <label className="ui-check m-0">
-                                                        <input type="checkbox"/>
-                                                        <i></i>
-                                                    </label>
-                                                </th>
+                                                <th className="text-muted">S/N</th>
                                                 <th className="text-muted">First Name</th>
                                                 <th className="text-muted">Last Name</th>
                                                 <th className="text-muted">Unique ID</th>
@@ -182,30 +177,27 @@ function Users() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        { users.map((user, index) => {
+                                        { users && users.map((user, index) => {
                                             // console.log(user); 
                                             return(  
                                                 <tr className="v-middle" key={user?.id}>
                                                 <td>
-                                                    <label className="ui-check m-0 ">
-                                                        <input type="checkbox" name="id" value="15"/>
-                                                        <i></i>
-                                                    </label>
+                                                    <div className="item-title text-color">{index + 1}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{user?.profile?.firstname}</div>
+                                                    <div className="item-title text-color">{user?.biodata?.firstname}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{user?.profile?.lastname}</div>
+                                                    <div className="item-title text-color">{user?.biodata?.lastname}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{user?.profile?.medical_id}</div>
+                                                    <div className="item-title text-color">{user?.biodata?.medical_id}</div>
                                                 </td>
                                                 <td>
                                                     <div className="item-title text-color">{user?.email}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{user?.profile?.gender}</div>
+                                                    <div className="item-title text-color">{user?.biodata?.gender}</div>
                                                 </td>
                                                 <td>
                                                     <div className="item-title text-color">{user?.phone}</div>

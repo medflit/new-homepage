@@ -33,9 +33,16 @@ function Patient() {
     }, []);
 
     const patientProfileID = location.state.patientProfileID;
+    const patientID = location.state.id;
     console.log("patientProfileID: ", patientProfileID)
+    console.log("patientID: ", patientID);
+
     const providerProfileID = location.state.providerProfileID;
+    console.log("providerProfileID: ", providerProfileID);
+
     const subID = location.state.subID;
+    console.log("subID: ", subID);
+
 
     const getID = () => {
         const id = location.state.id;

@@ -74,13 +74,13 @@ const SearchDoctor = () => {
                                     <tr className="v-middle" key={doctorDetail?.id}>
                                         
                                         <td>
-                                            <div className="item-title text-color ">{doctorDetail.profile === null ? "-" : capitalize(doctorDetail?.profile?.firstname + " " + doctorDetail?.profile?.lastname) }</div> 
+                                            <div className="item-title text-color ">{capitalize(doctorDetail?.biodata?.firstname + " " + doctorDetail?.biodata?.lastname) }</div> 
                                         </td>
                                         <td>
                                             <div className="item-title text-color ">{doctorDetail?.biodata?.medical_id}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color ">{doctorDetail?.profile === null ? "-" : doctorDetail?.doctorDetail?.hospital_name}</div>
+                                            <div className="item-title text-color ">{doctorDetail?.provider?.hospital_name}</div>
                                         </td>
                                         <td>
                                             <div className="item-title text-color">
@@ -88,18 +88,18 @@ const SearchDoctor = () => {
                                             </div>
                                         </td>
                                         <td className="flex">
-                                            <div className="item-title text-color ">{doctorDetail?.profile === null ? "-" : doctorDetail?.doctorDetail?.licenses?.id_number}</div>
+                                            <div className="item-title text-color ">{doctorDetail?.biodata?.licenses?.id_number}</div>
                                         </td>
                                         <td className="flex">
                                             <div className="item-title text-color ">
-                                            {doctorDetail?.profile === null ? "-" : <a href={checkResume(doctorDetail?.provider?.uploaded_documents).url}>View</a>}
+                                            {doctorDetail?.provider?.uploaded_documents && <a href={checkResume(doctorDetail?.provider?.uploaded_documents).url}>View</a>}
                                             </div>
                                         </td>
                                         <td className="flex">
-                                            <div className=" item-title text-color ">{doctorDetail?.profile === null ? "-" : <a href={checkMedicalLicense(doctorDetail?.provider?.uploaded_documents).url}>View</a>}</div>
+                                            <div className=" item-title text-color ">{doctorDetail?.provider?.uploaded_documents && <a href={checkMedicalLicense(doctorDetail?.provider?.uploaded_documents).url}>View</a>}</div>
                                         </td>
                                         <td className="flex">
-                                            <div className=" item-title text-color ">{doctorDetail?.profile === null ? "-" : <a href={checkUniCert(doctorDetail?.provider?.uploaded_documents).url}>View</a>}</div>
+                                            <div className=" item-title text-color ">{doctorDetail?.provider?.uploaded_documents && <a href={checkUniCert(doctorDetail?.provider?.uploaded_documents).url}>View</a>}</div>
                                         </td>
                                         <td>
                                             {doctorDetail?.publish ? <span className="badge badge-success">
