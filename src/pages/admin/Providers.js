@@ -255,7 +255,7 @@ function Providers() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {providers.map((provider, index) => {
+                                            { providers && providers.map((provider, index) => {
                                                 // console.log(provider);
                                                 
                                                 return (

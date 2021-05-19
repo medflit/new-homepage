@@ -220,7 +220,7 @@ function Patients() {
                                             <div className="item-title text-color">{patient?.subscription?.expires_at ? patient.subscription.expires_at : "Not Subscribed"}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{dateFormatting(patient?.created_at)}</div>
+                                            <div className="item-title text-color">{dateFormatting(patient?.biodata?.created_at)}</div>
                                         </td>
                                         <td>
                                             <div className="item-title text-color">{patient?.subscription?.active ? <span class='badge badge-success'>Active</span> : <span class='badge badge-secondary'>Not Active</span> }</div> 
@@ -235,9 +235,9 @@ function Patients() {
                                                 {/* onClick={() => viewUser(patient.id)} */}
                                                 
                                                     <Dropdown.Item>
-                                                        <Link to={{pathname: `/admin/profile/patient/${patient.id}`, state: { "id": patient?.id, 
+                                                        <Link to={{pathname: `/admin/profile/patient/${patient?.biodata?.user_id}`, state: { "id": patient?.biodata?.user_id, 
                                                         "providerProfileID": patient?.subscription?.assigned_doctor?.provider?.profile_id,
-                                                                 "patientProfileID": patient?.biodata?.profile_id, 
+                                                                 "patientProfileID": patient?.biodata?.id, 
                                                                  "providerID": patient?.subscription?.assigned_doctor?.id, 
                                                                  "subID": patient?.subscription?.id
                                                                  }}}>View</Link>

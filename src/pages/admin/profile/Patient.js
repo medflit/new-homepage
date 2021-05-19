@@ -137,9 +137,10 @@ function Patient() {
         const jsonData = await response.json();
 
         setTreatment(jsonData.data);
-        setTreatmentPlanID(jsonData.data?.data[0]?.treatment_plan_id ? jsonData.data?.data[0]?.treatment_plan_id : 1 )
+        setTreatmentPlanID(jsonData.data?.data[0]?.treatment_plan_id)
     }
 
+    // console.log("treatmentPlanID: ", treatmentPlanID);
     const activateTreatment = async () => {
 
         setLoading(true);
@@ -208,14 +209,14 @@ function Patient() {
                         });
                         setTimeout(() => {
                             window.location.reload();
-                        }, 2000);
+                        }, 100000);
                     } else {
                         toast.success("Treatment plan activated successfully!", {
                             position: toast.POSITION.TOP_RIGHT
                         });
                         setTimeout(() => {
                             window.location.reload();
-                        }, 2000);
+                        }, 10000);
                     }
                 })
             }

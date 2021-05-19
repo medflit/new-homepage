@@ -66,7 +66,7 @@ const SearchPatient = () => {
                                             <div className="item-title text-color">{patientDetail?.subscription?.expires_at ? patientDetail.subscription.expires_at : "Not Subscribed"}</div>
                                         </td>
                                         <td>
-                                            <div className="item-title text-color">{dateFormatting(patientDetail?.created_at)}</div>
+                                            <div className="item-title text-color">{dateFormatting(patientDetail?.biodata?.created_at)}</div>
                                         </td>
                                         <td>
                                             <div className="item-title text-color">{patientDetail?.subscription?.active ? <span class='badge badge-success'>Active</span> : <span class='badge badge-secondary'>Not Active</span> }</div> 
@@ -81,7 +81,7 @@ const SearchPatient = () => {
                                                 {/* onClick={() => viewUser(patient.id)} */}
                                                 
                                                     <Dropdown.Item>
-                                                        <Link to={{pathname: `/admin/profile/patient/${patientDetail.id}`, state: { "patientID": patientDetail?.id, 
+                                                        <Link to={{pathname: `/admin/profile/patient/${patientDetail.biodata?.user_id}`, state: { "id": patientDetail?.biodata?.user_id, 
                                                         "providerProfileID": patientDetail?.subscription?.assigned_doctor?.provider?.profile_id,
                                                                  "patientProfileID": patientDetail?.biodata?.id, 
                                                                  "providerID": patientDetail?.subscription?.assigned_doctor?.id, 
