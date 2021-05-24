@@ -48,7 +48,7 @@ const assignDoctors = 'http://helloworld.com.ng/medflit-api/api/subscriptions/as
 
 
 const config = {
-    baseUrl: "http://helloworld.com.ng/medflit-api/api"
+    baseUrl: "http://api.medflit.com/api"
 };
 
 export default config

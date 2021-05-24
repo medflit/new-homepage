@@ -17,7 +17,7 @@ function Hero() {
             <Container>
                 <Row>
                     <Col className="pad m-auto">
-                        <h1>Enjoy your privacy. Book Doctors Online</h1>
+                        <h1>Enjoy Your Privacy. <br/>Book Doctors Online</h1>
                         <p>Medflit is a convenient and affordable telemedicine <br className="d-none d-md-block" />
                             platform that allows you to talk to a board-certified 
                             doctors <br className="d-none d-md-block" />by phone or video.</p>

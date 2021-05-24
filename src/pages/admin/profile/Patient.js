@@ -176,9 +176,7 @@ function Patient() {
                 // console.log("You can proceed")
                 console.log(data)
                 const treatment_id = data.data.id
-                console.log("treatment_id:",treatment_id)
                 const amount = data.data.treatmentPlan.price
-                console.log(data)
 
                 const data2 = {
                     "paid_at": "29-03-2021",
@@ -209,14 +207,14 @@ function Patient() {
                         });
                         setTimeout(() => {
                             window.location.reload();
-                        }, 100000);
+                        }, 3000);
                     } else {
                         toast.success("Treatment plan activated successfully!", {
                             position: toast.POSITION.TOP_RIGHT
                         });
                         setTimeout(() => {
                             window.location.reload();
-                        }, 10000);
+                        }, 3000);
                     }
                 })
             }

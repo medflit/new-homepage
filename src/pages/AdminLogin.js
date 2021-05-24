@@ -37,19 +37,48 @@ function AdminLogin() {
             body: JSON.stringify(data),
         })
             .then((res) => res.json())
-            .then(({ error, data }) => {
-                setMessage({
-                    data: error ? "Invalid email/username or password" : "Logged in successfully, redirecting...",
-                    type: error ? "alert-danger" : "alert-success",
-                });
-                !error &&
-                    setTimeout(() => {
-                        localStorage.setItem("access_token", data.access_token);
-                        history.push("/admin/dashboard");
-                        // setAlert(false);
-                    }, 3000);
+            .then((data) => {
+                // const error = true;s
+                console.log(data);
+                if ( data.error ) {
+                    // const error = false;
+                    setMessage({
+                        data: data.message,
+                        type: "alert-danger",
+                    });
+                    
+                } else {
+                    // const error = true;
+                    if (data.data.usertype === 1) {
+                        setMessage({
+                            data: data.message + " Redirecting to dashboard...",
+                            type: "alert-success"
+                        })
+                        setTimeout(() => {
+                            console.log(data)
+                            localStorage.setItem("access_token", data.access_token);
+                            history.push("/admin/dashboard");
+                        }, 3000);
+                    } else {
+                        setMessage({
+                            data: "Not an administrator",
+                            type: "alert-danger"
+                        })
+                    }   
+                }
+                // setMessage({
+                //     data: error ? "Invalid email/username or password" : "Logged in successfully, redirecting...",
+                //     type: error ? "alert-danger" : "alert-success",
+                // });
+                // // !error &&
+                // //     setTimeout(() => {
+                // //         console.log(data)
+                // //         localStorage.setItem("access_token", data.access_token);
+                // //         // history.push("/admin/dashboard");
+                // //         // setAlert(false);
+                // //     }, 3000);
 
-                !error && e.target.reset();
+                // // !error && e.target.reset();
             });
         
         // setAlert(true);
