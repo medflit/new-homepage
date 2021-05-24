@@ -23,25 +23,25 @@ function Dashboard() {
     const dashboardData = async () => {
 
         Promise.all([
-            fetch('http://helloworld.com.ng/medflit-api/api/patients/find', {
+            fetch( `${config.baseUrl}` + '/patients/find', {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
                 }
             }),
-            fetch('http://helloworld.com.ng/medflit-api/api/providers', {
+            fetch(`${config.baseUrl}` + '/providers', {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
                 }
             }),
-            fetch('http://helloworld.com.ng/medflit-api/api/admin/users', {
+            fetch(`${config.baseUrl}` + '/admin/users', {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
                 }
             }),
-            fetch('http://helloworld.com.ng/medflit-api/api/reports/all-consultations', {
+            fetch(`${config.baseUrl}` + '/reports/all-consultations', {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),

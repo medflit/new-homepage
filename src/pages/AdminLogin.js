@@ -56,7 +56,7 @@ function AdminLogin() {
                         })
                         setTimeout(() => {
                             console.log(data)
-                            localStorage.setItem("access_token", data.access_token);
+                            localStorage.setItem("access_token", data.data.access_token);
                             history.push("/admin/dashboard");
                         }, 3000);
                     } else {
