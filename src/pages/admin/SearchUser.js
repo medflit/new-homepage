@@ -55,13 +55,13 @@ const SearchUser = () => {
                                                     </label>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{user?.profile?.firstname}</div>
+                                                    <div className="item-title text-color">{user?.biodata?.firstname}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{user?.profile?.lastname}</div>
+                                                    <div className="item-title text-color">{user?.biodata?.lastname}</div>
                                                 </td>
                                                 <td>
-                                                    <div className="item-title text-color">{user?.profile?.medical_id}</div>
+                                                    <div className="item-title text-color">{user?.biodata?.medical_id}</div>
                                                 </td>
                                                 <td>
                                                     <div className="item-title text-color">{user?.email}</div>
@@ -82,7 +82,8 @@ const SearchUser = () => {
                                                         </Dropdown.Toggle>
 
                                                         <Dropdown.Menu>
-                                                            {user.usertype === 2 ? <Dropdown.Item><Link to={{pathname: `/admin/profile/patient/${user.id}`, state: { "id": user.id}}}>View</Link></Dropdown.Item> : <Dropdown.Item><Link to={{pathname: `/admin/profile/provider/${user.id}`, state: { "id": user.id}}}>View</Link></Dropdown.Item> }
+                                                            {user.usertype === 2 ? <Dropdown.Item><Link to={{pathname: `/admin/profile/patient/${user?.biodata?.user_id}`, state: { "id": user?.biodata?.user_id}}}>View</Link></Dropdown.Item> 
+                                                            : <Dropdown.Item><Link to={{pathname: `/admin/profile/provider/${user?.biodata?.user_id}`, state: { "id": user?.biodata?.user_id}}}>View</Link></Dropdown.Item> }
                                                             
                                                             <Dropdown.Item href="#" className="text-danger">Delete</Dropdown.Item>
                                                         </Dropdown.Menu>

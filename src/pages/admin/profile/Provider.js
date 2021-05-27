@@ -22,19 +22,17 @@ function Provider() {
 
 
     useEffect(() => {
-        getProviderProfile(getID());  
-        // getID();
+        getProviderProfile(getID());
+        getID();
     }, []);
+
     const getID = () => {
         const id = location.state.id;
-
-        console.log("My ID - ", id);
         return id;
     }
 
     const getCountry = () => {
-        let url = 'https://helloworld.com.ng/medflit-api/api/list-options';
-        fetch(url, {
+        fetch(`${config.baseUrl + config.listOptions}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -47,10 +45,8 @@ function Provider() {
         })        
     }
 
-    const url = '/admin/users/find?id=';
-    // const id = getID();
     const getProviderProfile = async (id) => {
-        const response = await fetch(`${config.baseUrl}` + url + `${id}`, {
+        const response = await fetch(`${config.baseUrl + config.findUser}` + `${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -92,8 +88,8 @@ function Provider() {
                                         </Col>
                                         <Col sm={8}>
                                             <div className="page-title m-auto">
-                                                <h2 className="text-md text-highlight">{provider?.profile?.firstname} {provider?.profile?.lastname}</h2>
-                                                <small className="text-muted">{provider?.profile?.medical_id}
+                                                <h2 className="text-md text-highlight">{provider?.biodata?.firstname} {provider?.biodata?.lastname}</h2>
+                                                <small className="text-muted">{provider?.biodata?.medical_id}
                                                 </small>
                                             </div>
                                         </Col>
@@ -183,11 +179,11 @@ function Provider() {
                                                     <div className="form-row">
                                                         <div className="form-group col-sm-6">
                                                             <label>Firstname</label>
-                                                            <input type="text" className="form-control" value={provider?.profile?.firstname} required/>
+                                                            <input type="text" className="form-control" value={provider?.biodata?.firstname} required/>
                                                         </div>
                                                         <div className="form-group col-sm-6">
                                                             <label>Lastname</label>
-                                                            <input type="text" className="form-control" value={provider?.profile?.lastname} required/>
+                                                            <input type="text" className="form-control" value={provider?.biodata?.lastname} required/>
                                                         </div>
                                                     </div>                                            
                                                     <div className="form-row">
@@ -210,7 +206,7 @@ function Provider() {
                                                         <div className="form-group col-sm-6">
                                                             <label>Gender</label>
                                                             <select className="form-control" data-plugin="select2" data-option="{}" data-minimum-results-for-search="Infinity">
-                                                                <option value="one">{provider?.profile?.gender}</option>
+                                                                <option value="one">{provider?.biodata?.gender}</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -224,7 +220,7 @@ function Provider() {
                                                             <label>Select Country</label>
                                                             <select className="form-control" data-plugin="select2" data-option="{}" data-minimum-results-for-search="Infinity">
                                                                 { countries?.map((country, index) => {
-                                                                    if(country?.id === provider?.profile?.country) {
+                                                                    if(country?.id === provider?.biodata?.country) {
                                                                         let curCountry = country?.name
                                                                         return (<option value={curCountry}>{curCountry}</option>)
                                                                     }
@@ -236,11 +232,11 @@ function Provider() {
                                                     <div className="form-row">
                                                         <div className="form-group col-sm-6">
                                                             <label>Address</label>
-                                                            <textarea className="form-control" rows="6" value={provider?.addresses[0]?.street + ", " + provider?.profile?.city} data-minwords="6" required>{provider?.addresses[0]?.street + ", " + provider?.profile?.city}</textarea>
+                                                            <textarea className="form-control" rows="6" value={provider?.addresses[0]?.street + ", " + provider?.biodata?.city} data-minwords="6" required>{provider?.addresses[0]?.street + ", " + provider?.biodata?.city}</textarea>
                                                         </div>
                                                         <div className="form-group col-sm-6">
                                                             <label>Doctor's bio</label>
-                                                            <textarea className="form-control" rows="6" value={provider?.profile?.bio} data-minwords="6" required>{provider?.profile?.bio}</textarea>
+                                                            <textarea className="form-control" rows="6" value={provider?.biodata?.bio} data-minwords="6" required>{provider?.biodata?.bio}</textarea>
                                                         </div>
                                                     </div>
                                                     <div className="form-row">

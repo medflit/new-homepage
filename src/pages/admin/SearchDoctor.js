@@ -116,7 +116,7 @@ const SearchDoctor = () => {
                                                 </Dropdown.Toggle>
 
                                                 <Dropdown.Menu>
-                                                    <Dropdown.Item><Link to={{pathname: `/admin/profile/provider/${doctorDetail.id}`, state: { "id": doctorDetail.id}}}>View</Link></Dropdown.Item>
+                                                    <Dropdown.Item><Link to={{pathname: `/admin/profile/provider/${doctorDetail?.biodata?.user_id}`, state: { "id": doctorDetail?.biodata?.user_id}}}>View</Link></Dropdown.Item>
                                                     {doctorDetail.publish ? <Dropdown.Item>Unverify</Dropdown.Item> : <Dropdown.Item onClick={() => verify(doctorDetail.email)} >Verify</Dropdown.Item> }
                                                     
                                                     <Dropdown.Item className="text-danger">Delete</Dropdown.Item>

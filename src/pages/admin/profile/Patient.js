@@ -34,15 +34,8 @@ function Patient() {
 
     const patientProfileID = location.state.patientProfileID;
     const patientID = location.state.id;
-    console.log("patientProfileID: ", patientProfileID)
-    console.log("patientID: ", patientID);
-
     const providerProfileID = location.state.providerProfileID;
-    console.log("providerProfileID: ", providerProfileID);
-
     const subID = location.state.subID;
-    console.log("subID: ", subID);
-
 
     const getID = () => {
         const id = location.state.id;
@@ -50,8 +43,7 @@ function Patient() {
     }
 
     const listOption = () => {
-        let url = 'https://helloworld.com.ng/medflit-api/api/list-options';
-        fetch(url, {
+        fetch(`${config.baseUrl + config.listOptions}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -65,8 +57,7 @@ function Patient() {
     }
     
     const getPatientProfile = async (id) => {
-        const url = '/admin/users/find?id=';
-        const response = await fetch(`${config.baseUrl}` + url + `${id}`, {
+        const response = await fetch(`${config.baseUrl + config.findUser}` + `${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -93,7 +84,7 @@ function Patient() {
             "duration_id": 1,
             "treatment_id": 1
         }
-        const response = await fetch(`${config.baseUrl}/admin/banks`, {
+        const response = await fetch(`${config.baseUrl + config.activatePay}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -120,13 +111,8 @@ function Patient() {
         });
     }
 
-    // const handleChange = (e) => {
-    //     setTreatmentPlanID(e.target.defaultValue);
-    // }
-
     const treatmentPlans = async (id) => {
-        const url = '/calls/treatment/get?user_id=';
-        const response = await fetch(`${config.baseUrl}` + url + `${id}`, {
+        const response = await fetch(`${config.baseUrl + config.userTreatment}` + `${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -153,7 +139,7 @@ function Patient() {
             "subscription_id" : subID,
         }
 
-        const response = await fetch(`${config.baseUrl}/calls/treatment`, {
+        const response = await fetch(`${config.baseUrl + config.activateTreatment}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -174,7 +160,7 @@ function Patient() {
                 // }, 1000);
             } else {
                 // console.log("You can proceed")
-                console.log(data)
+                // console.log(data)
                 const treatment_id = data.data.id
                 const amount = data.data.treatmentPlan.price
 
@@ -191,7 +177,7 @@ function Patient() {
                     "treatment_id": treatment_id
                 }
 
-                fetch(`${config.baseUrl}/admin/banks`, {
+                fetch(`${config.baseUrl + config.activatePay}`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

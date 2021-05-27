@@ -22,16 +22,12 @@ const Transactions = () => {
 
     useEffect(() => {
         getAllTransactions();
-        // getUsername(25);
-        // getIDS();
-        // ggg();
     }, []);
 
     const history = useHistory();
 
     const getAllTransactions = async (pageNumber) => {
-        const url = '/payment/all';
-        const response = await fetch(`${config.baseUrl}` + url + `?page=${pageNumber}`, {
+        const response = await fetch(`${config.baseUrl + config.allTransactions}` + `?page=${pageNumber}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -42,27 +38,16 @@ const Transactions = () => {
         const jsonData = await response.json();
         console.log(jsonData.data.data);
         setTransaction(jsonData.data.data);
-
         setTotal(jsonData.data.total);
         setPerPage(jsonData.data.per_page);
         setCurrentPage(jsonData.data.current_page);
 
     };
 
-    const getID = async () => {
-        await transactions.map((transaction) => {
-            // console.log(transaction);
-            let userID;
-            userID = transaction.user_id;
-            console.log(userID);
-            return userID;
-        })
-    }
-
     const handleSearch = (e) => {
         e.preventDefault();
 
-        fetch('http://helloworld.com.ng/medflit-api/api/patients/search?q=' + `${searchValue}`, {
+        fetch(`${config.baseUrl + config.searchPatient}` + `${searchValue}`, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("access_token"),
@@ -82,9 +67,8 @@ const Transactions = () => {
                 const userID = data.data[0].user_id;
                 const userType = data.data[0].usertype;
 
-                if (userType === 2) {                    
-                    const url = '/reports/payments?user_id=';
-                    fetch(`${config.baseUrl}` + url + `${userID}`, {
+                if (userType === 2) {
+                    fetch(`${config.baseUrl + config.userTransaction}` + `${userID}`, {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",

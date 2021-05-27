@@ -66,8 +66,7 @@ const EditAssignment = () => {
     }
 
     const getPatientProfile = async (id) => {
-        const url = '/admin/users/find?id=';
-        const response = await fetch(`${config.baseUrl}` + url + `${id}`, {
+        const response = await fetch(`${config.baseUrl + config.findUser}` + `${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -83,8 +82,7 @@ const EditAssignment = () => {
     }
 
     const getProviderName = async (id) => {
-        const url = '/admin/users/find?id=';
-        const response = await fetch(`${config.baseUrl}` + url + `${id}`, {
+        const response = await fetch(`${config.baseUrl + config.findUser}` + `${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -116,10 +114,7 @@ const EditAssignment = () => {
         console.log("iddd: ", e.target.value)
         setProviderUID(e.target.value)
 
-
-        // const getAllProviders = async () => {
-        const url = '/providers';
-        fetch(`${config.baseUrl}` + url, {
+        fetch(`${config.baseUrl + config.providerList}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -143,9 +138,7 @@ const EditAssignment = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const url = '/patients/search?q=';
-        // console.log(`${config.baseUrl}` + url + `${providerUID}`)
-        fetch(`${config.baseUrl}` + url + `${providerUID}`, {
+        fetch(`${config.baseUrl + config.searchPatient}` + `${providerUID}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -186,7 +179,7 @@ const EditAssignment = () => {
             "patient_id" : patientPID
         }
 
-        fetch(`${config.baseUrl}/subscriptions/assign`, {
+        fetch(`${config.baseUrl + config.assignDoctor}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -216,10 +209,7 @@ const EditAssignment = () => {
                 });
                 setTimeout(() => {
                     window.location.reload();
-                    // history.push("/admin/dashboard");
                 }, 2000);
-                // console.log(newDoctorUID);
-                // setProviderUID(newDoctorUID)
                 let pUID = newDoctorUID;
             }
         });

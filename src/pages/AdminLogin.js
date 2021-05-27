@@ -19,7 +19,6 @@ function AdminLogin() {
     const [username, setUsername] = useState()
     const [password, setPassword] = useState()
     const [message, setMessage] = useState()
-    // const [alert, setAlert] = useState(false)
 
     const history = useHistory();
 
@@ -29,7 +28,7 @@ function AdminLogin() {
             data: "Login in progress...",
             type: "alert-warning",
         });
-        fetch(`${config.baseUrl}/login`, {
+        fetch(`${config.baseUrl + config.login}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -51,7 +50,7 @@ function AdminLogin() {
                     // const error = true;
                     if (data.data.usertype === 1) {
                         setMessage({
-                            data: data.message + " Redirecting to dashboard...",
+                            data: data.message + ", redirecting to dashboard...",
                             type: "alert-success"
                         })
                         setTimeout(() => {
@@ -66,19 +65,6 @@ function AdminLogin() {
                         })
                     }   
                 }
-                // setMessage({
-                //     data: error ? "Invalid email/username or password" : "Logged in successfully, redirecting...",
-                //     type: error ? "alert-danger" : "alert-success",
-                // });
-                // // !error &&
-                // //     setTimeout(() => {
-                // //         console.log(data)
-                // //         localStorage.setItem("access_token", data.access_token);
-                // //         // history.push("/admin/dashboard");
-                // //         // setAlert(false);
-                // //     }, 3000);
-
-                // // !error && e.target.reset();
             });
         
         // setAlert(true);

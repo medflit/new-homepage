@@ -33,10 +33,8 @@ const AssignmentLog = () => {
         getAllAssignedPatients(1);
     }, [])
 
-    const url = '/patients/find';
-
     const getAllAssignedPatients = async (pageNumber) => {
-        const response = await fetch(`${config.baseUrl}` + url + `?page=${pageNumber}`, {
+        const response = await fetch(`${config.baseUrl + config.patientList}` + `?page=${pageNumber}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -60,13 +58,13 @@ const AssignmentLog = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         Promise.all([
-            fetch('http://helloworld.com.ng/medflit-api/api/patients/search?q=' + `${patientUID}`, {
+            fetch(`${config.baseUrl + config.searchPatient}` + `${patientUID}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
                 }
             }),
-            fetch('http://helloworld.com.ng/medflit-api/api/patients/search?q=' + `${doctorUID}`, {
+            fetch(`${config.baseUrl + config.searchDoctor}` + `${doctorUID}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
@@ -108,9 +106,6 @@ const AssignmentLog = () => {
                     });
                     // setAlert(false);
                 }, 3000);
-
-                // console.log(data[0].data)
-                // console.log(data[1].data)
             }
         }).catch((error) => {
             console.log(error);
@@ -242,10 +237,10 @@ const AssignmentLog = () => {
                                                     return (
                                                         <tr className="v-middle" key={patient?.id}>
                                                             <td>
-                                                                <div className="item-title text-color">{patient?.profile?.medical_id}</div>
+                                                                <div className="item-title text-color">{patient?.biodata?.medical_id}</div>
                                                             </td>
                                                             <td>
-                                                                <div className="item-title text-color">{patient?.profile?.firstname + " " + patient?.profile?.lastname}</div>
+                                                                <div className="item-title text-color">{patient?.biodata?.firstname + " " + patient?.profile?.lastname}</div>
                                                             </td>
                                                             
                                                             <td>
@@ -267,8 +262,8 @@ const AssignmentLog = () => {
                                                                     </Dropdown.Toggle>
     
                                                                     <Dropdown.Menu>
-                                                                        <Dropdown.Item ><Link to={{pathname: `/admin/edit-assignment/${patient?.id}`, state: { 
-                                                                            "patientID": patient?.id, "patientPID": patient?.profile?.id, "subID": patient?.subscription?.id, "providerPID": patient?.subscription?.assigned_doctor?.biodata?.id, "providerUID": patient?.subscription?.assigned_doctor?.biodata?.medical_id}}}>Edit</Link></Dropdown.Item>
+                                                                        <Dropdown.Item ><Link to={{pathname: `/admin/edit-assignment/${patient?.biodata?.user_id}`, state: { 
+                                                                            "patientID": patient?.biodata?.user_id, "patientPID": patient?.profile?.id, "subID": patient?.subscription?.id, "providerPID": patient?.subscription?.assigned_doctor?.biodata?.id, "providerUID": patient?.subscription?.assigned_doctor?.biodata?.medical_id}}}>Edit</Link></Dropdown.Item>
                                                                         <Dropdown.Item className="text-danger">Delete</Dropdown.Item>
                                                                     </Dropdown.Menu>
                                                                 </Dropdown>

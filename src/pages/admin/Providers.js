@@ -24,11 +24,10 @@ function Providers() {
 
     useEffect(() => {
         getAllProviders(1);
-        // verify();
     }, [])
 
     const verify = async (email) => {
-        const response = await fetch(`${config.baseUrl}` + "/admin/users/publish"  + `?email=${email}`, {
+        const response = await fetch(`${config.baseUrl + config.verifyDoctor}` + `?email=${email}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -54,37 +53,8 @@ function Providers() {
         });
     };
 
-    // const unverify = async (email) => {
-    //     const response = await fetch(`${config.baseUrl}` + "/admin/users/publish"  + `?email=${email}`, {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "Authorization": "Bearer " + localStorage.getItem("access_token"),
-    //         },
-    //     })
-
-    //     const jsonData = await response.json()
-       
-    //     .then(({error, response}) => {            
-    //         !error &&
-    //             toast.success("User unverified successfully!", {
-    //                 position: toast.POSITION.TOP_RIGHT
-    //             });
-    //             setTimeout(() => {
-    //                 window.location.reload();
-    //             }, 3000);
-
-    //         error && 
-    //         toast.error("Cannot unverify user!", {
-    //             position: toast.POSITION.TOP_RIGHT
-    //         });
-    //     });
-    // };
-
-    const url = '/providers';
-
     const getAllProviders = async (pageNumber) => {
-        const response = await fetch(`${config.baseUrl}` + url + `?page=${pageNumber}`, {
+        const response = await fetch(`${config.baseUrl + config.providerList}` + `?page=${pageNumber}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -101,10 +71,8 @@ function Providers() {
     };
 
     const handleSearch = (e) => {
-        // e.preventDefault();
-        // if (e.key === 'Enter') {
             e.preventDefault();
-            fetch('http://helloworld.com.ng/medflit-api/api/patients/search?q=' + `${searchValue}`, {
+            fetch(`${config.baseUrl + config.searchDoctor}` + `${searchValue}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
@@ -125,8 +93,7 @@ function Providers() {
                     const userType = data.data[0].usertype;
 
                     if (userType === 3) {
-                        const url = '/admin/users/find?id=';
-                        fetch(`${config.baseUrl}` + url + `${userID}`, {
+                        fetch(`${config.baseUrl + config.findUser}` + `${userID}`, {
                             method: "GET",
                             headers: {
                                 "Content-Type": "application/json",
@@ -310,7 +277,7 @@ function Providers() {
                                                                 </Dropdown.Toggle>
 
                                                                 <Dropdown.Menu>
-                                                                    <Dropdown.Item><Link to={{pathname: `/admin/profile/provider/${provider?.id}`, state: { "id": provider?.id}}}>View</Link></Dropdown.Item>
+                                                                    <Dropdown.Item><Link to={{pathname: `/admin/profile/provider/${provider?.biodata?.user_id}`, state: { "id": provider?.biodata?.user_id}}}>View</Link></Dropdown.Item>
                                                                     {provider?.publish ? <Dropdown.Item>Unverify</Dropdown.Item> : <Dropdown.Item onClick={() => verify(provider?.email)} >Verify</Dropdown.Item> }
                                                                     
                                                                     <Dropdown.Item className="text-danger">Delete</Dropdown.Item>

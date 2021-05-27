@@ -24,8 +24,7 @@ function Patients() {
     }, [])
 
     const getAllPatients = async (pageNumber) => {
-        const url = '/patients/find';
-        const response = await fetch(`${config.baseUrl}` + url + `?page=${pageNumber}`, {
+        const response = await fetch(`${config.baseUrl + config.patientList}` + `?page=${pageNumber}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -44,7 +43,7 @@ function Patients() {
     const handleSearch = (e) => {
             e.preventDefault();
 
-            fetch('http://helloworld.com.ng/medflit-api/api/patients/search?q=' + `${searchValue}`, {
+            fetch(`${config.baseUrl + config.searchPatient}` + `${searchValue}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
@@ -65,8 +64,7 @@ function Patients() {
                     const userType = data.data[0].usertype;
 
                     if (userType === 2) {                    
-                        const url = '/admin/users/find?id=';
-                        fetch(`${config.baseUrl}` + url + `${userID}`, {
+                        fetch(`${config.baseUrl + config.findUser}` + `${userID}`, {
                             method: "GET",
                             headers: {
                                 "Content-Type": "application/json",

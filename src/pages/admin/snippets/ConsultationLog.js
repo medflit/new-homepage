@@ -19,10 +19,8 @@ const ConsultationLog = () => {
         getAllConsultations(1);
     }, []);
 
-    const url = '/reports/all-consultations';
-
     const getAllConsultations = async (pageNumber) => {
-        const response = await fetch(`${config.baseUrl}` + url + `?page=${pageNumber}`, {
+        const response = await fetch(`${config.baseUrl + config.allConsultations}` + `?page=${pageNumber}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

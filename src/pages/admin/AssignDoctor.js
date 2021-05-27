@@ -32,8 +32,7 @@ const AssignDoctor = () => {
     const patientID = location.state.patientDetail.user_id;
 
     const getSubID = async (id) => {
-        const url = '/admin/users/find?id=';
-        const response = await fetch(`${config.baseUrl}` + url + `${patientID}`, {
+        const response = await fetch(`${config.baseUrl + config.findUser}` + `${patientID}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -44,7 +43,6 @@ const AssignDoctor = () => {
         const jsonData = await response.json();
 
         setPatientSubID(jsonData.data.subscription.id);
-        // console.log("subID: ",jsonData.data.subscription.id);
     };
 
     const handleClick = () => {
@@ -60,7 +58,7 @@ const AssignDoctor = () => {
             "patient_id" : patientPID
         }
 
-        fetch(`${config.baseUrl}/subscriptions/assign`, {
+        fetch(`${config.baseUrl + config.assignDoctor}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
