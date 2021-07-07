@@ -1,6 +1,6 @@
 import React from 'react'
 import AuthLayout from '../../layouts/auth'
-import {Table, Col, Row, Container, Card, Dropdown} from 'react-bootstrap'
+import {Table, Row, Container, Card} from 'react-bootstrap'
 import { useLocation } from "react-router-dom";
 
 import {formatNumber, getPaymentType} from '../../helpers/functions'

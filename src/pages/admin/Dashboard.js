@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import {useHistory} from 'react-router-dom'
-
 import config from '../../api/index'
 
 import { Row, Col, Container, Card } from 'react-bootstrap'
@@ -23,25 +21,25 @@ function Dashboard() {
     const dashboardData = async () => {
 
         Promise.all([
-            fetch( `${config.baseUrl}` + '/patients/find', {
+            fetch( `${config.baseUrl}/patients/find`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
                 }
             }),
-            fetch(`${config.baseUrl}` + '/providers', {
+            fetch(`${config.baseUrl}/providers`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
                 }
             }),
-            fetch(`${config.baseUrl}` + '/admin/users', {
+            fetch(`${config.baseUrl}/admin/users`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
                 }
             }),
-            fetch(`${config.baseUrl}` + '/reports/all-consultations', {
+            fetch(`${config.baseUrl}/reports/all-consultations`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),

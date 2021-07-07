@@ -2,7 +2,7 @@ import React from 'react'
 
 import AuthLayout from '../../layouts/auth'
 import ConsultationLog from './snippets/ConsultationLog'
-import DirectConsultation from './snippets/DirectConsultation'
+// import DirectConsultation from './snippets/DirectConsultation'
 
 import FeatherIcon from 'feather-icons-react'
 

@@ -19,7 +19,7 @@ const AssignDoctor = () => {
     useEffect(() => {
         getSubID(patientID);
 
-    }, [])
+    })
 
     const location = useLocation();
 
@@ -32,7 +32,7 @@ const AssignDoctor = () => {
     const patientID = location.state.patientDetail.user_id;
 
     const getSubID = async (id) => {
-        const response = await fetch(`${config.baseUrl + config.findUser}` + `${patientID}`, {
+        const response = await fetch(`${config.baseUrl + config.findUser}${patientID}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

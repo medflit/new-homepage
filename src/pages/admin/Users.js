@@ -22,7 +22,7 @@ function Users() {
     const history = useHistory();
 
     const getAllUsers = async (pageNumber) => {
-        const response = await fetch(`${config.baseUrl + config.allUsers}` + `?page=${pageNumber}`, {
+        const response = await fetch(`${config.baseUrl + config.allUsers}?page=${pageNumber}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -41,7 +41,7 @@ function Users() {
     const handleSearch = (e) => {
         e.preventDefault();
 
-        fetch(`${config.baseUrl + config.searchPatient}` + `${searchValue}`, {
+        fetch(`${config.baseUrl + config.searchPatient}${searchValue}`, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("access_token"),
@@ -60,7 +60,7 @@ function Users() {
                 // setSearch(data.data);
                 const userID = data.data[0].user_id;
                  
-                fetch(`${config.baseUrl + config.findUser}` + `${userID}`, {
+                fetch(`${config.baseUrl + config.findUser}${userID}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -102,13 +102,15 @@ function Users() {
     renderPageNumbers = pageNumbers.map(number => {
         let classes = currentPage === number ? 'page-item active' : 'page-item';
       
-        if (number == 1 || number == total || (number >= currentPage - 2 && number <= currentPage + 2)) {
+        if (number === 1 || number === total || (number >= currentPage - 2 && number <= currentPage + 2)) {
             return (
                 <li className={classes}>
                     <span className="page-link" key={number} onClick={() => getAllUsers(number)}>{number}</span>
                 </li>
             );
         }
+
+        return ""
     });
 
 

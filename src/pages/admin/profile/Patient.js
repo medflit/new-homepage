@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { Row, Col, Card, Container, Accordion, Button, Modal, Form } from 'react-bootstrap'
+import { Row, Col, Card, Container, Accordion, Button } from 'react-bootstrap'
 import config from '../../../api'
 import { useLocation } from 'react-router-dom'
 
@@ -30,7 +30,7 @@ function Patient() {
         treatmentPlans(getID());
         listOption();
         getID();
-    }, []);
+    });
 
     const patientProfileID = location.state.patientProfileID;
     const patientID = location.state.id;
@@ -57,7 +57,7 @@ function Patient() {
     }
     
     const getPatientProfile = async (id) => {
-        const response = await fetch(`${config.baseUrl + config.findUser}` + `${id}`, {
+        const response = await fetch(`${config.baseUrl + config.findUser}${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -112,7 +112,7 @@ function Patient() {
     }
 
     const treatmentPlans = async (id) => {
-        const response = await fetch(`${config.baseUrl + config.userTreatment}` + `${id}`, {
+        const response = await fetch(`${config.baseUrl + config.userTreatment}${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -234,7 +234,7 @@ function Patient() {
                                 <div className="">
                                     <Row>
                                         <Col sm={4}>
-                                            <img src={ ProfileImage } className="w-80 avatar img-fluid mb-3"/>
+                                            <img src={ ProfileImage } alt="" className="w-80 avatar img-fluid mb-3"/>
                                         </Col>
                                         <Col sm={8}>
                                             <div className="page-title m-auto">
@@ -302,7 +302,7 @@ function Patient() {
                                                     <small className="text-muted">Plan:</small>
                                                     { treat?.data[0]?.payment === null ?
                                                         <div><h2 className="text-md text-highlight">{treat?.data[0]?.treatmentPlan?.name + " - N" + formatNumber(treat?.data[0]?.treatmentPlan?.price)} (Not paid)</h2>
-                                                        <Button variant="primary" size="xs" onClick={activateTreatment} variant="primary"> {loading && <Spinner animation="border" size="16" role="status">
+                                                        <Button variant="primary" size="xs" onClick={activateTreatment}> {loading && <Spinner animation="border" size="16" role="status">
                                                             </Spinner>}
                                                             &nbsp;{activateText}
                                                         </Button></div>

@@ -20,7 +20,7 @@ const ConsultationLog = () => {
     }, []);
 
     const getAllConsultations = async (pageNumber) => {
-        const response = await fetch(`${config.baseUrl + config.allConsultations}` + `?page=${pageNumber}`, {
+        const response = await fetch(`${config.baseUrl + config.allConsultations}?page=${pageNumber}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -46,13 +46,15 @@ const ConsultationLog = () => {
     renderPageNumbers = pageNumbers.map(number => {
         let classes = currentPage === number ? 'page-item active' : 'page-item';
         
-        if (number == 1 || number == total || (number >= currentPage - 2 && number <= currentPage + 2)) {
+        if (number === 1 || number === total || (number >= currentPage - 2 && number <= currentPage + 2)) {
             return (
                 <li className={classes}>
                     <span className="page-link" key={number} onClick={() => getAllConsultations(number)}>{number}</span>
                 </li>
             );
         }
+
+        return ""
     });
 
 

@@ -1,4 +1,3 @@
-import React, {useState} from 'react'
 
 export const capitalize = (sentence) => {
     const words = sentence.split(" ");
@@ -70,66 +69,66 @@ export const getPaymentType = (payableType) => {
     }
 }
 
-function ListOptions() {
-    const [treatmentPlan, setTreatmentPlan] = useState();
-    const [countries, setCountry] = useState();
-    const [state, setState] = useState();
-    const [duration, setDuration] = useState();
-    const [profession, setProfession] = useState();
-    const [specialty, setSpecialty] = useState();
-    const [paymentType, setPaymentType] = useState();
-    const [subscriptionPlan, setSubscriptionPlan] = useState();
-    const [payable, setPayable] = useState();
-    const [bank, setBank] = useState();
+// function ListOptions() {
+//     const [treatmentPlan, setTreatmentPlan] = useState();
+//     const [countries, setCountry] = useState();
+//     const [state, setState] = useState();
+//     const [duration, setDuration] = useState();
+//     const [profession, setProfession] = useState();
+//     const [specialty, setSpecialty] = useState();
+//     const [paymentType, setPaymentType] = useState();
+//     const [subscriptionPlan, setSubscriptionPlan] = useState();
+//     const [payable, setPayable] = useState();
+//     const [bank, setBank] = useState();
 
     
-    // let url = 'https://helloworld.com.ng/medflit-api/api/list-options';
+//     // let url = 'https://helloworld.com.ng/medflit-api/api/list-options';
 
-    const getList = async (id) => {
-        let url = 'https://helloworld.com.ng/medflit-api/api/list-options';
-        fetch(url, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("access_token"),
-            },
-        }).then((res) => {
-            return res.json();
-        }).then((data) => {
-            setCountry(data.data.countries);
-            setCountry(data.data.countries);
-            setState(data.data.states);
-            setDuration(data.data.durations);
-            setPayable(data.data.payables);
-            setProfession(data.data.professions);
-            setSpecialty(data.data.specialties);
-            setPaymentType(data.data.paymentTypes);
-            setSubscriptionPlan(data.data.subscriptionPlans);
-            setBank(data.data.banks);
-            setTreatmentPlan(data.data.treatmentPlans);
-        })   
+//     const getList = async (id) => {
+//         let url = 'https://helloworld.com.ng/medflit-api/api/list-options';
+//         fetch(url, {
+//             method: 'GET',
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "Authorization": "Bearer " + localStorage.getItem("access_token"),
+//             },
+//         }).then((res) => {
+//             return res.json();
+//         }).then((data) => {
+//             setCountry(data.data.countries);
+//             setCountry(data.data.countries);
+//             setState(data.data.states);
+//             setDuration(data.data.durations);
+//             setPayable(data.data.payables);
+//             setProfession(data.data.professions);
+//             setSpecialty(data.data.specialties);
+//             setPaymentType(data.data.paymentTypes);
+//             setSubscriptionPlan(data.data.subscriptionPlans);
+//             setBank(data.data.banks);
+//             setTreatmentPlan(data.data.treatmentPlans);
+//         })   
 
         
 
-    }
+//     }
 
-    const getCountry = () => {
-        let url = 'https://helloworld.com.ng/medflit-api/api/list-options';
-        fetch(url, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("access_token"),
-            },
-        }).then((res) => {
-            return res.json();
-        }).then((data) => {
-            setCountry(data.data.countries);
-        })        
-    }
-    return (
-        <>
-        </>
-    )
-}
+//     const getCountry = () => {
+//         let url = 'https://helloworld.com.ng/medflit-api/api/list-options';
+//         fetch(url, {
+//             method: 'GET',
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "Authorization": "Bearer " + localStorage.getItem("access_token"),
+//             },
+//         }).then((res) => {
+//             return res.json();
+//         }).then((data) => {
+//             setCountry(data.data.countries);
+//         })        
+//     }
+//     return (
+//         <>
+//         </>
+//     )
+// }
 // export default {getList}

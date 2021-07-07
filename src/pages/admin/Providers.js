@@ -14,7 +14,7 @@ import AuthLayout from '../../layouts/auth'
 
 function Providers() {
     const [providers, setProvider] = useState([]);
-    const [user, setUser] = useState([]);
+    // const [user, setUser] = useState([]);
     const [searchValue, setSearchValue] = useState([]);
     const [total, setTotal] = useState();
     const [perPage, setPerPage] = useState();
@@ -27,7 +27,7 @@ function Providers() {
     }, [])
 
     const verify = async (email) => {
-        const response = await fetch(`${config.baseUrl + config.verifyDoctor}` + `?email=${email}`, {
+        const response = await fetch(`${config.baseUrl + config.verifyDoctor} ?email=${email}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -54,7 +54,7 @@ function Providers() {
     };
 
     const getAllProviders = async (pageNumber) => {
-        const response = await fetch(`${config.baseUrl + config.providerList}` + `?page=${pageNumber}`, {
+        const response = await fetch(`${config.baseUrl + config.providerList}?page=${pageNumber}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -72,7 +72,7 @@ function Providers() {
 
     const handleSearch = (e) => {
             e.preventDefault();
-            fetch(`${config.baseUrl + config.searchDoctor}` + `${searchValue}`, {
+            fetch(`${config.baseUrl + config.searchDoctor}${searchValue}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
@@ -93,7 +93,7 @@ function Providers() {
                     const userType = data.data[0].usertype;
 
                     if (userType === 3) {
-                        fetch(`${config.baseUrl + config.findUser}` + `${userID}`, {
+                        fetch(`${config.baseUrl + config.findUser}${userID}`, {
                             method: "GET",
                             headers: {
                                 "Content-Type": "application/json",
@@ -144,13 +144,15 @@ function Providers() {
     renderPageNumbers = pageNumbers.map(number => {
         let classes = currentPage === number ? 'page-item active' : 'page-item';
       
-        if (number == 1 || number == total || (number >= currentPage - 2 && number <= currentPage + 2)) {
+        if (number === 1 || number === total || (number >= currentPage - 2 && number <= currentPage + 2)) {
             return (
                 <li className={classes}>
                     <span className="page-link" key={number} onClick={() => getAllProviders(number)}>{number}</span>
                 </li>
             );
         }
+
+        return ""
     });
 
     return (

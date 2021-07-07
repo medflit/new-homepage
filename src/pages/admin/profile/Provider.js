@@ -46,7 +46,7 @@ function Provider() {
     }
 
     const getProviderProfile = async (id) => {
-        const response = await fetch(`${config.baseUrl + config.findUser}` + `${id}`, {
+        const response = await fetch(`${config.baseUrl + config.findUser}${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -84,7 +84,7 @@ function Provider() {
                                 <div className="">
                                     <Row>
                                         <Col sm={4}>
-                                            <img src={ ProfileImage } className="w-80 avatar img-fluid"/>
+                                            <img src={ ProfileImage } alt="" className="w-80 avatar img-fluid"/>
                                         </Col>
                                         <Col sm={8}>
                                             <div className="page-title m-auto">

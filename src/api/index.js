@@ -1,5 +1,5 @@
 const config = {
-    baseUrl: "http://api.medflit.com/api",
+    baseUrl: "https://api.medflit.com/api",
     login: "/login",
     providerList: "/providers",
     patientList: "/patients/find",

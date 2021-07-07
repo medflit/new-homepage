@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import {useLocation} from 'react-router-dom'
 import AuthLayout from '../../layouts/auth';
@@ -15,7 +15,7 @@ const SearchDoctor = () => {
     const doctorDetail = location.state.doctorDetail;
 
     const verify = async (email) => {
-        const response = await fetch(`${config.baseUrl}` + "/admin/users/publish"  + `?email=${email}`, {
+        const response = await fetch(`${config.baseUrl}/admin/users/publish?email=${email}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

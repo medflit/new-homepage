@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import {Table, Col, Row, Container, Card, Dropdown} from 'react-bootstrap'
-import { Link, useHistory } from "react-router-dom";
+import {Table, Row, Container, Card} from 'react-bootstrap'
+import { useHistory } from "react-router-dom";
 import config from '../../api/index'
 
 import {formatNumber, getPaymentType} from '../../helpers/functions'
@@ -16,7 +16,7 @@ const Transactions = () => {
     const [total, setTotal] = useState();
     const [perPage, setPerPage] = useState();
     const [currentPage, setCurrentPage] = useState();
-    const [name, setName] = useState();
+    // const [name, setName] = useState();
     const [searchValue, setSearchValue] = useState([]);
     // const [id, getID] = useState();
 
@@ -27,7 +27,7 @@ const Transactions = () => {
     const history = useHistory();
 
     const getAllTransactions = async (pageNumber) => {
-        const response = await fetch(`${config.baseUrl + config.allTransactions}` + `?page=${pageNumber}`, {
+        const response = await fetch(`${config.baseUrl + config.allTransactions}?page=${pageNumber}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -47,7 +47,7 @@ const Transactions = () => {
     const handleSearch = (e) => {
         e.preventDefault();
 
-        fetch(`${config.baseUrl + config.searchPatient}` + `${searchValue}`, {
+        fetch(`${config.baseUrl + config.searchPatient}${searchValue}`, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("access_token"),
@@ -68,7 +68,7 @@ const Transactions = () => {
                 const userType = data.data[0].usertype;
 
                 if (userType === 2) {
-                    fetch(`${config.baseUrl + config.userTransaction}` + `${userID}`, {
+                    fetch(`${config.baseUrl + config.userTransaction}${userID}`, {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
@@ -120,13 +120,15 @@ const Transactions = () => {
     renderPageNumbers = pageNumbers.map(number => {
         let classes = currentPage === number ? 'page-item active' : 'page-item';
       
-        if (number == 1 || number == total || (number >= currentPage - 2 && number <= currentPage + 2)) {
+        if (number === 1 || number === total || (number >= currentPage - 2 && number <= currentPage + 2)) {
             return (
                 <li className={classes}>
                     <span className="page-link" key={number} onClick={() => getAllTransactions(number)}>{number}</span>
                 </li>
             );
         }
+
+        return ""
     });
 
     return (

@@ -24,7 +24,7 @@ function Patients() {
     }, [])
 
     const getAllPatients = async (pageNumber) => {
-        const response = await fetch(`${config.baseUrl + config.patientList}` + `?page=${pageNumber}`, {
+        const response = await fetch(`${config.baseUrl + config.patientList}?page=${pageNumber}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -43,7 +43,7 @@ function Patients() {
     const handleSearch = (e) => {
             e.preventDefault();
 
-            fetch(`${config.baseUrl + config.searchPatient}` + `${searchValue}`, {
+            fetch(`${config.baseUrl + config.searchPatient}${searchValue}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
@@ -64,7 +64,7 @@ function Patients() {
                     const userType = data.data[0].usertype;
 
                     if (userType === 2) {                    
-                        fetch(`${config.baseUrl + config.findUser}` + `${userID}`, {
+                        fetch(`${config.baseUrl + config.findUser}${userID}`, {
                             method: "GET",
                             headers: {
                                 "Content-Type": "application/json",
@@ -114,13 +114,15 @@ function Patients() {
     renderPageNumbers = pageNumbers.map(number => {
         let classes = currentPage === number ? 'page-item active' : 'page-item';
       
-        if (number == 1 || number == total || (number >= currentPage - 2 && number <= currentPage + 2)) {
+        if (number === 1 || number === total || (number >= currentPage - 2 && number <= currentPage + 2)) {
             return (
                 <li className={classes}>
                     <span className="page-link" key={number} onClick={() => getAllPatients(number)}>{number}</span>
                 </li>
             );
         }
+
+        return ""
     });
 
 

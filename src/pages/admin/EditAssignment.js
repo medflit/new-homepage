@@ -31,7 +31,7 @@ const EditAssignment = () => {
         getPatientID();
         getSubID();
         getPatientProfile(getPatientID());
-    }, [])
+    })
 
     const location = useLocation();
 
@@ -66,7 +66,7 @@ const EditAssignment = () => {
     }
 
     const getPatientProfile = async (id) => {
-        const response = await fetch(`${config.baseUrl + config.findUser}` + `${id}`, {
+        const response = await fetch(`${config.baseUrl + config.findUser}${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -82,7 +82,7 @@ const EditAssignment = () => {
     }
 
     const getProviderName = async (id) => {
-        const response = await fetch(`${config.baseUrl + config.findUser}` + `${id}`, {
+        const response = await fetch(`${config.baseUrl + config.findUser}${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -138,7 +138,7 @@ const EditAssignment = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        fetch(`${config.baseUrl + config.searchPatient}` + `${providerUID}`, {
+        fetch(`${config.baseUrl + config.searchPatient}${providerUID}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
