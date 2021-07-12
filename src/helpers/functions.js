@@ -10,6 +10,10 @@ export const capitalize = (sentence) => {
 }
 
 export const dateFormatting = (timeStr) => {
+
+    if(timeStr === null) {
+        return "Not set"
+    }
     let date = new Date(timeStr);
     let day = date.getDate();
     let year = date.getFullYear();

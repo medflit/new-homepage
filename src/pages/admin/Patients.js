@@ -34,6 +34,7 @@ function Patients() {
 
         const jsonData = await response.json();
 
+        console.log(jsonData)
         setPatient(jsonData.data);
         setTotal(jsonData.paginator.total);
         setPerPage(jsonData.paginator.per_page);
@@ -176,7 +177,6 @@ function Patients() {
                                 <thead>
                                     <tr>
                                         <th className="text-muted">S/N</th>
-                                        <th className="text-muted">Email</th>
                                         <th className="text-muted">First Name</th>
                                         <th className="text-muted">Last Name</th>
                                         <th className="text-muted">Unique ID</th>
@@ -200,9 +200,6 @@ function Patients() {
                                         </td> */}
                                         <td>
                                             <div className="item-title text-color">{index + 1}</div>
-                                        </td>
-                                        <td>
-                                            <div className="item-title text-color">{patient?.email}</div>
                                         </td>
                                         <td>
                                             <div className="item-title text-color">{patient?.biodata?.firstname}</div>

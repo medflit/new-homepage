@@ -1,13 +1,11 @@
 import React from 'react'
-import logo from '../../assets/images/medflit-logo.png';
 import logoWhite from '../../assets/images/logo-white.png';
-import { Navbar, NavDropdown, NavbarBrand, Nav, Button } from 'react-bootstrap';
+import { Navbar, NavDropdown, Nav } from 'react-bootstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons'
 
-import { Route, Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Navigation() {
     return (
@@ -52,6 +50,7 @@ function Navigation() {
                         </NavDropdown.Item>
                     </NavDropdown>
                     <Nav.Link className="nl"><Link to="/contact">Contact</Link></Nav.Link>
+                    <Nav.Link  className="nl"><a href="https://p.medflit.com">Old site</a></Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

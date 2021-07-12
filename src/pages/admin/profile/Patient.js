@@ -480,7 +480,7 @@ function Patient() {
                                                 </div>
                                             </Accordion.Toggle>
                                             <Accordion.Collapse eventKey="0">
-                                                <form role="form">
+                                                <form>
                                                     <div class="form-group">
                                                         <label>Profile picture</label>
                                                         <div class="custom-file">
@@ -497,7 +497,7 @@ function Patient() {
                                                 <div><p className="pro-serv">Change Password</p></div>
                                             </div>
                                             <div className="flex"></div>
-                                            <form role="form">
+                                            <form>
                                                 <div className="form-group">
                                                     <label>Old Password</label>
                                                     <input type="password" className="form-control"/>
