@@ -6,7 +6,7 @@ import igIcon from '../../assets/images/ig.svg';
 
 import { Container, Row, Col } from 'react-bootstrap'
 
-import { Route, NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelopeOpen } from '@fortawesome/free-solid-svg-icons'
@@ -20,16 +20,16 @@ function Footer() {
             <Container>
                 <Row>
                     <Col md={4}>
-                        <img src={ logo } width="120" />
+                        <img src={ logo } alt="" width="120" />
                         <Row className="mt-5">
-                            <a href="https://facebook.com/medflit" target="_blank">
-                                <img src={ fbIcon } width="" className="ml-2 social-icon" />
+                            <a href="https://facebook.com/medflit" rel="noreferrer" target="_blank">
+                                <img src={ fbIcon } alt="" width="" className="ml-2 social-icon" />
                             </a>
-                            <a href="https://instagram.com/medflit" target="_blank">
-                                <img src={ igIcon } width="" className="social-icon" />
+                            <a href="https://instagram.com/medflit" rel="noreferrer" target="_blank">
+                                <img src={ igIcon } alt="" width="" className="social-icon" />
                             </a>
-                            <a href="https://twitter.com/medflithealth" target="_blank">
-                                <img src={ twitterIcon } width="" className="social-icon" />
+                            <a href="https://twitter.com/medflithealth" rel="noreferrer" target="_blank">
+                                <img src={ twitterIcon } alt="" width="" className="social-icon" />
                             </a>
                         </Row>
                         <p className="copyright d-none d-md-block">© Medflit 2021. All rights reserved</p>
@@ -40,18 +40,18 @@ function Footer() {
                             <Col md={6}>
                                 <h5>Reach Us</h5>
                                 <div className="footer-link mt-4">
-                                    <p><FontAwesomeIcon icon={ faEnvelopeOpen } /> info@medflithealthresources.com</p>
-                                    <p><FontAwesomeIcon icon={ faPhone } /> +234 705 520 9676</p>
-                                    <p><FontAwesomeIcon icon={ faMapPin } /> 24, Prince Ibrahim Eletu Avenue, Osapa London, Lekki, Lagos, Nigeria.</p>
+                                    <NavLink to=""><p><FontAwesomeIcon icon={ faEnvelopeOpen } /> info@medflithealthresources.com</p></NavLink>
+                                    <NavLink to=""><p><FontAwesomeIcon icon={ faPhone } /> +234 705 520 9676</p></NavLink>
+                                    <NavLink to=""><p><FontAwesomeIcon icon={ faMapPin } /> 24, Prince Ibrahim Eletu Avenue, Osapa London, <br/>Lekki, Lagos, Nigeria.</p></NavLink>
                                 </div>                                    
                             </Col>
                             <Col md={3}>
                                 <h5>Company</h5>
                                 <div className="footer-link mt-4">
                                     <NavLink to="/about"><p>About Us</p></NavLink>
-                                    <a href="https://api.whatsapp.com/send?phone=+=2347055209676&text=Hi,%20I%20would%20like%20to%20know%20more%20about%20Medflit."target="_blank"><p>Contact Us</p></a>
+                                    <a rel="noreferrer" href="https://api.whatsapp.com/send?phone=+=2347055209676&text=Hi,%20I%20would%20like%20to%20know%20more%20about%20Medflit."target="_blank"><p>Contact Us</p></a>
                                     <NavLink to="/partners"><p>Partners</p></NavLink>
-                                    <NavLink to="/admin-login"><p>Login</p></NavLink>
+                                    <NavLink to="/admin-login"><p>Admin</p></NavLink>
                                 </div>                                    
                             </Col>
                             <Col md={3}>
