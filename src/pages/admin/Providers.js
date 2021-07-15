@@ -27,7 +27,7 @@ function Providers() {
     }, [])
 
     const verify = async (email) => {
-        const response = await fetch(`${config.baseUrl + config.verifyDoctor} ?email=${email}`, {
+        const response = await fetch(`${config.baseUrl + config.verifyDoctor}?email=${email}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
