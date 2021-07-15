@@ -50,7 +50,7 @@ function Navigation() {
                         </NavDropdown.Item>
                     </NavDropdown>
                     <Nav.Link className="nl"><Link to="/contact">Contact</Link></Nav.Link>
-                    <Nav.Link  className="nl"><a href="https://p.medflit.com">Old site</a></Nav.Link>
+                    <Nav.Link  className="nl"><a href="http://p.medflit.com">Old site</a></Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
