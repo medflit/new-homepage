@@ -36,7 +36,7 @@ import CurrentStats from '../pages/admin/providers/CurrentStats'
 import PastStats from '../pages/admin/providers/PastStats'
 import Payments from '../pages/admin/providers/Payment'
 
-import useToken from '../components/app/useToken'
+// import useToken from '../components/app/useToken'
 import EditAssignment from '../pages/admin/EditAssignment';
 import SearchPatient from '../pages/admin/SearchPatient';
 import SearchDoctor from '../pages/admin/SearchDoctor';
@@ -61,11 +61,9 @@ const Routes = (props) => {
     // }
     // function to guard the component for private access
     const authGuard = (Component) => () => {
-        return localStorage.getItem("access_token") ? (
-        <Component />
-        ) : (
-        <Redirect to="/admin-login" />
-        );
+        return localStorage.getItem("access_token") ? 
+        ( <Component /> ) : 
+        ( <Redirect to="/admin-login" /> );
     };
     return (
         <Router {...props}>

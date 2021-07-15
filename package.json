@@ -1,5 +1,6 @@
 {
-  "name": "medflit-landingpage",
+  "name": "Medflit",
+  "homepage": "https://medflit.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
