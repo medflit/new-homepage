@@ -12,7 +12,7 @@ function Navigation() {
         <Navbar collapseOnSelect expand="lg" className="primary-bg">
             <Navbar.Brand>
                 <Link to="/">
-                    <img src={logoWhite} className="" width="80" alt="logo" />
+                    <img src={logoWhite} className="" alt="logo" />
                 </Link>
             </Navbar.Brand>
 
@@ -50,7 +50,7 @@ function Navigation() {
                         </NavDropdown.Item>
                     </NavDropdown>
                     <Nav.Link className="nl"><Link to="/contact">Contact</Link></Nav.Link>
-                    <Nav.Link  className="nl"><a href="http://p.medflit.com">Old site</a></Nav.Link>
+                    <a className="nl nx" href="http://p.medflit.com">Old site</a>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

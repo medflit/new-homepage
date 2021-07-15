@@ -42,7 +42,7 @@ code {
 
 .hero {
   background-color: #1D4BB7 !important;
-  padding-bottom: 100px;
+  padding-bottom: 55px;
 }
 
 .hero .pad {
@@ -108,6 +108,16 @@ select {
   color: #fff !important;
 }
 
+.nx {
+  margin-top: 25px;
+}
+
+@media(max-width: 768px) {
+  .nx {
+    margin-left: 25px;
+  }
+  
+}
 
 /* Amazing Benefits Section*/
 

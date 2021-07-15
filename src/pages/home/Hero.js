@@ -1,13 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import heroIllustration from '../../assets/images/hero_image.png';
 import playStore from '../../assets/images/playstore.png';
 import appStore from '../../assets/images/appstore.png';
-import { Container, Row, Col, Button } from 'react-bootstrap';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
-
-import { Route, Link } from 'react-router-dom';
+import { Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 // import Animate from 'animate.css-react'
 
