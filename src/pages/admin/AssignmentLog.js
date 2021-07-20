@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import {Container, Row, Card, Table, Dropdown, Button, Form, Modal} from 'react-bootstrap'
 import AuthLayout from '../../layouts/auth'
-import config from '../../api/index'
+import * as service from '../../api/index'
 import FeatherIcon from 'feather-icons-react'
 
 import {Spinner} from 'react-bootstrap'
@@ -34,7 +34,7 @@ const AssignmentLog = () => {
     }, [])
 
     const getAllAssignedPatients = async (pageNumber) => {
-        const response = await fetch(`${config.baseUrl + config.patientList}` + `?page=${pageNumber}`, {
+        const response = await fetch(`${service.config.baseUrl + service.config.patientList}` + `?page=${pageNumber}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -58,13 +58,13 @@ const AssignmentLog = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         Promise.all([
-            fetch(`${config.baseUrl + config.searchPatient}` + `${patientUID}`, {
+            fetch(`${service.config.baseUrl + service.config.searchPatient}` + `${patientUID}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
                 }
             }),
-            fetch(`${config.baseUrl + config.searchDoctor}` + `${doctorUID}`, {
+            fetch(`${service.config.baseUrl + service.config.searchDoctor}` + `${doctorUID}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),

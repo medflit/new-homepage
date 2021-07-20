@@ -1,4 +1,4 @@
-const config = {
+export const config = {
     baseUrl: "https://api.medflit.com/api",
     login: "/login",
     providerList: "/providers",
@@ -21,4 +21,24 @@ const config = {
 
 };
 
-export default config
+let token = localStorage.getItem("access_token")
+
+if (!token)
+  token = localStorage.token = Math.random().toString(36).substr(-8)
+
+const headers = {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}`,
+}
+
+export const getProviderProfile = async (provider) => {
+    await fetch(`${config.baseUrl + config.findUser}${provider.id}`, { headers })
+    .then((res) => res.json())
+    .then(data => data.data)
+}
+
+export const getAllProviders = async (pageNumber) => {
+    await fetch(`${config.baseUrl + config.providerList}?page=${pageNumber}`, { headers })
+    .then((res) => res.json())
+    .then(data => data.data)
+} 

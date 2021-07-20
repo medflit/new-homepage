@@ -5,7 +5,7 @@ import AuthLayout from '../../layouts/auth';
 import { Row, Container, Table, Dropdown, Card } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import {checkResume, checkMedicalLicense, checkUniCert, capitalize} from '../../helpers/functions'
-import config from '../../api/index'
+import * as service from '../../api/index'
 import FeatherIcon from 'feather-icons-react'
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -15,7 +15,7 @@ const SearchDoctor = () => {
     const doctorDetail = location.state.doctorDetail;
 
     const verify = async (email) => {
-        const response = await fetch(`${config.baseUrl}/admin/users/publish?email=${email}`, {
+        const response = await fetch(`${service.config.baseUrl}/admin/users/publish?email=${email}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

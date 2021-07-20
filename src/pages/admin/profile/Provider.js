@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { Row, Col, Card, Container, Accordion, Button, Table } from 'react-bootstrap'
-import config from '../../../api'
+import * as service from '../../../api'
 
 import { useLocation, useRouteMatch } from 'react-router-dom'
 
@@ -32,7 +32,7 @@ function Provider() {
     }
 
     const getCountry = () => {
-        fetch(`${config.baseUrl + config.listOptions}`, {
+        fetch(`${service.config.baseUrl + service.config.listOptions}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -46,7 +46,7 @@ function Provider() {
     }
 
     const getProviderProfile = async (id) => {
-        const response = await fetch(`${config.baseUrl + config.findUser}${id}`, {
+        const response = await fetch(`${service.config.baseUrl + service.config.findUser}${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -57,7 +57,6 @@ function Provider() {
         const jsonData = await response.json();
 
         setProviderProfile(jsonData.data);
-        console.log(jsonData)
     };
 
     return (

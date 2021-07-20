@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from 'react'
-import config from '../../../api/index'
+import * as service from '../../../api/index'
 
 import { Row, Table, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
@@ -20,7 +20,7 @@ const ConsultationLog = () => {
     }, []);
 
     const getAllConsultations = async (pageNumber) => {
-        const response = await fetch(`${config.baseUrl + config.allConsultations}?page=${pageNumber}`, {
+        const response = await fetch(`${service.config.baseUrl + service.config.allConsultations}?page=${pageNumber}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

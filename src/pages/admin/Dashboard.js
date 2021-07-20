@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import config from '../../api/index'
+import * as service from '../../api/index'
 
 import { Row, Col, Container, Card } from 'react-bootstrap'
 import FeatherIcon from 'feather-icons-react'
@@ -21,25 +21,25 @@ function Dashboard() {
     const dashboardData = async () => {
 
         Promise.all([
-            fetch( `${config.baseUrl}/patients/find`, {
+            fetch( `${service.config.baseUrl}/patients/find`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
                 }
             }),
-            fetch(`${config.baseUrl}/providers`, {
+            fetch(`${service.config.baseUrl}/providers`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
                 }
             }),
-            fetch(`${config.baseUrl}/admin/users`, {
+            fetch(`${service.config.baseUrl}/admin/users`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
                 }
             }),
-            fetch(`${config.baseUrl}/reports/all-consultations`, {
+            fetch(`${service.config.baseUrl}/reports/all-consultations`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),

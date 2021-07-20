@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Container, Table, Dropdown, Card } from 'react-bootstrap'
 import { Link, useHistory } from "react-router-dom";
-import config from '../../api/index'
+import * as service from '../../api/index'
 
 import {dateFormatting} from '../../helpers/functions'
 
@@ -24,7 +24,7 @@ function Patients() {
     }, [])
 
     const getAllPatients = async (pageNumber) => {
-        const response = await fetch(`${config.baseUrl + config.patientList}?page=${pageNumber}`, {
+        const response = await fetch(`${service.config.baseUrl + service.config.patientList}?page=${pageNumber}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -44,7 +44,7 @@ function Patients() {
     const handleSearch = (e) => {
             e.preventDefault();
 
-            fetch(`${config.baseUrl + config.searchPatient}${searchValue}`, {
+            fetch(`${service.config.baseUrl + service.config.searchPatient}${searchValue}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
@@ -65,7 +65,7 @@ function Patients() {
                     const userType = data.data[0].usertype;
 
                     if (userType === 2) {                    
-                        fetch(`${config.baseUrl + config.findUser}${userID}`, {
+                        fetch(`${service.config.baseUrl + service.config.findUser}${userID}`, {
                             method: "GET",
                             headers: {
                                 "Content-Type": "application/json",

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Col, Card, Container, Accordion, Button, Table } from 'react-bootstrap'
-import config from '../../../api'
+import * as service from '../../../api'
 
 import { useLocation, useRouteMatch } from 'react-router-dom'
 import AuthLayout from '../../../layouts/auth'
@@ -37,7 +37,7 @@ const ConsultationDetails = () => {
     const url = '/reports/user-report?user_id=';
     // const id = getID();
     const getConsultation = async (id) => {
-        const response = await fetch(`${config.baseUrl}` + url + `${id}`, {
+        const response = await fetch(`${service.config.baseUrl}` + url + `${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

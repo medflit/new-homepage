@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {Table, Row, Container, Card} from 'react-bootstrap'
 import { useHistory } from "react-router-dom";
-import config from '../../api/index'
+import * as service from '../../api/index'
 
 import {formatNumber, getPaymentType} from '../../helpers/functions'
 
@@ -27,7 +27,7 @@ const Transactions = () => {
     const history = useHistory();
 
     const getAllTransactions = async (pageNumber) => {
-        const response = await fetch(`${config.baseUrl + config.allTransactions}?page=${pageNumber}`, {
+        const response = await fetch(`${service.config.baseUrl + service.config.allTransactions}?page=${pageNumber}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -47,7 +47,7 @@ const Transactions = () => {
     const handleSearch = (e) => {
         e.preventDefault();
 
-        fetch(`${config.baseUrl + config.searchPatient}${searchValue}`, {
+        fetch(`${service.config.baseUrl + service.config.searchPatient}${searchValue}`, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("access_token"),
@@ -68,7 +68,7 @@ const Transactions = () => {
                 const userType = data.data[0].usertype;
 
                 if (userType === 2) {
-                    fetch(`${config.baseUrl + config.userTransaction}${userID}`, {
+                    fetch(`${service.config.baseUrl + service.config.userTransaction}${userID}`, {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",

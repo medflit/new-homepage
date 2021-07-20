@@ -1,7 +1,7 @@
 import React from 'react'
 import { Row, Container, Table, Card, Dropdown } from 'react-bootstrap'
 import {useState, useEffect} from 'react'
-import config from '../../api/index'
+import * as service from '../../api/index'
 import { Link, useHistory } from "react-router-dom";
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -27,7 +27,7 @@ function Providers() {
     }, [])
 
     const verify = async (email) => {
-        const response = await fetch(`${config.baseUrl + config.verifyDoctor}?email=${email}`, {
+        const response = await fetch(`${service.config.baseUrl + service.config.verifyDoctor} ?email=${email}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -54,7 +54,7 @@ function Providers() {
     };
 
     const getAllProviders = async (pageNumber) => {
-        const response = await fetch(`${config.baseUrl + config.providerList}?page=${pageNumber}`, {
+        const response = await fetch(`${service.config.baseUrl + service.config.providerList}?page=${pageNumber}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -72,7 +72,7 @@ function Providers() {
 
     const handleSearch = (e) => {
             e.preventDefault();
-            fetch(`${config.baseUrl + config.searchDoctor}${searchValue}`, {
+            fetch(`${service.config.baseUrl + service.config.searchDoctor}${searchValue}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + localStorage.getItem("access_token"),
@@ -93,7 +93,7 @@ function Providers() {
                     const userType = data.data[0].usertype;
 
                     if (userType === 3) {
-                        fetch(`${config.baseUrl + config.findUser}${userID}`, {
+                        fetch(`${service.config.baseUrl + service.config.findUser}${userID}`, {
                             method: "GET",
                             headers: {
                                 "Content-Type": "application/json",

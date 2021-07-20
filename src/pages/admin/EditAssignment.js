@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {useLocation} from 'react-router-dom'
 import AuthLayout from '../../layouts/auth'
-import config from '../../api'
+import * as service from '../../api'
 import FeatherIcon from 'feather-icons-react'
 import {Container, Row, Col, Card, Form, Button} from 'react-bootstrap'
 
@@ -66,7 +66,7 @@ const EditAssignment = () => {
     }
 
     const getPatientProfile = async (id) => {
-        const response = await fetch(`${config.baseUrl + config.findUser}${id}`, {
+        const response = await fetch(`${service.config.baseUrl + service.config.findUser}${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -82,7 +82,7 @@ const EditAssignment = () => {
     }
 
     const getProviderName = async (id) => {
-        const response = await fetch(`${config.baseUrl + config.findUser}${id}`, {
+        const response = await fetch(`${service.config.baseUrl + service.config.findUser}${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -114,7 +114,7 @@ const EditAssignment = () => {
         console.log("iddd: ", e.target.value)
         setProviderUID(e.target.value)
 
-        fetch(`${config.baseUrl + config.providerList}`, {
+        fetch(`${service.config.baseUrl + service.config.providerList}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -138,7 +138,7 @@ const EditAssignment = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        fetch(`${config.baseUrl + config.searchPatient}${providerUID}`, {
+        fetch(`${service.config.baseUrl + service.config.searchPatient}${providerUID}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -179,7 +179,7 @@ const EditAssignment = () => {
             "patient_id" : patientPID
         }
 
-        fetch(`${config.baseUrl + config.assignDoctor}`, {
+        fetch(`${service.config.baseUrl + service.config.assignDoctor}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

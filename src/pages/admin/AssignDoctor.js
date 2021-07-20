@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {useLocation} from 'react-router-dom'
 import AuthLayout from '../../layouts/auth'
-import config from '../../api'
+import * as service from '../../api'
 import FeatherIcon from 'feather-icons-react'
 import {Container, Row, Col, Card, Form, Button} from 'react-bootstrap'
 
@@ -32,7 +32,7 @@ const AssignDoctor = () => {
     const patientID = location.state.patientDetail.user_id;
 
     const getSubID = async (id) => {
-        const response = await fetch(`${config.baseUrl + config.findUser}${patientID}`, {
+        const response = await fetch(`${service.config.baseUrl + service.config.findUser}${patientID}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -58,7 +58,7 @@ const AssignDoctor = () => {
             "patient_id" : patientPID
         }
 
-        fetch(`${config.baseUrl + config.assignDoctor}`, {
+        fetch(`${service.config.baseUrl + service.config.assignDoctor}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

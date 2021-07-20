@@ -3,7 +3,7 @@ import { Form, Row, Col, Button } from 'react-bootstrap';
 
 import { useForm } from 'react-hook-form'
 
-import config from '../api/index'
+import * as service from '../api/index'
 
 import PropTypes from 'prop-types';
 
@@ -28,7 +28,7 @@ function AdminLogin() {
             data: "Login in progress...",
             type: "alert-warning",
         });
-        fetch(`${config.baseUrl + config.login}`, {
+        fetch(`${service.config.baseUrl + service.config.login}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -109,7 +109,7 @@ function AdminLogin() {
                                 required
                             />
                             {/**
-                             * we provide validation configuration for email field above
+                             * we provide validation service.configuration for email field above
                              * error message are displayed with code below
                              */}
                             {errors.username && (

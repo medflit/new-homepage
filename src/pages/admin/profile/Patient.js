@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { Row, Col, Card, Container, Accordion, Button } from 'react-bootstrap'
-import config from '../../../api'
+import * as service from '../../../api'
 import { useLocation } from 'react-router-dom'
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -43,7 +43,7 @@ function Patient() {
     }
 
     const listOption = () => {
-        fetch(`${config.baseUrl + config.listOptions}`, {
+        fetch(`${service.config.baseUrl + service.config.listOptions}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -57,7 +57,7 @@ function Patient() {
     }
     
     const getPatientProfile = async (id) => {
-        const response = await fetch(`${config.baseUrl + config.findUser}${id}`, {
+        const response = await fetch(`${service.config.baseUrl + service.config.findUser}${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -84,7 +84,7 @@ function Patient() {
             "duration_id": 1,
             "treatment_id": 1
         }
-        const response = await fetch(`${config.baseUrl + config.activatePay}`, {
+        const response = await fetch(`${service.config.baseUrl + service.config.activatePay}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -112,7 +112,7 @@ function Patient() {
     }
 
     const treatmentPlans = async (id) => {
-        const response = await fetch(`${config.baseUrl + config.userTreatment}${id}`, {
+        const response = await fetch(`${service.config.baseUrl + service.config.userTreatment}${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -139,7 +139,7 @@ function Patient() {
             "subscription_id" : subID,
         }
 
-        const response = await fetch(`${config.baseUrl + config.activateTreatment}`, {
+        const response = await fetch(`${service.config.baseUrl + service.config.activateTreatment}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -177,7 +177,7 @@ function Patient() {
                     "treatment_id": treatment_id
                 }
 
-                fetch(`${config.baseUrl + config.activatePay}`, {
+                fetch(`${service.config.baseUrl + service.config.activatePay}`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
