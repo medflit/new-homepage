@@ -23,22 +23,24 @@ function Patient() {
     const [loading, setLoading] = useState(false);
     const [activateText, setActivateText] = useState("Activate")
 
-    const location = useLocation();
+    const {state} = useLocation();
+
+    console.log(state)
 
     useEffect(() => {
         getPatientProfile(getID());
         treatmentPlans(getID());
         listOption();
         getID();
-    });
+    }, []);
 
-    const patientProfileID = location.state.patientProfileID;
-    const patientID = location.state.id;
-    const providerProfileID = location.state.providerProfileID;
-    const subID = location.state.subID;
+    const patientProfileID = state.patientProfileID;
+    const patientID = state.id;
+    const providerProfileID = state.providerProfileID;
+    const subID = state.subID;
 
     const getID = () => {
-        const id = location.state.id;
+        const id = state.id;
         return id;
     }
 
@@ -219,8 +221,8 @@ function Patient() {
                     </div>
                     <div className="flex"></div>
                     <div>
-                        <span class="btn btn-md text-muted">
-                            <span class="d-sm-inline mx-1 breadcrumb-text"></span>
+                        <span className="btn btn-md text-muted">
+                            <span className="d-sm-inline mx-1 breadcrumb-text"></span>
                             <FeatherIcon icon="arrow-right" size="14"/>
                         </span>
                     </div>
@@ -466,29 +468,29 @@ function Patient() {
                                 <Card id="feed-1">
                                     <Card.Body>
                                         <Accordion defaultActiveKey="0">
-                                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                                            {/* <Accordion.Toggle variant="link" eventKey="0">
                                                 <div className="d-flex align-items-center pointer">
                                                     <div>
-                                                        <span class="w-48 avatar circle bg-info-lt" data-toggle-class="loading">
+                                                        <span className="w-48 avatar circle bg-info-lt" data-toggle-className="loading">
                                                             <img src={ProfileImage} alt="."/>
                                                         </span>
                                                     </div>
-                                                    <div class="flex"></div>
-                                                    <div class="mx-3">
+                                                    <div className="flex"></div>
+                                                    <div className="mx-3">
                                                         <FeatherIcon icon="chevron-right" size="16"/>
                                                     </div>
                                                 </div>
-                                            </Accordion.Toggle>
+                                            </Accordion.Toggle> */}
                                             <Accordion.Collapse eventKey="0">
                                                 <form>
-                                                    <div class="form-group">
+                                                    <div className="form-group">
                                                         <label>Profile picture</label>
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="customFile"/>
-                                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                                        <div className="custom-file">
+                                                            <input type="file" className="custom-file-input" id="customFile"/>
+                                                            <label className="custom-file-label" for="customFile">Choose file</label>
                                                         </div>
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary mt-2">Update</button>
+                                                    <button type="submit" className="btn btn-primary mt-2">Update</button>
                                                 </form>
                                             </Accordion.Collapse>
                                         </Accordion>

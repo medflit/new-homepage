@@ -11,8 +11,8 @@ import FeatherIcon from 'feather-icons-react'
 import { ToastContainer, toast } from 'react-toastify';
 
 const SearchDoctor = () => {
-    const location = useLocation()
-    const doctorDetail = location.state.doctorDetail;
+    const {state} = useLocation()
+    const doctorDetail = state.doctorDetail;
 
     const verify = async (email) => {
         const response = await fetch(`${service.config.baseUrl}/admin/users/publish?email=${email}`, {
@@ -116,7 +116,7 @@ const SearchDoctor = () => {
                                                 </Dropdown.Toggle>
 
                                                 <Dropdown.Menu>
-                                                    <Dropdown.Item><Link to={{pathname: `/admin/profile/provider/${doctorDetail?.biodata?.user_id}`, state: { "id": doctorDetail?.biodata?.user_id}}}>View</Link></Dropdown.Item>
+                                                    <Dropdown.Item><Link to={`/admin/profile/provider/${doctorDetail?.biodata?.user_id}`} state={{ "id": doctorDetail?.biodata?.user_id}}>View</Link></Dropdown.Item>
                                                     {doctorDetail.publish ? <Dropdown.Item>Unverify</Dropdown.Item> : <Dropdown.Item onClick={() => verify(doctorDetail.email)} >Verify</Dropdown.Item> }
                                                     
                                                     <Dropdown.Item className="text-danger">Delete</Dropdown.Item>

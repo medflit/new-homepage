@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {useLocation} from 'react-router-dom'
+import {useLocation, useNavigate} from 'react-router-dom'
 import AuthLayout from '../../layouts/auth'
 import * as service from '../../api'
 import FeatherIcon from 'feather-icons-react'
@@ -10,60 +10,39 @@ import { ToastContainer, toast } from 'react-toastify';
 
 
 const EditAssignment = () => {
+    const {state} = useLocation();
+    const navigate = useNavigate();
+    
     const [showAssignForm, setShowAssignForm] = useState(false);
     const [showSearchForm, setShowSearchForm] = useState(true);
+
     const [patient, setPatientProfile] = useState();
     const [providerName, setProviderName] = useState();
-    const [providers, setProviders] = useState();
-    const [doctorPID, setDoctorPID] = useState();
-    const [newDoctorUID, setNewDoctorUID] = useState();
-    const [newDoctorName, setNewDoctorName] = useState();
-    const [providerUID, setProviderUID] = useState();
+
+    const [provider, setProvider] = useState();
+    const [doctorPID, setDoctorPID] = useState("");
+    const [providerUID, setProviderUID] = useState(state.providerUID);
+    // const [patientID, setPatientID] = useState(state.patientID)
+
+    const [currentDoc, setCurrentDoc] = useState();
+    const [newDocUID, setNewDocUID] = useState("");
 
     const [loading, setLoading] = useState(false);
     const [assignLoading, setAssignLoading] = useState(false);
     const [searchText, setSearchText] = useState("Search");
     const [assignText, setAssignText] = useState("Assign");
 
+
+    console.log({state})
+    const patientID = state.patientID;
+    const subID = state.subID;
+    const patientPID = state.patientPID;
+    const providerPID = state.providerPID;
+    // const providerUID = state.providerUID;
+
     useEffect(() => {
-        getProviderID();
-        // getProviderUID();
-        getPatientID();
-        getSubID();
-        getPatientProfile(getPatientID());
-    })
-
-    const location = useLocation();
-
-    // console.log("Location: ", location);
-
-    const getProviderID = () => {
-        let providerID = location.state.providerID;
-
-        // console.log("Provider ID - ", providerID);
-        return providerID;
-    }
-
-    const getSubID = () => {
-        let subID = location.state.subID;
-
-        // console.log("sub ID - ", subID);
-        return subID;
-    }
-
-    const getProviderUID = () => {
-        let providerUID = location.state.providerUID;
-
-        // console.log("Doctor UID - ", providerUID);
-        return providerUID;
-    }
-
-    const getPatientID = () => {
-        const patientID = location.state.patientID;
-
-        // console.log("Patient ID - ", patientID);
-        return patientID;
-    }
+        getPatientProfile(patientID);
+    }, [])
 
     const getPatientProfile = async (id) => {
         const response = await fetch(`${service.config.baseUrl + service.config.findUser}${id}`, {
@@ -77,68 +56,23 @@ const EditAssignment = () => {
         const jsonData = await response.json();
 
         setPatientProfile(jsonData.data);
-        // console.log(jsonData)
-        setNewDoctorName(jsonData.data.subscription.assigned_doctor.biodata.firstname + " " + jsonData.data.subscription.assigned_doctor.biodata.lastname)
+        // console.log(jsonData.data)
+        setCurrentDoc(jsonData.data.subscription.assigned_doctor.biodata.firstname + " " + jsonData.data.subscription.assigned_doctor.biodata.lastname)
     }
 
-    const getProviderName = async (id) => {
-        const response = await fetch(`${service.config.baseUrl + service.config.findUser}${id}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("access_token"),
-            },
-        });
-
-        const jsonData = await response.json();
-
-        setProviderName(jsonData.data.biodata.firstname + " " + jsonData.data.biodata.lastname);
-        // console.log(jsonData)
-    }
-
-    const handleClick = () => {
-        setLoading(true);
-        setSearchText("Searching...");
-        setTimeout(() => {
-            setShowSearchForm(false);
-            setShowAssignForm(true);
-        }, 3000);
-    }
-
-    const handleAssign = () => {
-        setAssignLoading(true);
-        setAssignText("Assigning...");
-    }
+    console.log(patient)
 
     const handleChange = (e) => {
         console.log("iddd: ", e.target.value)
         setProviderUID(e.target.value)
-
-        fetch(`${service.config.baseUrl + service.config.providerList}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("access_token"),
-            },
-        }).then((res) => {
-            return res.json();
-        }).then((data) => {
-            setProviders(data.data);
-            // console.log(data.data)
-
-            data.data.map((dt,index) => {
-                // console.log(dt);
-                if(dt?.biodata?.medical_id === providerUID) {
-                    setNewDoctorName(dt?.biodata?.firstname + " " + dt?.biodata?.lastname)
-                }
-            })
-        })
     }
 
-    const handleSubmit = async (e) => {
+    const handleSearch = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setSearchText("Searching...");
 
-        fetch(`${service.config.baseUrl + service.config.searchPatient}${providerUID}`, {
+        fetch(`${service.config.baseUrl + service.config.searchDoctor}${providerUID}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -155,28 +89,28 @@ const EditAssignment = () => {
                     window.location.reload();
                 }, 2000);
             } else {
-                setProviders(data.data[0].firstname + " " + data.data[0].lastname);
+                setProvider(data.data[0].firstname + " " + data.data[0].lastname);
+                // console.log(provider)
                 // setProviderUID(data.data[0].medical_id)
-                setDoctorPID(data.data[0].id)
-                setNewDoctorUID(data.data[0].medical_id)
+                setDoctorPID(data.data[0].profile_id)
+                // setNewDoctorUID(data.data[0].medical_id)
+                setShowSearchForm(false);
+                setShowAssignForm(true);
             }
         })
     }
 
-    const patientID = location.state.patientID;
-    const subID = location.state.subID;
-    const patientPID = location.state.patientPID;
-    const providerPID = location.state.providerPID;
-    const pUID = location.state.providerUID;
+    
 
 
     const assignDoctor = (e) => {
         e.preventDefault();
-        setDoctorPID(e.target.value)
+        setAssignLoading(true);
+        setAssignText("Assigning...");
         const data = {
             "subscription_id" : subID,
+            "patient_id" : patientPID,
             "provider_id" : doctorPID,
-            "patient_id" : patientPID
         }
 
         fetch(`${service.config.baseUrl + service.config.assignDoctor}`, {
@@ -208,9 +142,11 @@ const EditAssignment = () => {
                     position: toast.POSITION.TOP_RIGHT
                 });
                 setTimeout(() => {
-                    window.location.reload();
-                }, 2000);
-                let pUID = newDoctorUID;
+                    navigate(
+                        '/admin/assignment-log'
+                    )
+                }, 5000);
+                // let pUID = newDoctorUID;
             }
         });
     }
@@ -225,8 +161,8 @@ const EditAssignment = () => {
                     </div>
                     <div className="flex"></div>
                     <div>
-                        <span class="btn btn-md text-muted">
-                            <span class="d-sm-inline mx-1 breadcrumb-text"></span>
+                        <span className="btn btn-md text-muted">
+                            <span className="d-sm-inline mx-1 breadcrumb-text"></span>
                             <FeatherIcon icon="arrow-right" size="14"/>
                         </span>
                     </div>
@@ -239,18 +175,18 @@ const EditAssignment = () => {
                         { showSearchForm &&
                             (<Card>
                                 <Card.Header>
-                                <small>Current Doctor: </small><span className="pull-right" style={{fontWeight: "700", color: "darkred"}}>{newDoctorName}</span>
+                                <small>Current Doctor: </small><span style={{fontWeight: "700", color: "darkred"}}>{currentDoc}</span>
                                 </Card.Header>
                                 <Card.Body>
-                                    <Form className="" onSubmit={handleSubmit}>
+                                    <Form className="">
                                         <Form.Group controlId="formBasicEmail">
                                                 
-                                            <Form.Label>Doctor's Unique ID </Form.Label>
+                                            <Form.Label>Enter new Doctor's Unique ID </Form.Label>
                                             <Form.Control type="text" 
                                                 // id="username" 
-                                                name="providerUID"
-                                                defaultValue={newDoctorUID}
-                                                value={newDoctorUID}
+                                                // name={newDocUID}
+                                                // defaultValue={newDoctorUID}
+                                                value={providerUID}
                                                 onChange={handleChange}
                                                 />
                                                 
@@ -262,7 +198,7 @@ const EditAssignment = () => {
                                                 })} */}
                                         <Row className="justify-center">
                                             <div>
-                                                <Button size="sm" type="submit" onClick={handleClick} variant="primary"> {loading && <Spinner animation="border" size="16" role="status">
+                                                <Button size="sm" type="submit" onClick={handleSearch} variant="primary"> {loading && <Spinner animation="border" size="16" role="status">
                                                     </Spinner>}
                                                     &nbsp;{searchText}
                                                 </Button>
@@ -275,22 +211,21 @@ const EditAssignment = () => {
                         { showAssignForm &&           
                             (<Card >
                                 <Card.Body>
-                                    <Form className="" onSubmit={assignDoctor}>
+                                    <Form className="">
                                         <Form.Group controlId="formBasicEmail">
                                                 
-                                            <Form.Label>New Doctor's Name </Form.Label>
+                                            <Form.Label>New Doctor's Name <span style={{fontWeight: "700", color: "darkred"}}>{provider}</span></Form.Label>
                                             <Form.Control type="text" 
                                                 // id="username" 
                                                 name="doctorPID"
-                                                defaultValue={doctorPID}
-                                                value={providers}
+                                                value={doctorPID}
                                                 disabled
                                                 />
                                                 
                                         </Form.Group>
                                         <Row className="justify-center">
                                             <div>
-                                                <Button size="sm" type="submit" onClick={handleAssign} variant="primary"> {assignLoading && <Spinner animation="border" size="16" role="status">
+                                                <Button size="sm" type="submit" onClick={assignDoctor} variant="primary"> {assignLoading && <Spinner animation="border" size="16" role="status">
                                                     </Spinner>}
                                                     &nbsp;{assignText}
                                                 </Button>

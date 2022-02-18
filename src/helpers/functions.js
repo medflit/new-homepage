@@ -14,11 +14,13 @@ export const dateFormatting = (timeStr) => {
     if(timeStr === null) {
         return "Not set"
     }
+    // console.log(timeStr)
     let date = new Date(timeStr);
+    // console.log(date)
     let day = date.getDate();
     let year = date.getFullYear();
     let month = date.getMonth()+1;
-    let dateStr = day+"/"+month+"/"+year;
+    let dateStr = String(day)+"/"+String(month)+"/"+String(year);
 
     return (dateStr)
 }

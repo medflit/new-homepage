@@ -11,9 +11,9 @@ import { Route, Link } from 'react-router-dom';
 
 import Carousel from 'react-bootstrap/Carousel'
 
-import { Swiper, SwiperSlide } from 'swiper/react';
+// import { Swiper, SwiperSlide } from 'swiper/react';
 
-import SwiperCore, { Autoplay } from 'swiper';
+// import SwiperCore, { Autoplay } from 'swiper';
 
 function Testimonials() {
     return(

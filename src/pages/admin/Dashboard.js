@@ -74,8 +74,8 @@ function Dashboard() {
                     </div>
                     <div className="flex"></div>
                     <div>
-                        <span class="btn btn-md text-muted">
-                            <span class="d-sm-inline mx-1 breadcrumb-text"></span>
+                        <span className="btn btn-md text-muted">
+                            <span className="d-sm-inline mx-1 breadcrumb-text"></span>
                             <FeatherIcon icon="arrow-right" size="14"/>
                         </span>
                     </div>

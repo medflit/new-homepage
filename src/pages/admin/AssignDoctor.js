@@ -23,6 +23,8 @@ const AssignDoctor = () => {
 
     const location = useLocation();
 
+    console.log(location)
+
     const patientPID = location.state.patientDetail.id;
     const patientData= location.state.patientDetail;
     // console.log(patientData)

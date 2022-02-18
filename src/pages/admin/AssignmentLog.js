@@ -8,7 +8,7 @@ import FeatherIcon from 'feather-icons-react'
 import {Spinner} from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
 
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 const AssignmentLog = () => {
@@ -27,7 +27,7 @@ const AssignmentLog = () => {
     const [loading, setLoading] = useState(false);
     const [searchText, setSearchText] = useState("Search");
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     useEffect(() => {
         getAllAssignedPatients(1);
@@ -49,6 +49,8 @@ const AssignmentLog = () => {
         setPerPage(jsonData.paginator.per_page);
         setCurrentPage(jsonData.paginator.current_page);
     }
+
+    console.log(assignedPatients)
 
     const handleClick = () => {
         setLoading(true);
@@ -96,9 +98,9 @@ const AssignmentLog = () => {
                 setPatient(data[0].data);
                 setProvider(data[1].data);
                 setTimeout(() => {
-                    history.push(
+                    navigate(
+                        "/admin/assign-doctor",
                         {
-                            pathname: "/admin/assign-doctor",
                             state: {
                                 patientDetail: data[0].data[0],
                                 doctorDetail: data[1].data[0]
@@ -122,7 +124,7 @@ const AssignmentLog = () => {
     renderPageNumbers = pageNumbers.map(number => {
         let classes = currentPage === number ? 'page-item active' : 'page-item';
       
-        if (number == 1 || number == total || (number >= currentPage - 2 && number <= currentPage + 2)) {
+        if (number == 1 || number == total || (number >= currentPage - 9 && number <= currentPage + 9)) {
             return (
                 <li className={classes}>
                     <span className="page-link" key={number} onClick={() => getAllAssignedPatients(number)}>{number}</span>
@@ -182,8 +184,8 @@ const AssignmentLog = () => {
                     </div>
                     <div className="flex"></div>
                     <div>
-                        <span class="btn btn-md text-muted">
-                            <span class="d-sm-inline mx-1 breadcrumb-text"></span>
+                        <span className="btn btn-md text-muted">
+                            <span className="d-sm-inline mx-1 breadcrumb-text"></span>
                             <FeatherIcon icon="arrow-right" size="14"/>
                         </span>
                     </div>
@@ -199,7 +201,7 @@ const AssignmentLog = () => {
                             <div className="mb-5">
                                 <div className="toolbar ">
                                     <div className="btn-group">
-                                        <button className="btn btn-sm btn-icon btn-white" dataToggle="tooltip" title="Trash" id="btn-trash">
+                                        <button className="btn btn-sm btn-icon btn-white" data-toggle="tooltip" title="Trash" id="btn-trash">
                                             <FeatherIcon icon="trash" className="text-muted"/>
                                         </button>
                                         <button className="btn btn-sm btn-icon btn-white sort " data-sort="item-title" data-toggle="tooltip" title="Sort">
@@ -235,12 +237,12 @@ const AssignmentLog = () => {
 
                                                 if(patient?.subscription?.assigned_doctor !== null && patient?.subscription?.active === true) {
                                                     return (
-                                                        <tr className="v-middle" key={patient?.id}>
+                                                        <tr className="v-middle" key={index}>
                                                             <td>
                                                                 <div className="item-title text-color">{patient?.biodata?.medical_id}</div>
                                                             </td>
                                                             <td>
-                                                                <div className="item-title text-color">{patient?.biodata?.firstname + " " + patient?.profile?.lastname}</div>
+                                                                <div className="item-title text-color">{patient?.biodata?.firstname + " " + patient?.biodata?.lastname}</div>
                                                             </td>
                                                             
                                                             <td>
@@ -262,8 +264,12 @@ const AssignmentLog = () => {
                                                                     </Dropdown.Toggle>
     
                                                                     <Dropdown.Menu>
-                                                                        <Dropdown.Item ><Link to={{pathname: `/admin/edit-assignment/${patient?.biodata?.user_id}`, state: { 
-                                                                            "patientID": patient?.biodata?.user_id, "patientPID": patient?.profile?.id, "subID": patient?.subscription?.id, "providerPID": patient?.subscription?.assigned_doctor?.biodata?.id, "providerUID": patient?.subscription?.assigned_doctor?.biodata?.medical_id}}}>Edit</Link></Dropdown.Item>
+                                                                        <Dropdown.Item ><Link to={`/admin/edit-assignment/${patient?.biodata?.user_id}`} state={{ 
+                                                                            "patientID": patient?.biodata?.user_id, 
+                                                                            "patientPID": patient?.biodata?.id, 
+                                                                            "subID": patient?.subscription?.id, 
+                                                                            "providerPID": patient?.subscription?.assigned_doctor?.biodata?.id, 
+                                                                            "providerUID": patient?.subscription?.assigned_doctor?.biodata?.medical_id}}>Edit</Link></Dropdown.Item>
                                                                         <Dropdown.Item className="text-danger">Delete</Dropdown.Item>
                                                                     </Dropdown.Menu>
                                                                 </Dropdown>
@@ -275,10 +281,9 @@ const AssignmentLog = () => {
                                             }) }
                                             
                                         </tbody>
+                                        
                                     </Table>
-                                </div>
-                                
-                                <div className="d-flex">
+                                    <div className="d-flex">
                                     <ul className="pagination">
                                         <li className="page-item">
                                             <span className="page-link" aria-label="Previous">
@@ -296,6 +301,9 @@ const AssignmentLog = () => {
                                     </ul>
                                     <small className="text-muted py-2 mx-2">Total <span id="count">{total}</span> items</small>
                                 </div>
+                                </div>
+                                
+                                
                             </div>
                         </Card.Body>
                     </Card>

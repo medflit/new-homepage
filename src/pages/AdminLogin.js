@@ -11,16 +11,16 @@ import PropTypes from 'prop-types';
 
 import DefaultLayout from '../layouts/default'
 
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // {setToken}
 function AdminLogin() {
-    const { register, handleSubmit, errors } = useForm();
+    const { register, handleSubmit, formState: {errors} } = useForm();
     const [username, setUsername] = useState()
     const [password, setPassword] = useState()
     const [message, setMessage] = useState()
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const onSubmit = (data, e) => {
         e.preventDefault();
@@ -56,7 +56,7 @@ function AdminLogin() {
                         setTimeout(() => {
                             console.log(data)
                             localStorage.setItem("access_token", data.data.access_token);
-                            history.push("/admin/dashboard");
+                            navigate("/admin/dashboard");
                         }, 3000);
                     } else {
                         setMessage({
@@ -93,19 +93,14 @@ function AdminLogin() {
                     <Form onSubmit={ handleSubmit(onSubmit) }>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Email address/Username</Form.Label>
-                            <Form.Control type="text" 
+                            <input 
+                                {...register('username',{required: {value: true,message: "Please enter your username/email address"}})}
+
+                                type="text" 
                                 // id="username" 
                                 name="username" 
                                 placeholder="Enter username/email" 
                                 onChange={e => setUsername(e.target.value)} 
-                                ref= {
-                                    register({
-                                        required: {
-                                            value: true,
-                                            message: "Please enter your username/email address",
-                                        },
-                                    })
-                                }
                                 required
                             />
                             {/**
@@ -121,20 +116,13 @@ function AdminLogin() {
 
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control 
+                            <input 
                                 // id="password" 
                                 type="password" 
                                 name="password" 
                                 placeholder="Password" 
                                 onChange={e => setPassword(e.target.value)} 
-                                ref= {
-                                    register({
-                                        required: {
-                                            value: true,
-                                            message: "Please enter your password",
-                                        },
-                                    })
-                                }
+                                {...register('password',{ required: {value: true, message: "Please enter your password" } })}
                                 required
                             />
                             {errors.password && (
@@ -159,8 +147,8 @@ function AdminLogin() {
     )
 }
 
-AdminLogin.propTypes = {
-    setToken: PropTypes.func.isRequired
-}
+// AdminLogin.propTypes = {
+//     setToken: PropTypes.func.isRequired
+// }
 
 export default AdminLogin

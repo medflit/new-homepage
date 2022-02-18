@@ -8,9 +8,9 @@ import FeatherIcon from 'feather-icons-react'
 
 const SearchUser = () => {
 
-    const location = useLocation();
+    const {state} = useLocation();
 
-    const user = location.state.userDetails;
+    const user = state.userDetails;
 
     return (
         <AuthLayout>
@@ -82,8 +82,8 @@ const SearchUser = () => {
                                                         </Dropdown.Toggle>
 
                                                         <Dropdown.Menu>
-                                                            {user.usertype === 2 ? <Dropdown.Item><Link to={{pathname: `/admin/profile/patient/${user?.biodata?.user_id}`, state: { "id": user?.biodata?.user_id}}}>View</Link></Dropdown.Item> 
-                                                            : <Dropdown.Item><Link to={{pathname: `/admin/profile/provider/${user?.biodata?.user_id}`, state: { "id": user?.biodata?.user_id}}}>View</Link></Dropdown.Item> }
+                                                            {user.usertype === 2 ? <Dropdown.Item><Link to={`/admin/profile/patient/${user?.biodata?.user_id}`} state={{ "id": user?.biodata?.user_id}}>View</Link></Dropdown.Item> 
+                                                            : <Dropdown.Item><Link to={`/admin/profile/provider/${user?.biodata?.user_id}`} state={{ "id": user?.biodata?.user_id}}>View</Link></Dropdown.Item> }
                                                             
                                                             <Dropdown.Item href="#" className="text-danger">Delete</Dropdown.Item>
                                                         </Dropdown.Menu>

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Container, Table, Dropdown, Card } from 'react-bootstrap'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import * as service from '../../api/index'
 
 import FeatherIcon from 'feather-icons-react'
-
+import {Spinner} from 'react-bootstrap'
 import AuthLayout from '../../layouts/auth'
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -15,11 +15,13 @@ function Users() {
     const [currentPage, setCurrentPage] = useState();
     const [searchValue, setSearchValue] = useState([]);
 
+    const [loading, setLoading] = useState(false);
+    const [loadText, setLoadText] = useState("");
     useEffect(() => {
         getAllUsers(1);
     }, [])
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const getAllUsers = async (pageNumber) => {
         const response = await fetch(`${service.config.baseUrl + service.config.allUsers}?page=${pageNumber}`, {
@@ -40,7 +42,8 @@ function Users() {
 
     const handleSearch = (e) => {
         e.preventDefault();
-
+        setLoadText("Loading ")
+        setLoading(true)
         fetch(`${service.config.baseUrl + service.config.searchPatient}${searchValue}`, {
             headers: {
                 "Content-Type": "application/json",
@@ -73,9 +76,9 @@ function Users() {
                         console.log(data2.message)
                     } else {
                         setTimeout(() => {
-                            history.push(
+                            navigate(
+                                `/admin/search-user/${searchValue}`,
                                 {
-                                    pathname: `/admin/search-user/${searchValue}`,
                                     state: {
                                         userDetails: data2.data,
                                     }
@@ -102,7 +105,7 @@ function Users() {
     renderPageNumbers = pageNumbers.map(number => {
         let classes = currentPage === number ? 'page-item active' : 'page-item';
       
-        if (number === 1 || number === total || (number >= currentPage - 2 && number <= currentPage + 2)) {
+        if (number === 1 || number === total || (number >= currentPage - 2 && number <= currentPage + 19)) {
             return (
                 <li className={classes}>
                     <span className="page-link" key={number} onClick={() => getAllUsers(number)}>{number}</span>
@@ -124,8 +127,8 @@ function Users() {
                     </div>
                     <div className="flex"></div>
                     <div>
-                        <span class="btn btn-md text-muted">
-                            <span class="d-sm-inline mx-1 breadcrumb-text"></span>
+                        <span className="btn btn-md text-muted">
+                            <span className="d-sm-inline mx-1 breadcrumb-text"></span>
                             <FeatherIcon icon="arrow-right" size="14"/>
                         </span>
                     </div>
@@ -136,13 +139,16 @@ function Users() {
                     <Card>
                         <Card.Header>
                             All Users
+                            <span className="pull-right">
+                                {loadText} &nbsp;{loading && <Spinner animation="border" size="7" role="status">
+                                </Spinner>}</span>
                         </Card.Header>
                         <Card.Body>
 
                             <div className="mb-5">
                                 <div className="toolbar ">
                                     <div className="btn-group">
-                                        <button className="btn btn-sm btn-icon btn-white" dataToggle="tooltip" title="Trash" id="btn-trash">
+                                        <button className="btn btn-sm btn-icon btn-white" data-toggle="tooltip" title="Trash" id="btn-trash">
                                             <FeatherIcon icon="trash" className="text-muted"/>
                                         </button>
                                         <button className="btn btn-sm btn-icon btn-white sort " data-sort="item-title" data-toggle="tooltip" title="Sort">
@@ -211,7 +217,7 @@ function Users() {
                                                         </Dropdown.Toggle>
 
                                                         <Dropdown.Menu>
-                                                            {user.usertype === 2 ? <Dropdown.Item><Link to={{pathname: `/admin/profile/patient/${user.id}`, state: { "id": user.id}}}>View</Link></Dropdown.Item> : <Dropdown.Item><Link to={{pathname: `/admin/profile/provider/${user.id}`, state: { "id": user.id}}}>View</Link></Dropdown.Item> }
+                                                            {user.usertype === 2 ? <Dropdown.Item><Link to={`/admin/profile/patient/${user.id}`} state={{ "id": user.id}}>View</Link></Dropdown.Item> : <Dropdown.Item><Link to={`/admin/profile/provider/${user.id}`} state={{ "id": user.id}}>View</Link></Dropdown.Item> }
                                                             
                                                             <Dropdown.Item href="#" className="text-danger">Delete</Dropdown.Item>
                                                         </Dropdown.Menu>

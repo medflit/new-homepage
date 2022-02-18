@@ -1,5 +1,5 @@
 import React from 'react'
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
 import logo from '../../assets/images/medflit-logo.png';
 import FeatherIcon from 'feather-icons-react'
@@ -8,14 +8,14 @@ import { Route, Link, NavLink } from 'react-router-dom';
 
 const Navigation = () => {
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const logout = () => {
         const toLogout = true;
 
         if(toLogout) {
             localStorage.clear();
-            history.push('/admin-login');
+            navigate('/admin-login');
         }
     };
 
@@ -211,7 +211,7 @@ const Navigation = () => {
                     </li>
                     <li className="nav-item dropdown">
                         <a href="#" data-toggle="dropdown" className="nav-link d-flex align-items-center px-2 text-color">
-                            <span className="avatar w-24" style={{margin: "-2px;"}}>
+                            <span className="avatar w-24" style={{margin: "-2px"}}>
                                 <img src="../assets/img/a0.jpg" alt="..."/>
                             </span>
                         </a>
@@ -240,7 +240,7 @@ const Navigation = () => {
                         </div>
                     </li>
                     <li className="nav-item d-lg-none">
-                        <a href="#" className="nav-link px-2" data-toggle="collapse" data-toggle-className data-target="#navbarToggler">
+                        <a href="#" className="nav-link px-2" data-toggle="collapse" data-target="#navbarToggler">
                             <FeatherIcon icon="search" size="18"/>
                         </a>
                     </li>

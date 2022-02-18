@@ -665,7 +665,7 @@ function Provider() {
                                 <Card id="feed-1">
                                     <Card.Body>
                                         <Accordion defaultActiveKey="0">
-                                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                                            {/* <Accordion.Toggle as={Button} variant="link" eventKey="0">
                                                 <div className="d-flex align-items-center pointer">
                                                     <div>
                                                         <span className="w-48 avatar circle bg-info-lt" data-toggle-className="loading">
@@ -677,7 +677,7 @@ function Provider() {
                                                         <FeatherIcon icon="chevron-right" size="16"/>
                                                     </div>
                                                 </div>
-                                            </Accordion.Toggle>
+                                            </Accordion.Toggle> */}
                                             <Accordion.Collapse eventKey="0">
                                                 <form role="form">
                                                     <div className="form-group">

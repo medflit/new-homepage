@@ -9,10 +9,10 @@ import {dateFormatting} from '../../helpers/functions'
 import FeatherIcon from 'feather-icons-react'
 
 const SearchPatient = () => {
-    const location = useLocation()
-    const patientDetail = location.state.patientDetail;
+    const {state} = useLocation()
+    const patientDetail = state.patientDetail;
 
-    // console.log(patientDetail)
+    console.log(patientDetail)
 
     return (
         <AuthLayout>
@@ -81,12 +81,14 @@ const SearchPatient = () => {
                                                 {/* onClick={() => viewUser(patient.id)} */}
                                                 
                                                     <Dropdown.Item>
-                                                        <Link to={{pathname: `/admin/profile/patient/${patientDetail.biodata?.user_id}`, state: { "id": patientDetail?.biodata?.user_id, 
-                                                        "providerProfileID": patientDetail?.subscription?.assigned_doctor?.provider?.profile_id,
+                                                        <Link to={`/admin/profile/patient/${patientDetail.biodata?.user_id}`}   state={{ "id": patientDetail?.biodata?.user_id, 
+                                                                "providerProfileID": patientDetail?.subscription?.assigned_doctor?.provider?.profile_id,
                                                                  "patientProfileID": patientDetail?.biodata?.id, 
                                                                  "providerID": patientDetail?.subscription?.assigned_doctor?.id, 
                                                                  "subID": patientDetail?.subscription?.id
-                                                                 }}}>View</Link>
+                                                                 }}>
+                                                                View
+                                                        </Link>
                                                     </Dropdown.Item>
                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
                                                     <Dropdown.Item href="#" className="text-danger">Delete</Dropdown.Item>

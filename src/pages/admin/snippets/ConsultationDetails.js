@@ -12,7 +12,7 @@ const ConsultationDetails = () => {
     const [prescription, setPrescription] = useState();
     const [labTest, setLabTest] = useState();
 
-    const location = useLocation();
+    const {state} = useLocation();
 
     // console.log("Location: ", location.state.patient_id);
 
@@ -25,8 +25,8 @@ const ConsultationDetails = () => {
         // getID();
     }, []);
 
-    const id = location.state.patient_id;
-    const id2 = location.state.id;
+    const id = state.patient_id;
+    const id2 = state.id;
 
     const getID = () => {
         console.log("My ID - ", id);

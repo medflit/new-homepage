@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
 import logo from '../../assets/images/medflit-logo.png';
 
@@ -10,14 +10,14 @@ import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const logout = () => {
         const toLogout = true;
 
         if(toLogout) {
             localStorage.clear();
-            history.push('/admin-login');
+            navigate('/admin-login');
         }
     };
 

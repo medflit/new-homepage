@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {Table, Row, Container, Card} from 'react-bootstrap'
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as service from '../../api/index'
 
 import {formatNumber, getPaymentType} from '../../helpers/functions'
@@ -24,7 +24,7 @@ const Transactions = () => {
         getAllTransactions();
     }, []);
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const getAllTransactions = async (pageNumber) => {
         const response = await fetch(`${service.config.baseUrl + service.config.allTransactions}?page=${pageNumber}`, {
@@ -83,7 +83,7 @@ const Transactions = () => {
                             });
                         } else {
                             setTimeout(() => {
-                                history.push(
+                                navigate(
                                     {
                                         pathname: `/admin/search-transaction/${searchValue}`,
                                         state: {

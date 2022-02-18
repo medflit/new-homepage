@@ -3,7 +3,7 @@ import ScriptTag from 'react-script-tag'
 
 import AppBreadcrumbs from '../../pages/admin/extras/AppBreadcrumbs'
 
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
 
 import '../../assets/css/theme.css';
 
@@ -20,8 +20,8 @@ const AuthLayout = ( {children} ) => {
             <div id="main" className="layout-column flex">
                 <Navigation/>
                 <div id="content" className="flex">
-                    <div class="page-content page-container" id="page-content">
-                        <div class="padding">  
+                    <div className="page-content page-container" id="page-content">
+                        <div className="padding">  
                             {children}
                         </div>
                     </div>

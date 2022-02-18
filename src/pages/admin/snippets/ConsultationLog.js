@@ -46,7 +46,7 @@ const ConsultationLog = () => {
     renderPageNumbers = pageNumbers.map(number => {
         let classes = currentPage === number ? 'page-item active' : 'page-item';
         
-        if (number === 1 || number === total || (number >= currentPage - 2 && number <= currentPage + 2)) {
+        if (number === 1 || number === total || (number >= currentPage - 9 && number <= currentPage + 9)) {
             return (
                 <li className={classes}>
                     <span className="page-link" key={number} onClick={() => getAllConsultations(number)}>{number}</span>
@@ -136,7 +136,7 @@ const ConsultationLog = () => {
                                         </span>
                                     </td>
                                     <td>
-                                        <Link to={{pathname: `/admin/consultation-details/${consultation.id}`, state: { "patient_id": consultation?.patient?.user_id, "id": consultation?.id}}} className="badge badge-secondary badge-md">View</Link>
+                                        <Link to={`/admin/consultation-details/${consultation.id}`} state={{ "patient_id": consultation?.patient?.user_id, "id": consultation?.id}} className="badge badge-secondary badge-md">View</Link>
                                         {/* <a href="#" className="badge badge-secondary badge-md">View</a> */}
                                     </td>
                                 </tr>
@@ -144,13 +144,7 @@ const ConsultationLog = () => {
                             })}
                             </tbody>
                         </Table>
-                    </div>
-                    </div>
-            
-                    </Card.Body>
-                </Card>
-            </Row>
-            <div className="d-flex">
+                        <div className="d-flex">
                 <ul className="pagination">
                     <li className="page-item">
                         <span className="page-link" aria-label="Previous">
@@ -168,6 +162,13 @@ const ConsultationLog = () => {
                 </ul>
                 <small className="text-muted py-2 mx-2">Total <span id="count">{total}</span> items</small>
             </div>
+                    </div>
+                    </div>
+            
+                    </Card.Body>
+                </Card>
+            </Row>
+            
         </div>
     )
 }

@@ -40,7 +40,7 @@ function Footer() {
                             <Col md={6}>
                                 <h5>Reach Us</h5>
                                 <div className="footer-link mt-4">
-                                    <NavLink to=""><p><FontAwesomeIcon icon={ faEnvelopeOpen } /> info@medflithealthresources.com</p></NavLink>
+                                    <NavLink to=""><p><FontAwesomeIcon icon={ faEnvelopeOpen } /> info@medflit.com</p></NavLink>
                                     <NavLink to=""><p><FontAwesomeIcon icon={ faPhone } /> +234 705 520 9676</p></NavLink>
                                     <NavLink to=""><p><FontAwesomeIcon icon={ faMapPin } /> 24, Prince Ibrahim Eletu Avenue, Osapa London, <br/>Lekki, Lagos, Nigeria.</p></NavLink>
                                 </div>                                    

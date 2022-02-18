@@ -1,7 +1,7 @@
 import React from 'react';
-
+import { element } from 'react-dom'
 // import router components
-import { BrowserRouter as Router,  Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router,  Route, Routes, Navigate } from 'react-router-dom';
 
 // import pages
 import Home from '../pages/Home';
@@ -53,66 +53,66 @@ import SearchUser from '../pages/admin/SearchUser';
 //     return userToken?.token
 // }
 
-const Routes = (props) => {
+const MyRoutes = (props) => {
     // const {token, setToken} = useToken()
 
     // if(!token) {
     //     return <AdminLogin setToken={setToken} />
     // }
     // function to guard the component for private access
-    const authGuard = (Component) => () => {
+    const authGuard = (Component) => {
         return localStorage.getItem("access_token") ? 
-        ( <Component /> ) : 
-        ( <Redirect to="/admin-login" /> );
+        ( <Component {...props}/> ) : 
+        ( <Navigate to="/admin-login" /> );
     };
     return (
         <Router {...props}>
-            <Switch>
+            <Routes>
                 {/* <Route path="*">
                     <NotFound/>
                 </Route> */}
                 {/* Outer pages routes */}
-                <Route exact path="/" component={ Home }/>
-                <Route path="/admin-login" component={ AdminLogin }/>
-                <Route path="/conditions" component={ Conditions }/>
-                <Route path="/faq" component={ Faq }/>
-                <Route path="/about" component={ About }/>
-                <Route path="/partners" component={ Partners }/>
+                <Route exact path="/" element={ <Home/> }/>
+                <Route path="/admin-login" element={ <AdminLogin/> }/>
+                <Route path="/conditions" element={ <Conditions/> }/>
+                <Route path="/faq" element={ <Faq/> }/>
+                <Route path="/about" element={ <About/> }/>
+                <Route path="/partners" element={ <Partners/> }/>
 
                 {/* Admin routes */}
-                <Route path="/admin/dashboard" render={authGuard(Dashboard)}/>
-                <Route path="/admin/patients" render={authGuard(Patients)}/>
-                <Route exact path="/admin/providers" render={authGuard(Providers)}/>
-                <Route path="/admin/users" render={authGuard(Users)}/>
-                <Route path="/admin/consultations" render={authGuard(Consultations)}/>
-                <Route path="/admin/transactions" render={authGuard(Transactions)}/>
-                <Route path="/admin/assignment-log" render={authGuard(AssignmentLog)}/>
-                <Route path="/admin/assign-doctor" render={authGuard(AssignDoctor)}/>
-                <Route path="/admin/edit-assignment/:id" render={authGuard(EditAssignment)}/>
-                <Route path="/admin/search-patient/:id" render={authGuard(SearchPatient)}/>
-                <Route path="/admin/search-doctor/:id" render={authGuard(SearchDoctor)}/>
-                <Route path="/admin/search-transaction/:id" render={authGuard(SearchTransaction)}/>
-                <Route path="/admin/search-user/:id" render={authGuard(SearchUser)}/>
-                <Route path="/admin/consultation-transaction" render={authGuard(ConsultationTransaction)}/>
-                <Route exact path="/admin/inbox" render={authGuard(Inbox)}/>
-                <Route path="/admin/inbox/show-inbox" render={authGuard(InboxShow)}/>
+                <Route path="/admin/dashboard" element={ authGuard(Dashboard)}/>
+                <Route path="/admin/patients" element={authGuard(Patients)}/>
+                <Route exact path="/admin/providers" element={authGuard(Providers)}/>
+                <Route path="/admin/users" element={authGuard(Users)}/>
+                <Route path="/admin/consultations" element={authGuard(Consultations)}/>
+                <Route path="/admin/transactions" element={authGuard(Transactions)}/>
+                <Route path="/admin/assignment-log" element={authGuard(AssignmentLog)}/>
+                <Route path="/admin/assign-doctor" element={authGuard(AssignDoctor)}/>
+                <Route path="/admin/edit-assignment/:id" element={authGuard(EditAssignment)}/>
+                <Route path="/admin/search-patient/:id" element={authGuard(SearchPatient)}/>
+                <Route path="/admin/search-doctor/:id" element={authGuard(SearchDoctor)}/>
+                <Route path="/admin/search-transaction/:id" element={authGuard(SearchTransaction)}/>
+                <Route path="/admin/search-user/:id" element={authGuard(SearchUser)}/>
+                <Route path="/admin/consultation-transaction" element={authGuard(ConsultationTransaction)}/>
+                <Route exact path="/admin/inbox" element={authGuard(Inbox)}/>
+                <Route path="/admin/inbox/show-inbox" element={authGuard(InboxShow)}/>
 
 
 
                 {/* Profile routes */}
-                <Route path="/admin/profile/patient/:id" render={authGuard(Patient)}/>
-                <Route path="/admin/profile/provider/:id" render={authGuard(Provider)}/>
-                <Route path="/admin/consultation-details/:id" render={authGuard(ConsultationDetails)}/>
+                <Route path="/admin/profile/patient/:id" element={authGuard(Patient)}/>
+                <Route path="/admin/profile/provider/:id" element={authGuard(Provider)}/>
+                <Route path="/admin/consultation-details/:id" element={authGuard(ConsultationDetails)}/>
 
                 {/* Providers routes */}
-                <Route path="/admin/providers/current-transaction" render={authGuard(CurrentTransaction)}/>
-                <Route path="/admin/providers/past-transaction" render={authGuard(PastTransaction)}/>
-                <Route path="/admin/providers/current-stats" render={authGuard(CurrentStats)}/>
-                <Route path="/admin/providers/past-stats" render={authGuard(PastStats)}/>
-                <Route path="/admin/providers/payment" render={authGuard(Payments)}/>
-            </Switch>
+                <Route path="/admin/providers/current-transaction" element={authGuard(CurrentTransaction)}/>
+                <Route path="/admin/providers/past-transaction" element={authGuard(PastTransaction)}/>
+                <Route path="/admin/providers/current-stats" element={authGuard(CurrentStats)}/>
+                <Route path="/admin/providers/past-stats" element={authGuard(PastStats)}/>
+                <Route path="/admin/providers/payment" element={authGuard(Payments)}/>
+            </Routes>
         </Router>
     )
 }
 
-export default Routes
+export default MyRoutes

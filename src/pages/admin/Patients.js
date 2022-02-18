@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Container, Table, Dropdown, Card } from 'react-bootstrap'
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as service from '../../api/index'
 
 import {dateFormatting} from '../../helpers/functions'
 
 import FeatherIcon from 'feather-icons-react'
-
+import {Spinner} from 'react-bootstrap'
 import AuthLayout from '../../layouts/auth'
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -17,7 +17,10 @@ function Patients() {
     const [perPage, setPerPage] = useState();
     const [currentPage, setCurrentPage] = useState();
 
-    const history = useHistory();
+    const [loading, setLoading] = useState(false);
+    const [loadText, setLoadText] = useState("");
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         getAllPatients(1);
@@ -43,7 +46,8 @@ function Patients() {
 
     const handleSearch = (e) => {
             e.preventDefault();
-
+            setLoadText("Loading ")
+            setLoading(true)
             fetch(`${service.config.baseUrl + service.config.searchPatient}${searchValue}`, {
                 headers: {
                     "Content-Type": "application/json",
@@ -78,9 +82,9 @@ function Patients() {
                                 console.log(data2.message)
                             } else {
                                 setTimeout(() => {
-                                    history.push(
+                                    navigate(
+                                        `/admin/search-patient/${searchValue}`,
                                         {
-                                            pathname: `/admin/search-patient/${searchValue}`,
                                             state: {
                                                 patientDetail: data2.data,
                                             }
@@ -115,7 +119,7 @@ function Patients() {
     renderPageNumbers = pageNumbers.map(number => {
         let classes = currentPage === number ? 'page-item active' : 'page-item';
       
-        if (number === 1 || number === total || (number >= currentPage - 2 && number <= currentPage + 2)) {
+        if (number === 1 || number === total || (number >= currentPage - 9 && number <= currentPage + 9)) {
             return (
                 <li className={classes}>
                     <span className="page-link" key={number} onClick={() => getAllPatients(number)}>{number}</span>
@@ -137,8 +141,8 @@ function Patients() {
                     </div>
                     <div className="flex"></div>
                     <div>
-                        <span class="btn btn-md text-muted">
-                            <span class="d-sm-inline mx-1 breadcrumb-text"></span>
+                        <span className="btn btn-md text-muted">
+                            <span className="d-sm-inline mx-1 breadcrumb-text"></span>
                             <FeatherIcon icon="arrow-right" size="14"/>
                         </span>
                     </div>
@@ -149,6 +153,9 @@ function Patients() {
                     <Card>
                         <Card.Header>
                             Patients List
+                            <span className="pull-right">
+                                {loadText} &nbsp;{loading && <Spinner animation="border" size="7" role="status">
+                                </Spinner>}</span>
                         </Card.Header>
                     <Card.Body>
                     <div className="mb-5">
@@ -191,7 +198,7 @@ function Patients() {
                                 { patients.map((patient, index) => {
                                     // console.log(patient); 
                                       return(  
-                                        <tr className="v-middle" key={patient?.id}>
+                                        <tr className="v-middle" key={index}>
                                         {/* <td>
                                             <label className="ui-check m-0 ">
                                                 <input type="checkbox" name="id" value="15"/>
@@ -232,12 +239,12 @@ function Patients() {
                                                 {/* onClick={() => viewUser(patient.id)} */}
                                                 
                                                     <Dropdown.Item>
-                                                        <Link to={{pathname: `/admin/profile/patient/${patient?.biodata?.user_id}`, state: { "id": patient?.biodata?.user_id, 
+                                                        <Link to={`/admin/profile/patient/${patient?.biodata?.user_id}`} state={{ "id": patient?.biodata?.user_id, 
                                                         "providerProfileID": patient?.subscription?.assigned_doctor?.provider?.profile_id,
                                                                  "patientProfileID": patient?.biodata?.id, 
                                                                  "providerID": patient?.subscription?.assigned_doctor?.id, 
                                                                  "subID": patient?.subscription?.id
-                                                                 }}}>View</Link>
+                                                                 }}>View</Link>
                                                     </Dropdown.Item>
                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
                                                     <Dropdown.Item href="#" className="text-danger">Delete</Dropdown.Item>
@@ -249,8 +256,7 @@ function Patients() {
                                     })}
                                 </tbody> 
                             </Table>
-                        </div>
-                        <div className="d-flex">
+                            <div className="d-flex">
                             <ul className="pagination">
                                 <li className="page-item">
                                     <span className="page-link" aria-label="Previous">
@@ -268,6 +274,8 @@ function Patients() {
                             </ul>
                             <small className="text-muted py-2 mx-2">Total <span id="count">{total}</span> items</small>
                         </div>
+                        </div>
+                        
                     </div>
                     </Card.Body>
                     </Card>

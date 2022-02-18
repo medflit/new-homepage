@@ -10,11 +10,11 @@ import affordable from '../../assets/images/affordable.png';
 
 import { Container, Row, Col } from 'react-bootstrap';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
+// import { Swiper, SwiperSlide } from 'swiper/react';
 
-import SwiperCore, { Autoplay } from 'swiper';
+// import SwiperCore, { Autoplay } from 'swiper';
 
-import 'swiper/swiper.scss';
+// import 'swiper/swiper.scss';
 
 function WhyMedflit() {
     return(
@@ -26,7 +26,7 @@ function WhyMedflit() {
                     </Col>
                 </Row>
                 <Row className="dd">
-                    <Swiper
+                    {/* <Swiper
                         spaceBetween={30}
                         slidesPerView={5}
                         loop={true}
@@ -89,13 +89,13 @@ function WhyMedflit() {
                             <h5>Drug Prescription</h5>
                             <p className="">Digital prescriptions and drugs delivery to your home or office..</p>
                         </SwiperSlide>
-                    </Swiper>                    
+                    </Swiper>                     */}
                 </Row>
             </Container>
         </section>
     )
 }
 
-SwiperCore.use([Autoplay]);
+// SwiperCore.use([Autoplay]);
 
 export default WhyMedflit

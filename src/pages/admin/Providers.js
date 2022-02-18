@@ -2,10 +2,10 @@ import React from 'react'
 import { Row, Container, Table, Card, Dropdown } from 'react-bootstrap'
 import {useState, useEffect} from 'react'
 import * as service from '../../api/index'
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { ToastContainer, toast } from 'react-toastify';
-
+import {Spinner} from 'react-bootstrap'
 import { capitalize, checkResume, checkMedicalLicense, checkUniCert } from '../../helpers/functions'
 
 import FeatherIcon from 'feather-icons-react'
@@ -20,7 +20,10 @@ function Providers() {
     const [perPage, setPerPage] = useState();
     const [currentPage, setCurrentPage] = useState();
 
-    const history = useHistory();
+    const [loading, setLoading] = useState(false);
+    const [loadText, setLoadText] = useState("");
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         getAllProviders(1);
@@ -72,6 +75,8 @@ function Providers() {
 
     const handleSearch = (e) => {
             e.preventDefault();
+            setLoadText("Loading ")
+            setLoading(true)
             fetch(`${service.config.baseUrl + service.config.searchDoctor}${searchValue}`, {
                 headers: {
                     "Content-Type": "application/json",
@@ -106,9 +111,9 @@ function Providers() {
                                 console.log(data2.message)
                             } else {
                                 setTimeout(() => {
-                                    history.push(
+                                    navigate(
+                                        `/admin/search-doctor/${searchValue}`,
                                         {
-                                            pathname: `/admin/search-doctor/${searchValue}`,
                                             state: {
                                                 doctorDetail: data2.data,
                                             }
@@ -144,7 +149,7 @@ function Providers() {
     renderPageNumbers = pageNumbers.map(number => {
         let classes = currentPage === number ? 'page-item active' : 'page-item';
       
-        if (number === 1 || number === total || (number >= currentPage - 2 && number <= currentPage + 2)) {
+        if (number === 1 || number === total || (number >= currentPage - 9 && number <= currentPage + 9)) {
             return (
                 <li className={classes}>
                     <span className="page-link" key={number} onClick={() => getAllProviders(number)}>{number}</span>
@@ -177,6 +182,9 @@ function Providers() {
                     <Card>
                         <Card.Header>
                             Providers List
+                            <span className="pull-right">
+                                {loadText} &nbsp;{loading && <Spinner animation="border" size="7" role="status">
+                                </Spinner>}</span>
                         </Card.Header>
                         <Card.Body>
                             <div className="mb-5">
@@ -293,8 +301,7 @@ function Providers() {
                                             })}
                                         </tbody>
                                     </Table>
-                                </div>
-                                <div className="d-flex">
+                                    <div className="d-flex">
                                     <ul className="pagination">
                                         <li className="page-item">
                                             <span className="page-link" aria-label="Previous">
@@ -312,6 +319,8 @@ function Providers() {
                                     </ul>
                                     <small className="text-muted py-2 mx-2">Total <span id="count">{total}</span> items</small>
                                 </div>
+                                </div>
+                                
                             </div>
                         </Card.Body>
                     </Card>
