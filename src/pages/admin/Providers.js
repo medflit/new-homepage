@@ -30,7 +30,7 @@ function Providers() {
     }, [])
 
     const verify = async (email) => {
-        const response = await fetch(`${service.config.baseUrl + service.config.verifyDoctor} ?email=${email}`, {
+        const response = await fetch(`${service.config.baseUrl + service.config.verifyDoctor}?email=${email}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -287,7 +287,7 @@ function Providers() {
                                                                 </Dropdown.Toggle>
 
                                                                 <Dropdown.Menu>
-                                                                    <Dropdown.Item><Link to={{pathname: `/admin/profile/provider/${provider?.biodata?.user_id}`, state: { "id": provider?.biodata?.user_id}}}>View</Link></Dropdown.Item>
+                                                                    <Dropdown.Item><Link to={`/admin/profile/provider/${provider?.biodata?.user_id}`} state={{ "id": provider?.biodata?.user_id}}>View</Link></Dropdown.Item>
                                                                     {provider?.publish ? <Dropdown.Item>Unverify</Dropdown.Item> : <Dropdown.Item onClick={() => verify(provider?.email)} >Verify</Dropdown.Item> }
                                                                     
                                                                     <Dropdown.Item className="text-danger">Delete</Dropdown.Item>
