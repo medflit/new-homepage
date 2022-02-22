@@ -21,12 +21,12 @@ function DownloadApp() {
 
                             <div className="mt-4 br">
                                 <div className="mt-3 download-btn">
-                                    <Link to="/playstore">
+                                    <a target="_blank" href="https://play.google.com/store/apps/details?id=com.medflit">
                                         <img src={ playStore } className="img-fluid mr-3 app-btn" width="" alt=""/>
-                                    </Link>
-                                    <Link to="/appStore">
+                                    </a>
+                                    <a href="#">
                                         <img src={ appStore } className="img-fluid app-btn" width="" alt=""/>
-                                    </Link>
+                                    </a>
                                 </div>
                             </div>
                         </Col>
