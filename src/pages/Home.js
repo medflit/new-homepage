@@ -18,7 +18,7 @@ function Home() {
                 <Benefits/>
                 <Pricing/>
                 <DownloadApp/>
-                {/* <WhyMedflit/> */}
+                <WhyMedflit/>
                 <Testimonials/>
             </DefaultLayout>
         </div>

@@ -22,11 +22,11 @@ function WhyMedflit() {
             <Container>
                 <Row className="mb-5">
                     <Col>
-                        {/* <h2>Why Medflit?</h2> */}
+                        <h2>Why Medflit?</h2>
                     </Col>
                 </Row>
                 <Row className="dd">
-                    {/* <Swiper
+                    <Swiper
                         spaceBetween={30}
                         slidesPerView={5}
                         loop={true}
@@ -89,7 +89,7 @@ function WhyMedflit() {
                             <h5>Drug Prescription</h5>
                             <p className="">Digital prescriptions and drugs delivery to your home or office..</p>
                         </SwiperSlide>
-                    </Swiper>                     */}
+                    </Swiper>                  
                 </Row>
             </Container>
         </section>
